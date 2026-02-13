@@ -1,0 +1,54 @@
+form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.checkbox-group label {
+  display: inline-block;
+  margin-right: 16px;
+  font-weight: normal;
+}
+
+input.ng-invalid.ng-touched {
+  border-color: #e74c3c;
+  background: #fff0f0;
+}
+
+small {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 16px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}

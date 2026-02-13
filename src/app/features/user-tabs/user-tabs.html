@@ -1,0 +1,26 @@
+<div class="tabs-header">
+  <div (click)="selectTab(0)" [class.active]="selectedTabIndex===0">Personal Info</div>
+  <div (click)="selectTab(1)" [class.active]="selectedTabIndex===1">Business Info</div>
+  <div (click)="selectTab(2)" [class.active]="selectedTabIndex===2">Business Problems</div>
+</div>
+
+<div class="tabs-content">
+  <app-personal-info
+    *ngIf="selectedTabIndex===0"
+    [userId]="userId"
+    [mode]="mode"
+    (userCreated)="handleUserCreated($event)">
+  </app-personal-info>
+
+  <app-business-info
+    *ngIf="selectedTabIndex===1"
+    [userId]="userId"
+    [mode]="mode">
+  </app-business-info>
+
+  <app-business-problems
+    *ngIf="selectedTabIndex===2"
+    [userId]="userId"
+    [mode]="mode">
+  </app-business-problems>
+</div>

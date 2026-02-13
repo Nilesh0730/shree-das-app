@@ -1,0 +1,19 @@
+.tabs-header {
+  display: flex;
+  gap: 20px;
+  cursor: pointer;
+
+  div {
+    padding: 8px 16px;
+    border-bottom: 2px solid transparent;
+
+    &.active {
+      font-weight: bold;
+      border-color: #007bff;
+    }
+  }
+}
+
+.tabs-content {
+  margin-top: 16px;
+}

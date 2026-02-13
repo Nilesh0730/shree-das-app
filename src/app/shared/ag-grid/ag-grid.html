@@ -1,0 +1,13 @@
+<div class="grid-wrapper">
+  <ag-grid-angular
+    class="ag-theme-alpine"
+    [gridOptions]="{ theme: 'legacy' }"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef"
+    [pagination]="true"
+    [paginationPageSize]="paginationPageSize"
+    (selectionChanged)="onSelectionChanged($event)"
+    (gridReady)="gridApi = $event.api">
+  </ag-grid-angular>
+</div>

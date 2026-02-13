@@ -1,0 +1,44 @@
+<form [formGroup]="businessForm" (ngSubmit)="onSubmit()">
+
+  <div class="problem-group" *ngFor="let field of problemFields">
+
+    <label class="main-label">{{ field.label }}</label>
+
+    <div class="radio-group">
+      <label>
+        <input
+          type="radio"
+          [formControlName]="field.id + 'YesNo'"
+          [value]="true">
+        होय
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          [formControlName]="field.id + 'YesNo'"
+          [value]="false">
+        नाही
+      </label>
+    </div>
+
+    <div *ngIf="businessForm.get(field.id + 'YesNo')?.value === true">
+      <textarea
+        [formControlName]="field.id"
+        placeholder="तपशील लिहा">
+      </textarea>
+
+      <small class="error"
+        *ngIf="businessForm.get(field.id)?.touched &&
+               businessForm.get(field.id)?.invalid">
+        हे क्षेत्र आवश्यक आहे
+      </small>
+    </div>
+
+  </div>
+
+  <button type="submit">
+    {{ isEditMode ? 'Update' : 'Save' }}
+  </button>
+
+</form>

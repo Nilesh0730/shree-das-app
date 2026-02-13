@@ -1,0 +1,238 @@
+<!--
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>व्यवसायाची माहिती</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: inline-block;
+      min-width: 220px;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 300px;
+      padding: 5px;
+    }
+
+    .checkbox-group label {
+      font-weight: normal;
+      min-width: auto;
+      margin-right: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>व्यवसायाची माहिती</h2>
+
+  <form>
+
+    <div class="form-group">
+      <label>व्यवसायाचे नाव :</label>
+      <input type="text" name="business_name">
+    </div>
+
+    <div class="form-group">
+      <label>सध्याचा व्यवसाय :</label>
+      <input type="text" name="current_business">
+    </div>
+
+    <div class="form-group">
+      <label>व्यवसायाचा पूर्ण पत्ता :</label>
+      <input type="text" name="business_address">
+    </div>
+
+    <div class="form-group">
+      <label>जीएसटी क्रमांक :</label>
+      <input type="text" name="gst_number">
+    </div>
+
+    <div class="form-group">
+      <label>व्यवसाय कालावधी :</label>
+      <input type="text" name="years" style="width:60px;">
+      <label>वर्षे : - </label>
+      <label>अर्धे वर्ष :</label>
+      <input type="text" name="half_year" style="width:60px;">
+      <label>पूर्ण वेळ :</label>
+      <input type="text" name="full_time" style="width:60px;">
+    </div>
+
+    <div class="form-group">
+      <label>उप व्यवसाय :</label>
+      <input type="text" name="sub_business">
+    </div>
+
+    <div class="form-group">
+      <label>व्यवसायाचे स्वरूप :</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="ownership"> वैयक्तिक मालकी (Proprietorship)</label>
+        <label><input type="checkbox" name="pvt_ltd"> खाजगी मर्यादित कंपनी (Private Limited Company)</label>
+        <label><input type="checkbox" name="llp"> मर्यादित दायित्व भागीदारी (LLP)</label>
+        <label><input type="checkbox" name="partnership"> भागीदारी (Partnership)</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>व्यवसायाचे वर्गीकरण :</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="service"> सेवा (Service)</label>
+        <label><input type="checkbox" name="trading"> खरेदी-विक्री (Trading)</label>
+        <label><input type="checkbox" name="manufacture"> उत्पादन (Manufacturer)</label>
+        <label><input type="checkbox" name="wholesale"> घाऊक व्यवसाय (Wholesale)</label>
+         <label>किरकोळ व्यवसाय (Retail)</label>
+         <label><input type="checkbox" name="ghar"> घरातून</label>
+        <label><input type="checkbox" name="shop">  दुकान</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>व्यवसायाचे ठिकाण :</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="gaon"> गाव</label>
+        <label><input type="checkbox" name="shahar"> शहर</label>
+        <label><input type="checkbox" name="bazaar"> बाजारपेठ</label>
+        <label><input type="checkbox" name="ghar"> घरातून</label>
+        <label><input type="checkbox" name="phirta"> फिरता व्यवसाय</label>
+        <label><input type="checkbox" name="itar"> इतर</label>
+
+      </div>
+    </div>
+
+  </form>
+
+</body>
+
+</html> -->
+<form [formGroup]="businessForm" (ngSubmit)="onSaveBusinessInformation()">
+
+  <label>व्यवसायाचे नाव :</label>
+  <input formControlName="businessName">
+  <small *ngIf="businessForm.get('businessName')?.touched && businessForm.get('businessName')?.invalid">
+    व्यवसायाचे नाव हे क्षेत्र आवश्यक आहे
+  </small>
+
+  <label>सध्याचा व्यवसाय :</label>
+  <input formControlName="currentBusiness">
+  <small *ngIf="businessForm.get('currentBusiness')?.touched && businessForm.get('currentBusiness')?.invalid">
+    व्यवसायाचे नाव हे क्षेत्र आवश्यक आहे
+  </small>
+
+  <label>व्यवसायाचा पूर्ण पत्ता :</label>
+  <input formControlName="address">
+  <small *ngIf="businessForm.get('address')?.touched && businessForm.get('address')?.invalid">
+    व्यवसायाचे नाव हे क्षेत्र आवश्यक आहे
+  </small>
+
+  <label>जीएसटी क्रमांक :</label>
+  <input formControlName="gst">
+  <small *ngIf="businessForm.get('gst')?.touched && businessForm.get('gst')?.invalid">
+    <small *ngIf="businessForm.get('gst')?.errors?.['required']">जीएसटी क्रमांक आवश्यक आहे</small>
+    <small *ngIf="businessForm.get('gst')?.errors?.['pattern']">अवैध जीएसटी क्रमांक</small>
+  </small>
+
+  <label>व्यवसाय कालावधी :</label>
+  <input type="number" formControlName="businessDuration">
+  <small *ngIf="businessForm.get('businessDuration')?.touched && businessForm.get('businessDuration')?.invalid">
+    व्यवसाय कालावधी हे क्षेत्र आवश्यक आहे
+  </small>
+
+
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <label>वेळ :</label>
+    <!-- Half Time -->
+    <div>
+      <label>अर्धे वेळ :</label>
+      <input type="checkbox" formControlName="half_time" style="width: 60px;">
+    </div>
+
+    <!-- Full Time -->
+    <div>
+      <label>पूर्ण वेळ :</label>
+      <input type="checkbox" formControlName="full_time" style="width: 60px;">
+    </div>
+  </div>
+
+
+  <label> उपव्यवसाय :</label>
+  <input formControlName="sub_business">
+  <small *ngIf="businessForm.get('sub_business')?.touched && businessForm.get('sub_business')?.invalid">
+    उपव्यवसाय नाव हे क्षेत्र आवश्यक आहे
+  </small>
+
+
+  <label>व्यवसायाचे स्वरूप :</label>
+  <div class="checkbox-group" formGroupName="ownership">
+    <label><input type="checkbox" formControlName="proprietorship"> वैयक्तिक मालकी</label>
+    <label><input type="checkbox" formControlName="pvt_ltd"> खाजगी मर्यादित कंपनी</label>
+    <label><input type="checkbox" formControlName="llp"> LLP</label>
+    <label><input type="checkbox" formControlName="partnership"> भागीदारी</label>
+  </div>
+
+  <label>व्यवसायाचे वर्गीकरण :</label>
+  <div class="checkbox-group" formGroupName="category">
+    <label><input type="checkbox" formControlName="service"> सेवा</label>
+    <label><input type="checkbox" formControlName="trading"> खरेदी-विक्री</label>
+    <label><input type="checkbox" formControlName="manufacture"> उत्पादन</label>
+    <label><input type="checkbox" formControlName="wholesale"> घाऊक</label>
+    <label><input type="checkbox" formControlName="retail"> किरकोळ</label>
+    <label><input type="checkbox" formControlName="ghar"> घरातून</label>
+    <label><input type="checkbox" formControlName="shop"> दुकान</label>
+  </div>
+
+  <label>व्यवसायाचे ठिकाण :</label>
+  <div class="checkbox-group" formGroupName="location">
+    <label><input type="checkbox" formControlName="gaon"> गाव</label>
+    <label><input type="checkbox" formControlName="shahar"> शहर</label>
+    <label><input type="checkbox" formControlName="bazaar"> बाजारपेठ</label>
+    <label><input type="checkbox" formControlName="ghar"> घरातून</label>
+    <label><input type="checkbox" formControlName="phirta"> फिरता व्यवसाय</label>
+    <label><input type="checkbox" formControlName="itar"> इतर</label>
+  </div>
+
+  <label>व्यवसायासाठी लागणारे भांडवल :</label>
+   <div>
+    <label for="capitalInvestment">भांडवली गुंतवणूक (Capital Investment):</label>
+    <input id="capitalInvestment" type="number" formControlName="capitalInvestment" />
+  </div>
+
+  <div>
+    <label for="workingCapital">खेळते भांडवल (Working Capital):</label>
+    <input id="workingCapital" type="number" formControlName="workingCapital" />
+  </div>
+
+  <div>
+    <label for="monthlyExpenses">मासिक खर्च (Monthly Expenses):</label>
+    <input id="monthlyExpenses" type="number" formControlName="monthlyExpenses" />
+  </div>
+
+  <div>
+    <label for="rollingInvestment">रोलिंग इन्भेस्टमेंट (Rolling Investment):</label>
+    <input id="rollingInvestment" type="number" formControlName="rollingInvestment" />
+  </div>
+
+  <div>
+    <label for="averageProfit">सरासरी नफा (Average Profit %):</label>
+    <input id="averageProfit" type="number" formControlName="averageProfit" />
+  </div>
+
+  <div class="button-group">
+    <button type="submit">{{ isEditMode ? 'Update' : 'Save' }}</button>
+  </div>
+</form>

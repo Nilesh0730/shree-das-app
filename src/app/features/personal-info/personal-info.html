@@ -1,0 +1,70 @@
+<form [formGroup]="personalForm" (ngSubmit)="onSaveUser()">
+
+  <label>श्री सदस्याचे नाव :</label>
+  <input formControlName="userName" />
+  <div *ngIf="personalForm.get('userName')?.touched && personalForm.get('userName')?.invalid">
+    <small *ngIf="personalForm.get('userName')?.errors?.['required']">श्री सदस्याचे नाव आवश्यक आहे.</small>
+  </div>
+
+  <!-- Mobile -->
+  <label>मोबाईल नंबर :</label>
+  <input formControlName="mobile" />
+  <div *ngIf="personalForm.get('mobile')?.touched && personalForm.get('mobile')?.invalid">
+    <small *ngIf="personalForm.get('mobile')?.errors?.['required']">मोबाईल नंबर आवश्यक आहे.</small>
+    <small *ngIf="personalForm.get('mobile')?.errors?.['pattern']">मोबाईल क्रमांक मराठीत १० अंकांचा (10 digits) हवा</small>
+  </div>
+
+  <!-- Address -->
+  <label>पत्ता</label>
+  <input formControlName="address" />
+  <div *ngIf="personalForm.get('address')?.touched && personalForm.get('address')?.invalid">
+    <small>पत्ता आवश्यक आहे.</small>
+  </div>
+
+  <!-- Birth Date -->
+  <label>जन्मतारीख</label>
+  <input type="date" formControlName="birthDate" />
+  <div *ngIf="personalForm.get('birthDate')?.touched && personalForm.get('birthDate')?.invalid">
+    <small>जन्मतारीख आवश्यक आहे.</small>
+  </div>
+
+  <!-- Age -->
+  <label>वय</label>
+  <input type="number" formControlName="age" />
+  <div *ngIf="personalForm.get('age')?.touched && personalForm.get('age')?.invalid">
+    <small *ngIf="personalForm.get('age')?.errors?.['required']">वय आवश्यक आहे.</small>
+    <small *ngIf="personalForm.get('age')?.errors?.['min']">वय नेहमी Positive नंबर असावे</small>
+  </div>
+
+  <!-- Gender -->
+  <label>लिंग</label>
+  <select formControlName="gender">
+    <option value="">Select</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
+  <div *ngIf="personalForm.get('gender')?.touched && personalForm.get('gender')?.invalid">
+    <small>लिंग आवश्यक आहे.</small>
+  </div>
+
+  <!-- Aadhar -->
+  <label>आधार क्रमांक</label>
+  <input formControlName="aadhar" />
+  <div *ngIf="personalForm.get('aadhar')?.touched && personalForm.get('aadhar')?.invalid">
+    <small *ngIf="personalForm.get('aadhar')?.errors?.['required']">आधार क्रमांक आवश्यक आहे.</small>
+    <small *ngIf="personalForm.get('aadhar')?.errors?.['pattern']">आधार क्रमांक नेहमी १२ अंकी असावा
+</small>
+  </div>
+
+  <!-- PAN -->
+  <label>पॅन क्रमांक</label>
+  <input formControlName="pan" />
+  <div *ngIf="personalForm.get('pan')?.touched && personalForm.get('pan')?.invalid">
+    <small *ngIf="personalForm.get('pan')?.errors?.['required']">पॅन क्रमांक आवश्यक आहे.</small>
+    <small *ngIf="personalForm.get('pan')?.errors?.['pattern']">PAN कार्ड क्रमांकाचा फॉरमॅट नेहमी ABCDE1234F अशा स्वरूपात असतो.</small>
+  </div>
+
+  <div class="button-group">
+    <button type="submit">{{ isEditMode ? 'Update' : 'Save' }}</button>
+  </div>
+</form>

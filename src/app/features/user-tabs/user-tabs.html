@@ -24,3 +24,9 @@
     [mode]="mode">
   </app-business-problems>
 </div>
+
+<div class="tabs-navigation">
+  <button (click)="goBack()">Back</button>
+  <button (click)="prevTab()" [disabled]="selectedTabIndex===0">Previous</button>
+  <button (click)="nextTab()" [disabled]="selectedTabIndex===tabs.length-1">Next</button>
+</div>

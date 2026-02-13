@@ -1,3 +1,4 @@
+import { DashboardComponent } from './features/dashboard/dashboard';
 import { Routes } from '@angular/router';
 import { PersonalInfoComponent } from './features/personal-info/personal-info';
 import { BusinessInfoComponent } from './features/business-info/business-info';
@@ -11,6 +12,7 @@ export const routes: Routes = [
   { path: 'business', component: BusinessInfoComponent },
   { path: 'problems', component: BusinessProblemsComponent },
   { path: 'UserdetailsList', component: UserGridComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
   { path: 'tab', component: UserTabsComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' }

@@ -11,7 +11,7 @@ import { UserDetailsService } from '../../core/services/user-details';
 @Component({
   selector: 'app-user-grid',
   standalone: true,
-  imports: [CommonModule,AgGridComponent],
+  imports: [CommonModule, AgGridComponent],
   templateUrl: './user-grid.html',
   styleUrl: './user-grid.scss',
 })
@@ -27,17 +27,17 @@ export class UserGridComponent {
   columnDefs: ColDef[] = [
     { field: 'userName', headerName: 'श्री सदस्याचे नाव' },
     { field: 'mobile', headerName: 'मोबाईल नंबर' },
-    { field: 'userAddress', headerName: 'पत्ता' },
-    { field: 'pinCode', headerName: 'पिनकोड' },
-    { field: 'emailId', headerName: 'ईमेल आयडी' },
-    { field: 'age', headerName: 'वय' },
-    { field: 'birthDate', headerName: 'जन्मतारीख' },
-    { field: 'gender', headerName: 'लिंग' },
-    { field: 'aadhar', headerName: 'आधार क्रमांक' },
-    { field: 'pan', headerName: 'पॅन क्रमांक' },
-    { field: 'userBaithakNo', headerName: 'बैठक क्रमांक' },
-    { field: 'userBaithakName', headerName: 'बैठक नाव' },
-    { field: 'userBaithakDay', headerName: 'बैठक दिवस' },
+    { field: 'userAddress', headerName: 'पत्ता', hide: true },
+    { field: 'pinCode', headerName: 'पिनकोड', hide: true },
+    { field: 'emailId', headerName: 'ईमेल आयडी', hide: true },
+    { field: 'age', headerName: 'वय', hide: true },
+    { field: 'birthDate', headerName: 'जन्मतारीख', hide: true },
+    { field: 'gender', headerName: 'लिंग', hide: true },
+    { field: 'aadhar', headerName: 'आधार क्रमांक', hide: true },
+    { field: 'pan', headerName: 'पॅन क्रमांक', hide: true },
+    { field: 'userBaithakNo', headerName: 'बैठक क्रमांक', hide: true },
+    { field: 'userBaithakName', headerName: 'बैठक नाव', hide: true },
+    { field: 'userBaithakDay', headerName: 'बैठक दिवस', hide: true },
     {
       headerName: 'Action',
       filter: false,
@@ -86,7 +86,7 @@ export class UserGridComponent {
   }
 
   addNewUser() {
-     this.router.navigate(['/tab']);
+    this.router.navigate(['/tab']);
   }
 
   onEdit(data: IUserDetails): any {

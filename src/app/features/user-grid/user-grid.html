@@ -1,5 +1,25 @@
+
+<div class="userdetailslist-panel">
+<div class="userdetailslist-menu-section">
+
+<button type="button" (click)="userMarster()">User Master</button>
+<button type="button" (click)="businessMaster()">Business Master</button>
+<button type="button" (click)="sadasyaMahiti()">sadasya mahiti entry form</button>
+<button type="button" (click)="logout()">Logout</button>
+</div>
+
+<div class="userdetailslist-data-section">
+
+<div class="userdetailslist-top-navigation-section">
 <div class="button-group">
   <button type="button" class="btn btn-primary" (click)="addNewUser()">Add New User</button>
+  <button type="button" class="btn btn-primary" (click)="sadasyaMahiti()">sadasya mahiti entry form</button>
 </div>
-<app-logout></app-logout>
+<!-- <app-logout></app-logout> -->
+</div>
 <app-ag-grid  [rowData]="rowData" [columnDefs]="columnDefs"></app-ag-grid>
+
+</div>
+
+
+</div>

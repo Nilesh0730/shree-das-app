@@ -4,3 +4,176 @@
   height: 100vh;
   display: flex;
 }
+
+
+.userdetailslist-panel{
+  display: flex;
+  width: 100vw;
+  height: max-content;
+  border: 1px solid orange;
+  overflow: hidden;
+  .userdetailslist-menu-section{
+    width: 20vw;
+    height: 100vh;
+    // align-self: center;
+    // align-content: center;
+    text-align: center;
+    button{
+      width: 80%;
+      margin: 12vh 0 0 0;
+      height: 10vh;
+      font-size: 1vw;
+      border-radius: 10px;
+      border: 1px solid orange;
+      background-color: #ffffff;
+    }
+  }
+  .userdetailslist-data-section{
+    width: 80vw;
+    height: auto;
+    padding: 0% 0% 0 0%;
+    // display: flex;
+    border-left: 1px solid blue;
+    height: 100vh;
+    overflow-y: scroll;
+      
+      .button-group{
+          margin: 2% 0 2% 2%;
+        button{
+          margin: 0% 0 0% 2%;
+          color: black;
+        }
+        button:nth-child(odd) {
+          background-color: lightyellow;
+        }
+        button:nth-child(even) {
+          background-color: lightblue;
+        }
+      }
+      
+
+      app-ag-grid{
+          // height: 80vh;
+          // width: 75vw;
+          // place-self: anchor-center;
+          // overflow: scroll;
+          // display: flow;
+          .grid-wrapper{
+            width: 75vw !important;
+          ag-grid-angular{
+            width: 75vw !important;
+            .ag-root-wrapper{
+              width: 75vw !important;
+              .ag-root-wrapper-body{
+                width: 75vw !important;
+                .ag-root{
+                  width: 75vw !important;
+                  .ag-header{
+                    width: 75vw !important;
+                    .ag-header-viewport{
+                      width: 75vw !important;
+                      .ag-header-container{
+                        width: 75vw !important;
+                        .ag-header-row{
+                          width: 75vw !important;
+                          .ag-header-cell{
+                            width: 20vw;
+                          }
+                          .ag-header-cell.ag-column-first{
+
+                          }
+                          .ag-header-cell.ag-column-last{
+
+                          }
+                        }
+                      }
+                    }
+                  }
+                  .ag-body{
+                    width: 20vw;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        }
+      
+    table{
+      margin: 2% 0 0 2%;
+      display: inline-block;
+      vertical-align:top;
+    }
+    table.business-count-by-gender {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: max-content;
+        
+        tbody tr{
+          display: flex;
+        }
+        th {
+        border-top: 2px solid #ffffff;
+        border-bottom: 2px solid #ffffff;
+        border-left: 1px solid #ffffff;
+        border-right: 1px solid #ffffff;
+        text-align: left;
+        padding: 3%;
+        white-space: nowrap;
+        width: 6vw;
+        }
+        td {
+        border: 1px solid #ffffff;
+        text-align: left;
+        padding: 3%;
+        white-space: nowrap;
+        width: 6vw;
+        }
+        td:first-child,th:first-child{
+          width: 10vw;
+        }
+
+        thead tr {
+          background-color: #4472c4;
+          color: white;
+          display: flex;
+        }
+        tbody tr:nth-child(even) {
+          background-color: #cfd5ea;
+        }
+        tbody tr:nth-child(odd) {
+          background-color: #e9ebf5;
+        }
+    }
+
+
+  }
+}
+
+.userdetailslist-data-section app-ag-grid{
+  height: 80vh;
+  width: 60vw;
+  place-self: anchor-center;
+  overflow: scroll;
+  display: flow;
+}
+
+.ag-header-cell.ag-header-parent-hidden.ag-focus-managed {
+    width: 18vw !important;
+    position: relative;
+    left: 0 !important;
+}
+.ag-header-container{
+width: 75vw !important;
+}
+
+.ag-header-row{
+width: 75vw !important;
+}
+.ag-header.ag-header-allow-overflow .ag-header-row {
+    overflow: visible;
+    // width: auto !important;
+    height: max-content !important;
+}
+

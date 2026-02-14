@@ -71,6 +71,15 @@ export class UserGridComponent implements OnInit {
     console.log("resolved users", this.rowData);
   }
 
+  userMarster() {
+        alert("userMarster was clicked!");
+    }
+    businessMaster() {
+        alert("businessMaster was clicked!");
+    }
+    logout() {
+        alert("logout was clicked!");
+    }
   addEditUser(event: any) {
     console.log("event",event);
     if (event == 'newuser') {
@@ -86,6 +95,9 @@ export class UserGridComponent implements OnInit {
     this.router.navigate(['/tab']);
   }
 
+  sadasyaMahiti() {
+        alert("sadasyaMahiti was clicked!");
+    }
   onEdit(data: IUserDetails): any {
     console.log("onEdit", data);
     if (data.userId) {

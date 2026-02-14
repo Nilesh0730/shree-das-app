@@ -1,0 +1,250 @@
+
+.dashboard-panel{
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  border: 1px solid orange;
+      overflow: hidden;
+  .dashboard-menu-section{
+    width: 20vw;
+    height: 100vh;
+    // align-self: center;
+    // align-content: center;
+    text-align: center;
+    button{
+      width: 80%;
+      margin: 12vh 0 0 0;
+      height: 10vh;
+      font-size: 1vw;
+      border-radius: 10px;
+      border: 1px solid orange;
+      background-color: #ffffff;
+    }
+  }
+  .dashboard-data-section{
+    width: 80vw;
+    height: auto;
+    padding: 2% 0% 0 0%;
+    // display: flex;
+    border-left: 1px solid blue;
+    height: 100vh;
+    overflow-y: scroll;
+    table{
+      margin: 2% 0 0 2%;
+      display: inline-block;
+      vertical-align:top;
+    }
+    table.business-count-by-gender {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: max-content;
+        
+        tbody tr{
+          display: flex;
+        }
+        th {
+        border-top: 2px solid #ffffff;
+        border-bottom: 2px solid #ffffff;
+        border-left: 1px solid #ffffff;
+        border-right: 1px solid #ffffff;
+        text-align: left;
+        padding: 3%;
+        white-space: nowrap;
+        width: 6vw;
+        }
+        td {
+        border: 1px solid #ffffff;
+        text-align: left;
+        padding: 3%;
+        white-space: nowrap;
+        width: 6vw;
+        }
+        td:first-child,th:first-child{
+          width: 10vw;
+        }
+
+        thead tr {
+          background-color: #4472c4;
+          color: white;
+          display: flex;
+        }
+        tbody tr:nth-child(even) {
+          background-color: #cfd5ea;
+        }
+        tbody tr:nth-child(odd) {
+          background-color: #e9ebf5;
+        }
+    }
+
+    table.business-type-details-by-gender {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: max-content;
+        
+        tbody tr{
+          display: flex;
+        }
+        th {
+        border-top: 2px solid #ffffff;
+        border-bottom: 2px solid #ffffff;
+        border-left: 1px solid #ffffff;
+        border-right: 1px solid #ffffff;
+        text-align: left;
+        padding: 3%;
+        white-space: nowrap;
+        width: 6vw;
+        }
+        td {
+        border: 1px solid #ffffff;
+        text-align: left;
+        padding: 3%;
+        white-space: nowrap;
+        width: 6vw;
+        }
+        td:first-child,th:first-child{
+          width: 12vw;
+        }
+
+        thead tr {
+          background-color: #70ad47;
+          color: white;
+          display: flex;
+        }
+        tbody tr:nth-child(even) {
+          background-color: #d5e3cf;
+        }
+        tbody tr:nth-child(odd) {
+          background-color: #ebf1e9;
+        }
+    }
+
+    table.age-details-by-gender {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: max-content;
+        
+        tbody tr{
+          display: flex;
+        }
+        th {
+        border-top: 2px solid #ffffff;
+        border-bottom: 2px solid #ffffff;
+        border-left: 1px solid #ffffff;
+        border-right: 1px solid #ffffff;
+        text-align: left;
+        padding: 3%;
+        white-space: nowrap;
+        width: 6vw;
+        }
+        td {
+        border: 1px solid #ffffff;
+        text-align: left;
+        padding: 3%;
+        white-space: nowrap;
+        width: 6vw;
+        }
+        td:first-child,th:first-child{
+          width: 8vw;
+        }
+
+        thead tr {
+          background-color: #000000;
+          color: white;
+          display: flex;
+        }
+        tbody tr:nth-child(even) {
+          background-color: #cbcbcb;
+        }
+        tbody tr:nth-child(odd) {
+          background-color: #e7e7e7;
+        }
+    }
+
+    table.business-ownership-details-by-gender {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: max-content;
+        
+        tbody tr{
+          display: flex;
+        }
+        th {
+        border-top: 2px solid #ffffff;
+        border-bottom: 2px solid #ffffff;
+        border-left: 1px solid #ffffff;
+        border-right: 1px solid #ffffff;
+        text-align: left;
+        padding: 3%;
+        white-space: nowrap;
+        width: 6vw;
+        }
+        td {
+        border: 1px solid #ffffff;
+        text-align: left;
+        padding: 3%;
+        white-space: nowrap;
+        width: 6vw;
+        }
+        td:first-child,th:first-child{
+          width: 17vw;
+        }
+
+        thead tr {
+          background-color: #ed7d31;
+          color: white;
+          display: flex;
+        }
+        tbody tr:nth-child(even) {
+          background-color: #f8d7cd;
+        }
+        tbody tr:nth-child(odd) {
+          background-color: #fcece8;
+        }
+    }
+
+    table.business-difficulty-details-by-gender {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: max-content;
+        
+        tbody tr{
+          display: flex;
+        }
+        th {
+        border-top: 2px solid #ffffff;
+        border-bottom: 2px solid #ffffff;
+        border-left: 1px solid #ffffff;
+        border-right: 1px solid #ffffff;
+        text-align: left;
+        padding: 3%;
+        white-space: nowrap;
+        width: 6vw;
+        }
+        td {
+        border: 1px solid #ffffff;
+        text-align: left;
+        padding: 3%;
+        white-space: nowrap;
+        width: 6vw;
+        }
+        td:first-child,th:first-child{
+          width: 22vw;
+        }
+
+        thead tr {
+          background-color: #5b9bd5;
+          color: white;
+          display: flex;
+        }
+        tbody tr:nth-child(even) {
+          background-color: #e7e7e7;
+        }
+        tbody tr:nth-child(odd) {
+          background-color: #ffffff;
+        }
+    }
+
+
+  }
+}
+

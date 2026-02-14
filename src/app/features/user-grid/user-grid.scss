@@ -99,54 +99,6 @@
         }
 
         }
-      
-    table{
-      margin: 2% 0 0 2%;
-      display: inline-block;
-      vertical-align:top;
-    }
-    table.business-count-by-gender {
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
-      width: max-content;
-        
-        tbody tr{
-          display: flex;
-        }
-        th {
-        border-top: 2px solid #ffffff;
-        border-bottom: 2px solid #ffffff;
-        border-left: 1px solid #ffffff;
-        border-right: 1px solid #ffffff;
-        text-align: left;
-        padding: 3%;
-        white-space: nowrap;
-        width: 6vw;
-        }
-        td {
-        border: 1px solid #ffffff;
-        text-align: left;
-        padding: 3%;
-        white-space: nowrap;
-        width: 6vw;
-        }
-        td:first-child,th:first-child{
-          width: 10vw;
-        }
-
-        thead tr {
-          background-color: #4472c4;
-          color: white;
-          display: flex;
-        }
-        tbody tr:nth-child(even) {
-          background-color: #cfd5ea;
-        }
-        tbody tr:nth-child(odd) {
-          background-color: #e9ebf5;
-        }
-    }
-
 
   }
 }

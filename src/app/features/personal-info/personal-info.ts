@@ -57,12 +57,12 @@ export class PersonalInfoComponent implements OnInit {
 
   // Load data for edit
   loadData(userId: string) {
-    this.userDetailsService.getUsers().subscribe({
+    this.userDetailsService.getUserDetails(this.userId).subscribe({
       next: (data: IUserDetails[]) => {
         console.log(data);   // ✅ strongly typed
 
         // Find the user by userId
-        const user = data.find(x => x.userId === userId);
+        const user = data[0];
         if (user) {
           // ✅ Patch values into the existing FormGroup
           this.personalForm.patchValue({

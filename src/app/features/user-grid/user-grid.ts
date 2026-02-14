@@ -19,9 +19,9 @@ export class UserGridComponent implements OnInit {
 
   rowData: IUserDetails[] = [];
   columnDefs: ColDef[] = [
-    { field: 'userId', headerName: 'यूआयडी' },
-    { field: 'userName', headerName: 'श्री सदस्याचे नाव' },
-    { field: 'mobile', headerName: 'मोबाईल नंबर' },
+    { field: 'userId', headerName: 'यूआयडी', width: 200 },
+    { field: 'userName', headerName: 'श्री सदस्याचे नाव', width: 300 },
+    { field: 'mobile', headerName: 'मोबाईल नंबर', width: 300 },
     { field: 'userAddress', headerName: 'पत्ता', hide: true },
     { field: 'pinCode', headerName: 'पिनकोड', hide: true },
     { field: 'emailId', headerName: 'ईमेल आयडी', hide: true },
@@ -56,7 +56,7 @@ export class UserGridComponent implements OnInit {
 
         return eDiv;
       },
-      width: 150
+      width: 200
     },
   ];
 

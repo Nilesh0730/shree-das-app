@@ -35,8 +35,7 @@ export class LoginComponent {
     const { username, password } = this.loginForm.value;
 
     if (this.authService.login(username, password)) {
-      // ✅ redirect after successful login
-      this.router.navigate(['/UserdetailsList']);
+      this.router.navigate(['/dashboard']);
     } else {
       this.errorMessage = 'Invalid username or password';
     }

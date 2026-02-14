@@ -87,7 +87,7 @@ export class BusinessInfoComponent implements OnInit {
   }
 
   loadData(userId: any) {
-    this.userDetailsService.getBusinessDetails().subscribe({
+    this.userDetailsService.getBusinessDetails(this.userId).subscribe({
       next: (data: IBusinessDetails[]) => {
         const business = data[0];
         if (business) {

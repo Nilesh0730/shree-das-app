@@ -41,8 +41,8 @@ export class BusinessProblemsComponent implements OnInit {
     this.buildForm();
 
     if (this.mode === 'edit' && this.userId) {
-      this.userDetailsService.getBusinessProblems().subscribe(data => {
-        const userProblem = data.find(item => item.userId === this.userId);
+      this.userDetailsService.getBusinessProblems(this.userId).subscribe(data => {
+        const userProblem = data[0];
 
         if (userProblem) {
           this.rowData = userProblem;

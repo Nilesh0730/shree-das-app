@@ -26,6 +26,11 @@
       border-radius: 10px;
       border: 1px solid orange;
       background-color: #ffffff;
+      color: black;
+    }
+    button:hover{
+      background-color: orange;
+      color: white;
     }
   }
   .userdetailslist-data-section{

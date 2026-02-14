@@ -1,7 +1,5 @@
 <div class="button-group">
   <button type="button" class="btn btn-primary" (click)="addNewUser()">Add New User</button>
 </div>
-<app-ag-grid class="ag-theme-alpine" [rowData]="rowData" [columnDefs]="columnDefs"></app-ag-grid>
-
-
-<!-- <app-grid (addEditUserEvent)="addEditUser($event)" [rowData]="rowData"></app-grid> -->
+<app-logout></app-logout>
+<app-ag-grid  [rowData]="rowData" [columnDefs]="columnDefs"></app-ag-grid>

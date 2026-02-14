@@ -13,6 +13,12 @@ export interface IBusinessDetails {
   ownership: Ownership;
   category: Category;
   location: Location;
+  capitalInvestment: number;
+  workingCapital: number;
+  monthlyExpenses: number;
+  rollingInvestment: number;
+  averageProfit: number; // percentage (0–100)
+
 }
 
 export interface BusinessCategory {

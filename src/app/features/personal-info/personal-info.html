@@ -49,10 +49,10 @@
 
   <!-- Aadhar -->
   <label>आधार क्रमांक</label>
-  <input formControlName="aadhar" />
-  <div *ngIf="personalForm.get('aadhar')?.touched && personalForm.get('aadhar')?.invalid">
-    <small *ngIf="personalForm.get('aadhar')?.errors?.['required']">आधार क्रमांक आवश्यक आहे.</small>
-    <small *ngIf="personalForm.get('aadhar')?.errors?.['pattern']">आधार क्रमांक नेहमी १२ अंकी असावा
+  <input formControlName="aadhaar" />
+  <div *ngIf="personalForm.get('aadhaar')?.touched && personalForm.get('aadhaar')?.invalid">
+    <small *ngIf="personalForm.get('aadhaar')?.errors?.['required']">आधार क्रमांक आवश्यक आहे.</small>
+    <small *ngIf="personalForm.get('aadhaar')?.errors?.['pattern']">आधार क्रमांक नेहमी १२ अंकी असावा
 </small>
   </div>
 

@@ -101,7 +101,12 @@ export class BusinessInfoComponent implements OnInit {
             sub_business: business.sub_business,
             ownership: business.ownership,
             category: business.category,
-            location: business.location
+            location: business.location,
+            capitalInvestment: business.capitalInvestment,
+            workingCapital:  business.workingCapital,
+            monthlyExpenses:  business.monthlyExpenses,
+            rollingInvestment:  business.rollingInvestment,
+            averageProfit:  business.averageProfit,
           });
         } else {
           console.warn(`No business found with id ${userId}`);

@@ -8,7 +8,7 @@ export interface IUserDetails {
   age: number;
   birthDate: string;
   gender: string;
-  aadhar: string;
+  aadhaar: string;
   pan: string;
   userBaithakNo: number;
   userBaithakName: string;

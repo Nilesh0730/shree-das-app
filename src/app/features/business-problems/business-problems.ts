@@ -14,9 +14,9 @@ import { IBusinessProblems } from '../../models/business-problems.model';
 })
 export class BusinessProblemsComponent implements OnInit {
 
-  @Input() rowData?: IBusinessProblems;
   @Input() userId: any | null = null;
   @Input() mode: 'add' | 'edit' = 'add';
+  rowData?: IBusinessProblems;
 
   businessForm!: FormGroup;
   isEditMode = false;
@@ -37,30 +37,36 @@ export class BusinessProblemsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.buildForm();
 
-    this.isEditMode = !!this.rowData?.id;
+    if (this.mode === 'edit' && this.userId) {
+      this.userDetailsService.getBusinessProblems().subscribe(data => {
+        // find the matching record
+        const userProblem = data.find(item => item.id === this.userId);
 
-    const group: { [key: string]: any } = {
-      id: [this.rowData?.id || null]   // 👈 ID control
-    };
+        if (userProblem) {
+          this.rowData = userProblem;
+          this.businessForm.patchValue(this.rowData);   // 👈 bind values into form
+        }
+      });
+    }
+  }
+
+  private buildForm(): void {
+    const group: { [key: string]: any } = { id: [this.rowData?.id || null] };
 
     this.problemFields.forEach(f => {
-
       group[f.id + 'YesNo'] = [
         this.rowData?.[f.id + 'YesNo' as keyof IBusinessProblems] ?? false,
         Validators.required
       ];
-
-      group[f.id] = [
-        this.rowData?.[f.id as keyof IBusinessProblems] ?? ''
-      ];
-
+      group[f.id] = [this.rowData?.[f.id as keyof IBusinessProblems] ?? ''];
     });
 
     this.businessForm = this.fb.group(group);
-
     this.setupConditionalValidation();
   }
+
 
   private setupConditionalValidation(): void {
 

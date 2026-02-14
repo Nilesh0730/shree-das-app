@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth-service';
 
 @Component({
   selector: 'app-login',
@@ -12,23 +13,30 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  errorMessage = '';
+  errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
     const { username, password } = this.loginForm.value;
 
-    // Hard-coded login check
-    if (username === 'admin' && password === 'admin123') {
-      console.log('Login successful');
-     // this.router.navigate(['/dashboard']); // redirect after login
-       this.router.navigate(['/UserdetailsList']); // redirect after login
+    if (this.authService.login(username, password)) {
+      // ✅ redirect after successful login
+      this.router.navigate(['/UserdetailsList']);
     } else {
       this.errorMessage = 'Invalid username or password';
     }

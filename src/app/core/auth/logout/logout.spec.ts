@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Grid } from './grid';
+import { Logout } from './logout';
 
-describe('Grid', () => {
-  let component: Grid;
-  let fixture: ComponentFixture<Grid>;
+describe('Logout', () => {
+  let component: Logout;
+  let fixture: ComponentFixture<Logout>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Grid]
+      imports: [Logout]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Grid);
+    fixture = TestBed.createComponent(Logout);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

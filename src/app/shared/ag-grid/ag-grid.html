@@ -8,6 +8,6 @@
     [pagination]="true"
     [paginationPageSize]="paginationPageSize"
     (selectionChanged)="onSelectionChanged($event)"
-    (gridReady)="gridApi = $event.api">
+    (gridReady)="onGridReady($event)">
   </ag-grid-angular>
 </div>

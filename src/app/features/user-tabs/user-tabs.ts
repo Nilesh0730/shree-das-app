@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { PersonalInfoComponent } from '../personal-info/personal-info';
@@ -18,8 +18,8 @@ import { BusinessProblemsComponent } from '../business-problems/business-problem
     BusinessProblemsComponent
   ],
 })
-export class UserTabsComponent {
-  @Input() userId: number | null = null;
+export class UserTabsComponent implements OnInit {
+  userId: any = null;
   @Input() mode: 'add' | 'edit' = 'add';
 
   selectedTabIndex: number = 0;
@@ -27,7 +27,16 @@ export class UserTabsComponent {
   // Define tab list so prev/next knows the length
   tabs = ['Personal Info', 'Business Info', 'Business Problems'];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.userId = this.route.snapshot.paramMap.get('userId');
+    if(this.mode)
+    {
+     this.mode = 'edit';
+    }
+    console.log('Fetched userId:', this.userId);
+  }
 
   selectTab(index: number) {
     this.selectedTabIndex = index;

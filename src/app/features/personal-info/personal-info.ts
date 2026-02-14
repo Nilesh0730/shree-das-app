@@ -43,7 +43,7 @@ export class PersonalInfoComponent implements OnInit {
       birthDate: ['', Validators.required],
       age: [0, [Validators.required, Validators.min(1)]], // must be positive
       gender: ['', Validators.required],
-      aadhar: ['', [Validators.required, Validators.pattern(/^[0-9]{12}$/)]], // 12 digits
+      aadhaar: ['', [Validators.required, Validators.pattern(/^[0-9]{12}$/)]], // 12 digits
       pan: ['', [Validators.required, Validators.pattern(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/)]], // ABCDE1234F format
     });
 
@@ -72,7 +72,7 @@ export class PersonalInfoComponent implements OnInit {
             birthDate: user.birthDate,
             age: user.age,
             gender: user.gender,
-            aadhar: user.aadhar,
+            aadhaar: user.aadhaar,
             pan: user.pan,
           });
         } else {

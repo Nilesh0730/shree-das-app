@@ -20,8 +20,8 @@ export class UserGridComponent implements OnInit {
   rowData: IUserDetails[] = [];
   columnDefs: ColDef[] = [
     { field: 'userId', headerName: 'यूआयडी', width: 200 },
-    { field: 'userName', headerName: 'श्री सदस्याचे नाव', width: 300 },
-    { field: 'mobile', headerName: 'मोबाईल नंबर', width: 300 },
+    { field: 'userName', headerName: 'श्री सदस्याचे नाव', width: 250 },
+    { field: 'mobile', headerName: 'मोबाईल नंबर', width: 250 },
     { field: 'userAddress', headerName: 'पत्ता', hide: true },
     { field: 'pinCode', headerName: 'पिनकोड', hide: true },
     { field: 'emailId', headerName: 'ईमेल आयडी', hide: true },

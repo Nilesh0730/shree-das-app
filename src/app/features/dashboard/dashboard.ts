@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { LogoutComponent } from '../../core/auth/logout/logout';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',

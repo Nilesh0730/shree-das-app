@@ -11,7 +11,7 @@ import { LogoutComponent } from '../../core/auth/logout/logout';
 @Component({
   selector: 'app-user-grid',
   standalone: true,
-  imports: [CommonModule, AgGridComponent,LogoutComponent],
+  imports: [CommonModule, AgGridComponent, LogoutComponent],
   templateUrl: './user-grid.html',
   styleUrl: './user-grid.scss',
 })
@@ -72,16 +72,14 @@ export class UserGridComponent implements OnInit {
   }
 
   userMarster() {
-        alert("userMarster was clicked!");
-    }
-    businessMaster() {
-        alert("businessMaster was clicked!");
-    }
-    logout() {
-        alert("logout was clicked!");
-    }
+    //alert("userMarster was clicked!");
+  }
+  businessMaster() {
+    //alert("businessMaster was clicked!");
+  }
+
   addEditUser(event: any) {
-    console.log("event",event);
+    console.log("event", event);
     if (event == 'newuser') {
       this.router.navigate(['/tab']);
     }
@@ -96,8 +94,8 @@ export class UserGridComponent implements OnInit {
   }
 
   sadasyaMahiti() {
-        alert("sadasyaMahiti was clicked!");
-    }
+    //alert("sadasyaMahiti was clicked!");
+  }
   onEdit(data: IUserDetails): any {
     console.log("onEdit", data);
     if (data.userId) {

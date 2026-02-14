@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { distinctUntilChanged } from 'rxjs/operators';
@@ -33,73 +33,74 @@ export class BusinessProblemsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userDetailsService: UserDetailsService) {
-  }
+    private userDetailsService: UserDetailsService
+  ) {}
 
   ngOnInit(): void {
+     this.isEditMode = this.mode === 'edit' && !!this.userId;
     this.buildForm();
 
     if (this.mode === 'edit' && this.userId) {
       this.userDetailsService.getBusinessProblems().subscribe(data => {
-        // find the matching record
-        const userProblem = data.find(item => item.id === this.userId);
+        const userProblem = data.find(item => item.userId === this.userId);
 
         if (userProblem) {
           this.rowData = userProblem;
-          this.businessForm.patchValue(this.rowData);   // 👈 bind values into form
+          this.buildForm();   // 👈 rebuild with rowData
         }
       });
     }
   }
 
   private buildForm(): void {
-    const group: { [key: string]: any } = { id: [this.rowData?.id || null] };
+    const group: { [key: string]: any } = {};
 
     this.problemFields.forEach(f => {
-      group[f.id + 'YesNo'] = [
-        this.rowData?.[f.id + 'YesNo' as keyof IBusinessProblems] ?? false,
-        Validators.required
-      ];
-      group[f.id] = [this.rowData?.[f.id as keyof IBusinessProblems] ?? ''];
+      const value = this.rowData?.[f.id as keyof IBusinessProblems] ?? null;
+      const hasExplanation = !!value && value.trim() !== '';
+
+      group[f.id + 'YesNo'] = [hasExplanation, Validators.required];
+      group[f.id] = [value ?? ''];
     });
 
     this.businessForm = this.fb.group(group);
     this.setupConditionalValidation();
   }
 
-
   private setupConditionalValidation(): void {
-
     this.problemFields.forEach(f => {
-
       const yesNoControl = this.businessForm.get(f.id + 'YesNo');
       const textControl = this.businessForm.get(f.id);
 
       yesNoControl?.valueChanges
         .pipe(distinctUntilChanged())
         .subscribe((value: boolean) => {
-
           if (value === true) {
             textControl?.setValidators([Validators.required]);
           } else {
             textControl?.clearValidators();
             textControl?.setValue('', { emitEvent: false });
           }
-
           textControl?.updateValueAndValidity({ emitEvent: false });
-
         });
     });
   }
 
   onSubmit(): void {
-
     if (this.businessForm.invalid) {
       this.businessForm.markAllAsTouched();
       return;
     }
 
-    const formData: IBusinessProblems = this.businessForm.value;
+    // Transform back into clean JSON
+    const formData: IBusinessProblems = {} as IBusinessProblems;
+
+    this.problemFields.forEach(f => {
+      const yesNo = this.businessForm.get(f.id + 'YesNo')?.value;
+      const explanation = this.businessForm.get(f.id)?.value;
+
+      (formData as any)[f.id] = yesNo ? explanation : null;
+    });
 
     if (this.isEditMode) {
       console.log('Update API Call:', formData);
@@ -108,4 +109,3 @@ export class BusinessProblemsComponent implements OnInit {
     }
   }
 }
-

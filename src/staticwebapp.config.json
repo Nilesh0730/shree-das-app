@@ -1,6 +1,11 @@
 {
   "navigationFallback": {
-    "rewrite": "/index.html",
-    "exclude": ["/assets/*"]
-  }
+    "rewrite": "/index.html"
+  },
+  "routes": [
+    {
+      "route": "/api/*",
+      "rewrite": "https://internal-forms-submission-api-fzedabapg3d7hqdq.centralindia-01.azurewebsites.net/api/*"
+    }
+  ]
 }

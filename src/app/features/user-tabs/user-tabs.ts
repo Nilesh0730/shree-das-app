@@ -31,7 +31,7 @@ export class UserTabsComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('userId');
-    if(this.mode)
+    if(this.userId)
     {
      this.mode = 'edit';
     }
@@ -42,10 +42,10 @@ export class UserTabsComponent implements OnInit {
     this.selectedTabIndex = index;
   }
 
-  handleUserCreated(newUserId: number) {
-    this.userId = newUserId;
-    this.mode = 'edit';
-  }
+  // handleUserCreated(newUserId: number) {
+  //   this.userId = newUserId;
+  //   this.mode = 'edit';
+  // }
 
   prevTab() {
     if (this.selectedTabIndex > 0) {

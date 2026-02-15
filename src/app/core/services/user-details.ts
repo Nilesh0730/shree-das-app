@@ -5,6 +5,8 @@ import { IUserDetails } from '../../models/user-details.model';
 import { IBusinessProblems } from '../../models/business-problems.model';
 import { IBusinessDetails } from '../../models/business-details.model';
 import { environment } from '../../../environments/environment';
+import { IBaithakLocation } from '../../models/baithak-location.model';
+import { IBaithakDay } from '../../models/baithak-day.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserDetailsService {
@@ -16,15 +18,48 @@ export class UserDetailsService {
     return this.http.get<IUserDetails[]>(`${this.baseUrl}/all`);
   }
 
-  getUserDetails(userId: any): Observable<IUserDetails[]> {
-    return this.http.get<IUserDetails[]>(`${this.baseUrl}/details/${userId}`);
+  getUserDetails(userId: string): Observable<IUserDetails> {
+    return this.http.get<IUserDetails>(`${this.baseUrl}/details/${userId}`);
   }
 
-  getBusinessDetails(userId: any): Observable<IBusinessDetails[]> {
-    return this.http.get<IBusinessDetails[]>(`${this.baseUrl}/businessdetails/${userId}`);
+  getBusinessDetails(userId: number): Observable<IBusinessDetails> {
+    return this.http.get<IBusinessDetails>(
+      `${this.baseUrl}/businessdetails/${userId}`
+    );
   }
 
-  getBusinessProblems(userId: any): Observable<IBusinessProblems[]> {
-    return this.http.get<IBusinessProblems[]>(`${this.baseUrl}/businessproblems/${userId}`);
+  getBusinessProblems(userId: number): Observable<IBusinessProblems> {
+    return this.http.get<IBusinessProblems>(
+      `${this.baseUrl}/businessproblems/${userId}`
+    );
   }
+
+  addBusinessDetails(userId: number, payload: any) {
+    return this.http.post(
+      `${this.baseUrl}/addbusinessdetails/${userId}`,
+      payload
+    );
+  }
+
+  getBaithakByGender(genderFlag: any) {
+    return this.http.get<IBaithakLocation[]>(
+      `${this.baseUrl}/baithakNames/${genderFlag}`
+    );
+  }
+
+  getBaithakDay(baithakLocationId: number, genderFlag: string) {
+    return this.http.get<IBaithakDay[]>(
+      `${this.baseUrl}/baithakdays/${baithakLocationId}/${genderFlag}`
+    );
+
+  }
+
+  getLookup() {
+    return this.http.get(`${this.baseUrl}/lookup`);
+  }
+
+  insertUpdateUser(payload: any) {
+    return this.http.post(`${this.baseUrl}/insertupdate`, payload);
+  }
+
 }

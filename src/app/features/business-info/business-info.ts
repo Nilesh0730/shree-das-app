@@ -88,8 +88,8 @@ export class BusinessInfoComponent implements OnInit {
 
   loadData(userId: any) {
     this.userDetailsService.getBusinessDetails(this.userId).subscribe({
-      next: (data: IBusinessDetails[]) => {
-        const business = data[0];
+      next: (data: IBusinessDetails) => {
+        const business = data;
         if (business) {
           // Map enums safely
           const ownership = Object.values(Ownership).find((e :any) => this.normalize(e) === this.normalize(business.ownership));

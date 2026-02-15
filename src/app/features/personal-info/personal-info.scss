@@ -1,11 +1,38 @@
 /* Form container */
 form {
-  max-width: 500px;
-  margin: 20px auto;
-  padding: 20px;
+  margin: 0 0 0 10vw;
+  padding: 1% 0 2% 0;
   border: 1px solid #ddd;
   border-radius: 6px;
   background: #fafafa;
+  width: 80vw;
+  height: max-content;
+  .form-row{
+    width: 95%;
+    height: 12vh;
+  }
+  .form-group{
+    display: inline-block;
+    width: 30%;
+    margin: 0 0 0 2.5%;
+    height: 12vh;
+    div{
+      small{
+        margin: 0 0 0 0;
+      }
+    }
+  }
+  .form-group.form-group-double{
+   width: 62.5%;
+  }
+  .form-group-full{
+      display: inline-block;
+    width: 100%;
+        .save-button{
+      justify-self: center;
+      width: 50%;
+    }
+  }
 }
 
 /* Labels */
@@ -14,17 +41,20 @@ label {
   margin-bottom: 4px;
   font-weight: 600;
   color: #333;
+  font-size: 0.8vw;
+  line-height: 0.9vw;
 }
 
 /* Inputs and selects */
 input, select {
   width: 100%;
-  padding: 8px 10px;
-  margin-bottom: 8px;
+  padding: 0 0 0 0.5vw;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 1vw;
+  height: 2vw;
 }
+
 
 /* Highlight invalid fields */
 input.ng-invalid.ng-touched,
@@ -36,9 +66,10 @@ select.ng-invalid.ng-touched {
 /* Error messages */
 small {
   color: #e74c3c;
-  font-size: 12px;
-  margin-bottom: 8px;
+  font-size: 1vw;
+  margin: 0 0 0 0;
   display: block;
+  line-height: 1.2vw;
 }
 
 /* Button */
@@ -46,10 +77,12 @@ button {
   background: #007bff;
   color: #fff;
   border: none;
-  padding: 10px 16px;
+  padding: 1% 2%;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 1.5vw;
+  width: 100%;
+  height: 3vw;
 }
 
 button:hover {

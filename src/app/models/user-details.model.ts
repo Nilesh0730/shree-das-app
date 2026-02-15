@@ -13,4 +13,10 @@ export interface IUserDetails {
   userBaithakNo: number;
   userBaithakName: string;
   userBaithakDay: string;
+  baithak: string;
+  baithakRollNo: string;
+  baithakDay: string;
+  email: string;
+  education: string;
+  pincode: string;
 }

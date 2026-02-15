@@ -38,8 +38,14 @@ export class PersonalInfoComponent implements OnInit {
     // Initialize form
     this.personalForm = this.fb.group({
       userName: ['', Validators.required],
-      mobile: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      baithak: ['', Validators.required],
+      baithakRollNo: ['', Validators.required],
+      baithakDay: ['', Validators.required],
       address: ['', Validators.required],
+      pincode: ['', Validators.required],
+      mobile: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      email: ['', Validators.required],
+      education: ['', Validators.required],
       birthDate: ['', Validators.required],
       age: [0, [Validators.required, Validators.min(1)]], // must be positive
       gender: ['', Validators.required],
@@ -67,8 +73,14 @@ export class PersonalInfoComponent implements OnInit {
           // ✅ Patch values into the existing FormGroup
           this.personalForm.patchValue({
             userName: user.userName,
-            mobile: user.mobile,
+            baithak: user.baithak,
+            baithakRollNo: user.baithakRollNo,
+            baithakDay: user.baithakDay,
             address: user.userAddress,
+            pincode: user.pincode,
+            mobile: user.mobile,
+            email: user.email,
+            education: user.education,
             birthDate: user.birthDate,
             age: user.age,
             gender: user.gender,

@@ -35,6 +35,13 @@ export class UserDetailsService {
     );
   }
 
+   updateBusinessProblems(userId: number, payload: any) {
+    return this.http.post(
+      `${this.baseUrl}/businessproblems/${userId}`,
+      payload
+    );
+  }
+
   UpdateBusinessDetails(userId: number, payload: any) {
     return this.http.post(
       `${this.baseUrl}/addbusinessdetails/${userId}`,

@@ -6,9 +6,13 @@ export interface IBusinessDetails {
   businessAddress: string;
   businessGstNo: string;
   businessDuration: number;
+  businessTypeId:number;
   businessTypeName: string;
+  businessOwnershipId : number;
   ownership: string;
+  businessCategoryId :number;
   businessCategory: string;
+  businessPlaceId: number;
   businessPlace: string;
   subBusiness: string;
   businessCapital: IBusinessCapital;

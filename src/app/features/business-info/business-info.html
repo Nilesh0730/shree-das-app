@@ -145,10 +145,10 @@
 <div class="form-group">
   <label>जीएसटी क्रमांक :</label>
   <input formControlName="gst">
-  <small *ngIf="businessForm.get('gst')?.touched && businessForm.get('gst')?.invalid">
+  <!-- <small *ngIf="businessForm.get('gst')?.touched && businessForm.get('gst')?.invalid">
     <small *ngIf="businessForm.get('gst')?.errors?.['required']">जीएसटी क्रमांक आवश्यक आहे</small>
     <small *ngIf="businessForm.get('gst')?.errors?.['pattern']">अवैध जीएसटी क्रमांक</small>
-  </small>
+  </small> -->
 </div>
 <div class="form-group">
   <label>व्यवसाय कालावधी :</label>
@@ -163,73 +163,73 @@
     <!-- Half Time -->
     <div class="checkbox-group">
       <label>अर्धे वेळ :</label>
-      <input type="checkbox" formControlName="half_time" style="width: 60px;">
+      <input type="checkbox" formControlName="partTime" style="width: 60px;">
     </div>
 
     <!-- Full Time -->
     <div class="checkbox-group">
       <label>पूर्ण वेळ :</label>
-      <input type="checkbox" formControlName="full_time" style="width: 60px;">
+      <input type="checkbox" formControlName="fullTime" style="width: 60px;">
     </div>
 </div>
 <div class="form-group">
 
   <label> उपव्यवसाय :</label>
-  <input formControlName="sub_business">
-  <small *ngIf="businessForm.get('sub_business')?.touched && businessForm.get('sub_business')?.invalid">
+  <input formControlName="subBusiness">
+  <!-- <small *ngIf="businessForm.get('subBusiness')?.touched && businessForm.get('subBusiness')?.invalid">
     उपव्यवसाय नाव हे क्षेत्र आवश्यक आहे
-  </small>
+  </small> -->
 
 </div>
 <div class="form-group form-group-checkbox">
   <label>व्यवसायाचे स्वरूप :</label>
   <div class="checkbox-group" formGroupName="ownership">
-    <label> वैयक्तिक मालकी</label><input type="checkbox" formControlName="proprietorship">
+    <label> वैयक्तिक मालकी</label><input type="checkbox" formControlName="Proprietorship">
     </div>
     <div class="checkbox-group" formGroupName="ownership">
-    <label> खाजगी मर्यादित कंपनी</label><input type="checkbox" formControlName="pvt_ltd">
+    <label> खाजगी मर्यादित कंपनी</label><input type="checkbox" formControlName="PvtLtd">
     </div>
     <div class="checkbox-group" formGroupName="ownership">
-    <label> LLP</label><input type="checkbox" formControlName="llp">
+    <label> LLP</label><input type="checkbox" formControlName="LLP">
     </div>
     <div class="checkbox-group" formGroupName="ownership">
-    <label> भागीदारी</label><input type="checkbox" formControlName="partnership">
+    <label> भागीदारी</label><input type="checkbox" formControlName="Partnership">
     </div>
-  
+
 </div>
 <div class="form-group form-group-checkbox">
   <label>व्यवसायाचे वर्गीकरण :</label>
-  <div class="checkbox-group" formGroupName="category">
-    <label> सेवा</label><input type="checkbox" formControlName="service">
+  <div class="checkbox-group" formGroupName="bType">
+    <label> सेवा</label><input type="checkbox" formControlName="Service">
   </div>
-  <div class="checkbox-group" formGroupName="category">
-    <label> खरेदी-विक्री</label><input type="checkbox" formControlName="trading">
-  </div><div class="checkbox-group" formGroupName="category">
-    <label> उत्पादन</label><input type="checkbox" formControlName="manufacture">
-    </div><div class="checkbox-group" formGroupName="category">
-    <label> घाऊक</label><input type="checkbox" formControlName="wholesale">
-    </div><div class="checkbox-group" formGroupName="category">
-    <label> किरकोळ</label><input type="checkbox" formControlName="retail">
-    </div><div class="checkbox-group" formGroupName="category">
-    <label> घरातून</label><input type="checkbox" formControlName="ghar">
-    </div><div class="checkbox-group" formGroupName="category">
-    <label> दुकान</label><input type="checkbox" formControlName="shop">
+  <div class="checkbox-group" formGroupName="bType">
+    <label> खरेदी-विक्री</label><input type="checkbox" formControlName="Trading">
+  </div><div class="checkbox-group" formGroupName="bType">
+    <label> उत्पादन</label><input type="checkbox" formControlName="Manufacture">
+    </div><div class="checkbox-group" formGroupName="bType">
+    <label> घाऊक</label><input type="checkbox" formControlName="Wholesale">
+    </div><div class="checkbox-group" formGroupName="bType">
+    <label> किरकोळ</label>
+    </div><div class="checkbox-group" formGroupName="bType">
+    <label> घरातून</label><input type="checkbox" formControlName="RetailGhar">
+    </div><div class="checkbox-group" formGroupName="bType">
+    <label> दुकान</label><input type="checkbox" formControlName="RetailShop">
   </div>
 </div>
 <div class="form-group form-group-checkbox">
   <label>व्यवसायाचे ठिकाण :</label>
   <div class="checkbox-group" formGroupName="location">
-    <label> गाव</label><input type="checkbox" formControlName="gaon">
+    <label> गाव</label><input type="checkbox" formControlName="Gaon">
   </div><div class="checkbox-group" formGroupName="location">
-    <label> शहर</label><input type="checkbox" formControlName="shahar">
+    <label> शहर</label><input type="checkbox" formControlName="City">
     </div><div class="checkbox-group" formGroupName="location">
-    <label> बाजारपेठ</label><input type="checkbox" formControlName="bazaar">
+    <label> बाजारपेठ</label><input type="checkbox" formControlName="Bazaar">
     </div><div class="checkbox-group" formGroupName="location">
-    <label> घरातून</label><input type="checkbox" formControlName="ghar">
+    <label> घरातून</label><input type="checkbox" formControlName="Home">
     </div><div class="checkbox-group" formGroupName="location">
-    <label> फिरता व्यवसाय</label><input type="checkbox" formControlName="phirta">
+    <label> फिरता व्यवसाय</label><input type="checkbox" formControlName="Phirta">
     </div><div class="checkbox-group" formGroupName="location">
-    <label> इतर</label><input type="checkbox" formControlName="itar">
+    <label> इतर</label><input type="checkbox" formControlName="Itar">
   </div>
 </div>
 <div class="form-group">

@@ -10,6 +10,7 @@ import { IBaithakDay } from '../../models/baithak-day.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserDetailsService {
+
   private baseUrl = `${environment.apiBaseUrl}/users`;
 
   constructor(private http: HttpClient) { }
@@ -34,9 +35,16 @@ export class UserDetailsService {
     );
   }
 
-  addBusinessDetails(userId: number, payload: any) {
+  UpdateBusinessDetails(userId: number, payload: any) {
     return this.http.post(
       `${this.baseUrl}/addbusinessdetails/${userId}`,
+      payload
+    );
+  }
+
+  addBusinessDetails(payload: any) {
+    return this.http.post(
+      `${this.baseUrl}/addbusinessdetails`,
       payload
     );
   }

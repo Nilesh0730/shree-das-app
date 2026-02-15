@@ -123,16 +123,16 @@ export class PersonalInfoComponent implements OnInit {
 
 
     const selectedBaithak = this.baithakList.find(
-      b => b.baithakLocationId === this.personalForm.get('userBaithakLocationId')?.value
+      b => b.baithakLocationId == this.personalForm.get('userBaithakLocationId')?.value
     );
 
     const selectedBaithakDay = this.baithakDays.find(
-      d => d.dayId === this.personalForm.get('userBaithakDayId')?.value
+      d => d.dayId == this.personalForm.get('userBaithakDayId')?.value
     );
 
     const payload: IUserDetails = {
       ...this.personalForm.value,
-      userId: this.userId || undefined,
+      userId: this.userId || null,
       userBaithakLocationId: selectedBaithak?.baithakLocationId || null,
       userBaithakName: selectedBaithak?.baithakName || '',
       userBaithakDayId: selectedBaithakDay?.dayId || null,

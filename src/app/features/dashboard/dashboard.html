@@ -1,191 +1,87 @@
-
-  <!-- <p class="signup-hint"> Don't have an account? <a routerLink="/add-user">Create one here</a> </p> -->
 <div class="dashboard-panel">
-<div class="dashboard-menu-section">
 
-<button type="button" (click)="userMarster()">User Master</button>
-<button type="button" (click)="businessMaster()">Business Master</button>
-<button type="button" (click)="sadasyaMahiti()">सदस्य माहिती एंट्री फॉर्म</button>
-<app-logout></app-logout>
-<!-- <button type="button" (click)="logout()">Logout</button> -->
+  <aside class="dashboard-menu-section">
+    <div class="brand-logo" style="color: white; font-weight: 800; font-size: 1.2rem; margin-bottom: 2rem; padding-left: 1rem;">
+      Admin Portal
+    </div>
+
+    <button type="button" (click)="userMarster()">
+      <i class="fas fa-users"></i> User Master
+    </button>
+    <button type="button" (click)="businessMaster()">
+      <i class="fas fa-chart-line"></i> Business Master
+    </button>
+    <button type="button" (click)="sadasyaMahiti()" class="active">
+      <i class="fas fa-user-plus"></i> सदस्य माहिती एंट्री
+    </button>
+
+    <div style="margin-top: auto;">
+      <app-logout></app-logout>
+    </div>
+  </aside>
+
+  <main class="dashboard-data-section">
+    <h2>उदयोजक सांख्यिकी (Entrepreneur Statistics)</h2>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="label">एकूण महिला उदयोजक</div>
+        <div class="value">750</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">एकूण पुरुष उदयोजक</div>
+        <div class="value">850</div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+
+      <div class="table-container">
+        <div class="table-header">व्यवसायाचे वर्गीकरण (Classification)</div>
+        <table>
+          <thead>
+            <tr><th>वर्गीकरण</th><th>महिला</th><th>पुरुष</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>सर्विस</td><td class="val-female">100</td><td class="val-male">250</td></tr>
+            <tr><td>ट्रेडिंग</td><td class="val-female">300</td><td class="val-male">350</td></tr>
+            <tr><td>उत्पादक</td><td class="val-female">300</td><td class="val-male">100</td></tr>
+            <tr><td>घाऊक व्यवसाय</td><td class="val-female">50</td><td class="val-male">50</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-container">
+        <div class="table-header">वयोगटानुसार (Age Wise)</div>
+        <table>
+          <thead>
+            <tr><th>वय</th><th>महिला</th><th>पुरुष</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>१८ ते ३५</td><td class="val-female">100</td><td class="val-male">250</td></tr>
+            <tr><td>३६ ते ४६</td><td class="val-female">300</td><td class="val-male">350</td></tr>
+            <tr><td>४७ ते ५६</td><td class="val-female">400</td><td class="val-male">200</td></tr>
+            <tr><td>५७+</td><td class="val-female">50</td><td class="val-male">50</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="table-container">
+      <div class="table-header">व्यवसायातील अडचणी (Business Difficulties)</div>
+      <table>
+        <thead>
+          <tr><th>अडचणी</th><th>महिला</th><th>पुरुष</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Financial Management</td><td class="val-female">100</td><td class="val-male">250</td></tr>
+          <tr><td>Marketing Management</td><td class="val-female">300</td><td class="val-male">350</td></tr>
+          <tr><td>Tax & Licences</td><td class="val-female">300</td><td class="val-male">100</td></tr>
+          <tr><td>Business Development</td><td class="val-female">50</td><td class="val-male">50</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
 </div>
-
-<div class="dashboard-data-section">
-
-<table class="business-count-by-gender">
-  <thead>
-  <tr>
-    <th>Category</th>
-    <th>Count</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>महिला उदयोजक</td>
-    <td>750</td>
-  </tr>
-  <tr>
-    <td>पुरुष उदयोजक</td>
-    <td>850</td>
-  </tr>
-  </tbody>
-</table>
-
-
-<table class="business-type-details-by-gender">
-  <thead>
-  <tr>
-    <th>वर्गीकरण</th>
-    <th>महिला</th>
-    <th>पुरुष</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>सर्विस</td>
-    <td>100</td>
-    <td>250</td>
-  </tr>
-  <tr>
-    <td>ट्रेडिंग</td>
-    <td>300</td>
-    <td>350</td>
-  </tr>
-  <tr>
-    <td>उत्पादक</td>
-    <td>300</td>
-    <td>100</td>
-  </tr>
-  <tr>
-    <td>घाऊक व्यवसाय</td>
-    <td>50</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>किरकोळ व्यवसाय</td>
-    <td>100</td>
-    <td>100</td>
-  </tr>
-  </tbody>
-</table>
-
-
-<table class="age-details-by-gender">
-  <thead>
-  <tr>
-    <th>वय</th>
-    <th>महिला</th>
-    <th>पुरुष</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>१८ ते ३५</td>
-    <td>100</td>
-    <td>250</td>
-  </tr>
-  <tr>
-    <td>३६ ते ४६</td>
-    <td>300</td>
-    <td>350</td>
-  </tr>
-  <tr>
-    <td>४७ ते ५६</td>
-    <td>400</td>
-    <td>200</td>
-  </tr>
-  <tr>
-    <td>५७ ते ६५</td>
-    <td>50</td>
-    <td>50</td>
-  </tr>
-  </tbody>
-</table>
-
-<table class="business-ownership-details-by-gender">
-  <thead>
-  <tr>
-    <th>वय</th>
-    <th>महिला</th>
-    <th>पुरुष</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>वैयक्तिक मालकी</td>
-    <td>100</td>
-    <td>250</td>
-  </tr>
-  <tr>
-    <td>भागीदारी</td>
-    <td>300</td>
-    <td>350</td>
-  </tr>
-  <tr>
-    <td>खाजगी मर्यादित कंपनी</td>
-    <td>400</td>
-    <td>200</td>
-  </tr>
-  <tr>
-    <td>मर्यादित दायीत्व भागीदारी</td>
-    <td>50</td>
-    <td>50</td>
-  </tr>
-  </tbody>
-</table>
-
-<table class="business-difficulty-details-by-gender">
-  <thead>
-  <tr>
-    <th>अडचणी</th>
-    <th>महिला</th>
-    <th>पुरुष</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>(Loan) Financial Management 100</td>
-    <td>100</td>
-    <td>250</td>
-  </tr>
-  <tr>
-    <td>(Marketing Management)</td>
-    <td>300</td>
-    <td>350</td>
-  </tr>
-  <tr>
-    <td>(Tax, Licences Management)</td>
-    <td>300</td>
-    <td>100</td>
-  </tr>
-  <tr>
-    <td>(Skill Management)</td>
-    <td>50</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>(Land Management)</td>
-    <td>100</td>
-    <td>100</td>
-  </tr>
-  <tr>
-    <td>(Business Development)</td>
-    <td>50</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>(Employment Management)</td>
-    <td>50</td>
-    <td>50</td>
-  </tr>
-  </tbody>
-</table>
-
-
-
-</div>
-
-
-</div>
-
-

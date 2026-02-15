@@ -1,32 +1,60 @@
-<div class="tabs-header">
-  <div (click)="selectTab(0)" [class.active]="selectedTabIndex===0">Personal Info</div>
-  <div (click)="selectTab(1)" [class.active]="selectedTabIndex===1">Business Info</div>
-  <div (click)="selectTab(2)" [class.active]="selectedTabIndex===2">Business Problems</div>
-</div>
+<div class="main-wrapper">
 
-<div class="tabs-content">
-  <app-personal-info
-    *ngIf="selectedTabIndex===0"
-    [userId]="userId"
-    [mode]="mode"
-    >
-  </app-personal-info>
+  <header class="tabs-header">
+    <div class="tab-item" (click)="selectTab(0)" [class.active]="selectedTabIndex===0">
+      <div class="step-number">1</div>
+      <div class="step-label">Personal Info</div>
+    </div>
 
-  <app-business-info
-    *ngIf="selectedTabIndex===1"
-    [userId]="userId"
-    [mode]="mode">
-  </app-business-info>
+    <div class="tab-item" (click)="selectTab(1)" [class.active]="selectedTabIndex===1">
+      <div class="step-number">2</div>
+      <div class="step-label">Business Info</div>
+    </div>
 
-  <app-business-problems
-    *ngIf="selectedTabIndex===2"
-    [userId]="userId"
-    [mode]="mode">
-  </app-business-problems>
-</div>
+    <div class="tab-item" (click)="selectTab(2)" [class.active]="selectedTabIndex===2">
+      <div class="step-number">3</div>
+      <div class="step-label">Challenges</div>
+    </div>
+  </header>
 
-<div class="tabs-navigation">
-  <button (click)="goBack()">Back</button>
-  <button (click)="prevTab()" [disabled]="selectedTabIndex===0">Previous</button>
-  <button (click)="nextTab()" [disabled]="selectedTabIndex===tabs.length-1">Next</button>
+  <main class="tabs-content">
+    <app-personal-info
+      *ngIf="selectedTabIndex===0"
+      [userId]="userId"
+      [mode]="mode"
+      (userCreated)="handleUserCreated($event)">
+    </app-personal-info>
+
+    <app-business-info
+      *ngIf="selectedTabIndex===1"
+      [userId]="userId"
+      [mode]="mode"
+      (nextButton)="handelNextWhensave($event)"
+      >
+    </app-business-info>
+
+    <app-business-problems
+      *ngIf="selectedTabIndex===2"
+      [userId]="userId"
+      [mode]="mode"
+      (nextButton)="handelNextWhensave($event)"
+      >
+    </app-business-problems>
+  </main>
+
+  <nav class="tabs-navigation">
+    <button (click)="goBack()" class="btn-exit">
+      <span>Exit</span>
+    </button>
+
+    <div class="separator" style="width: 1px; background: #e2e8f0; margin: 0 5px;"></div>
+
+    <button (click)="prevTab()" [disabled]="selectedTabIndex===0">
+      <i class="fas fa-arrow-left"></i> Previous
+    </button>
+
+    <button (click)="nextTab()" [disabled]="selectedTabIndex===2">
+       {{ selectedTabIndex === 2 ? 'Finish' : 'Next' }} <i class="fas fa-arrow-right"></i>
+    </button>
+  </nav>
 </div>

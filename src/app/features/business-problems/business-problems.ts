@@ -130,6 +130,7 @@ import { CommonModule } from '@angular/common';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { UserDetailsService } from '../../core/services/user-details';
 import { IBusinessProblems } from '../../models/business-problems.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-business-problems',
@@ -157,16 +158,17 @@ export class BusinessProblemsComponent implements OnInit {
   ];
 
   constructor(
+     private router: Router,
     private fb: FormBuilder,
     private userDetailsService: UserDetailsService,
     private cdr: ChangeDetectorRef // 1. Inject ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-    this.isEditMode = this.mode === 'edit' && !!this.userId;
+    this.isEditMode = this.mode === 'edit';
     this.buildEmptyForm();
 
-    if (this.isEditMode && this.userId) {
+    if (this.isEditMode) {
       this.userDetailsService.getBusinessProblems(this.userId).subscribe(userData => {
         if (userData) {
           this.rowData = userData;
@@ -235,23 +237,6 @@ export class BusinessProblemsComponent implements OnInit {
     textControl?.updateValueAndValidity({ emitEvent: false });
   }
 
-  // onSubmit(): void {
-  //   if (this.businessForm.invalid) {
-  //     this.businessForm.markAllAsTouched();
-  //     return;
-  //   }
-
-  //   const formData: any = {};
-  //   this.problemFields.forEach(f => {
-  //     const yesNo = this.businessForm.get(f.id + 'YesNo')?.value;
-  //     const explanation = this.businessForm.get(f.id)?.value;
-  //     formData[f.id] = yesNo ? explanation : null;
-  //   });
-
-
-
-  //   console.log(this.isEditMode ? 'Update:' : 'Create:', formData);
-  // }
 
   onSubmit(): void {
     if (this.businessForm.invalid) {
@@ -272,9 +257,11 @@ export class BusinessProblemsComponent implements OnInit {
 
     // Call the service method
     this.userDetailsService.updateBusinessProblems(this.userId, payload).subscribe({
-      next: (response) => {
-        console.log('Success:', response);
-        alert(this.isEditMode ? 'Details Updated Successfully!' : 'Details Added Successfully!');
+      next:  (res: IUserResponse)  => {
+          alert(`${res.message}`)
+      this.router.navigate(['/UserdetailsList']);
+       // console.log('Success:', response);
+      //  alert(this.isEditMode ? 'Details Updated Successfully!' : 'Details Added Successfully!');
         //this.isSubmitting = false;
       },
       error: (err) => {

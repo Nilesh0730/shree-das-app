@@ -17,7 +17,7 @@ export class PersonalInfoComponent implements OnInit {
 
   @Input() userId: string | null = null;
   @Input() mode: 'add' | 'edit' = 'add';
-  @Output() userCreated = new EventEmitter<string>();
+  @Output() userCreated = new EventEmitter<{ userId: any, mode: string }>();
 
   personalForm!: FormGroup;
   isEditMode = false;
@@ -26,6 +26,15 @@ export class PersonalInfoComponent implements OnInit {
     { value: 'g', label: 'पुरुष' },
     { value: 'l', label: 'महिला' }
   ];
+
+  educationList = [
+  { id: 1, name: 'Primary (प्राथमिक)' },
+  { id: 2, name: 'Secondary (माध्यमिक)' },
+  { id: 3, name: 'Higher Secondary (उच्च माध्यमिक)' },
+  { id: 4, name: 'Graduate (पदवीधर)' },
+  { id: 5, name: 'Post Graduate (पदव्युत्तर)' },
+  { id: 6, name: 'Other (इतर)' }
+];
 
   baithakList: IBaithakLocation[] = [];
   baithakDays: IBaithakDay[] = [];
@@ -59,6 +68,7 @@ export class PersonalInfoComponent implements OnInit {
       userBaithakNo: ['', Validators.required],
       mobile: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       userAddress: ['', Validators.required],
+      education: [''],
       pinCode: ['', Validators.required],
       emailId: ['', [Validators.required, Validators.email]],
       birthDate: ['', Validators.required],
@@ -115,7 +125,17 @@ export class PersonalInfoComponent implements OnInit {
     this.personalForm.get('age')?.setValue(age);
   }
 
+  checkFormErrors() {
+  const controls = this.personalForm.controls;
+  for (const name in controls) {
+    if (controls[name].invalid) {
+      console.log('Invalid Field found:', name, controls[name].errors);
+    }
+  }
+}
+
   onSaveUser() {
+    this.checkFormErrors();
     if (this.personalForm.invalid) {
       this.personalForm.markAllAsTouched();
       return;
@@ -142,9 +162,13 @@ export class PersonalInfoComponent implements OnInit {
     };
 
     this.userDetailsService.insertUpdateUser(payload).subscribe({
-      next: res => {
-        alert(`${this.mode === 'add' ? 'Created' : 'Updated'} successfully!`);
-        this.userCreated.emit(payload.userId || '');
+      next: (res: IUserResponse) => {
+        alert(`${res.message}`)
+       const emitData = {
+        userId: res.userId,
+        mode: this.mode
+      };
+      this.userCreated.emit(emitData);
       },
       error: err => {
         console.error('Error saving user:', err);

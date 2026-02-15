@@ -19,9 +19,9 @@ import { BusinessProblemsComponent } from '../business-problems/business-problem
   ],
 })
 export class UserTabsComponent implements OnInit {
+
   userId: any = null;
   @Input() mode: 'add' | 'edit' = 'add';
-
   selectedTabIndex: number = 0;
 
   // Define tab list so prev/next knows the length
@@ -31,9 +31,8 @@ export class UserTabsComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('userId');
-    if(this.userId)
-    {
-     this.mode = 'edit';
+    if (this.userId) {
+      this.mode = 'edit';
     }
     console.log('Fetched userId:', this.userId);
   }
@@ -42,10 +41,13 @@ export class UserTabsComponent implements OnInit {
     this.selectedTabIndex = index;
   }
 
-  // handleUserCreated(newUserId: number) {
-  //   this.userId = newUserId;
-  //   this.mode = 'edit';
-  // }
+
+  handleUserCreated(event: { userId: any, mode: string }) {
+    console.log(`User was ${event.mode}ed with ID: ${event.userId}`);
+    this.userId = event.userId;
+    this.mode = this.mode == 'add' ? 'add' : 'edit';
+    this.nextTab();
+  }
 
   prevTab() {
     if (this.selectedTabIndex > 0) {
@@ -62,5 +64,9 @@ export class UserTabsComponent implements OnInit {
   goBack() {
     // Redirect to dashboard (or any route you want)
     this.router.navigate(['/UserdetailsList']);
+  }
+
+  handelNextWhensave($event: any) {
+    this.nextTab();
   }
 }

@@ -1,34 +1,53 @@
-<div class="login-container">
-  <h2>व्यवसाय मार्गदर्शन लॉगिन</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <!-- <div class="form-group">
-      <label for="email">Email</label>
-      <input id="email" type="email" formControlName="email" />
-      <div class="error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
-        Valid email is required
+<div class="login-wrapper">
+  <div class="login-container">
+
+    <div class="login-header">
+      <div class="logo-circle" style="width: 60px; height: 60px; background: #eef2ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+        <i class="fas fa-user-tie" style="color: #4f46e5; font-size: 1.5rem;"></i>
       </div>
-    </div> -->
-    <div class="form-group">
-      <label for="username">UserName</label>
-      <div class="input-error-div">
-      <input id="username" type="username" formControlName="username" />
-      <div class="error" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
-        Valid username is required
-      </div>
-      </div>
+      <h2>व्यवसाय मार्गदर्शन</h2>
+      <p class="subtitle">तुमच्या खात्यात लॉग इन करा</p>
     </div>
 
-    <div class="form-group">
-      <label for="password">Password</label>
-      <div class="input-error-div">
-      <input id="password" type="password" formControlName="password" />
-      <div class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
-        Password must be at least 6 characters
-      </div>
-      </div>
-    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-    <button type="submit" [disabled]="loginForm.invalid">Login</button>
-  </form>
-  <p class="signup-hint"> Don’t have an account? <a routerLink="/add-user">Create one here</a> </p>
+      <div class="form-group">
+        <label for="username">युजरनेम (UserName)</label>
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          placeholder="तुमचे युजरनेम टाका"
+          autocomplete="username"
+        />
+        <div class="error" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+          <i class="fas fa-exclamation-circle"></i> युजरनेम आवश्यक आहे
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">पासवर्ड (Password)</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="••••••••"
+          autocomplete="current-password"
+        />
+        <div class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+          <i class="fas fa-exclamation-circle"></i> पासवर्ड किमान ६ अंकी असावा
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid">
+        लॉगिन करा <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+      </button>
+
+    </form>
+
+    <p class="signup-hint">
+      अकाऊंट नाहीये? <a routerLink="/add-user">नवीन तयार करा</a>
+    </p>
+
+  </div>
 </div>

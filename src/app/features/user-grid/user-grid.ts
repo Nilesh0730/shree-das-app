@@ -19,9 +19,9 @@ export class UserGridComponent implements OnInit {
 
   rowData: IUserDetails[] = [];
   columnDefs: ColDef[] = [
-    { field: 'userId', headerName: 'यूआयडी', width: 200 },
-    { field: 'userName', headerName: 'श्री सदस्याचे नाव', width: 250 },
-    { field: 'mobile', headerName: 'मोबाईल नंबर', width: 250 },
+    { field: 'userId', headerName: 'यूआयडी', flex: 1, width: 200 },
+    { field: 'userName', headerName: 'श्री सदस्याचे नाव', flex: 2, width: 250 },
+    { field: 'mobile', headerName: 'मोबाईल नंबर', flex: 1, width: 250 },
     { field: 'userAddress', headerName: 'पत्ता', hide: true },
     { field: 'pinCode', headerName: 'पिनकोड', hide: true },
     { field: 'emailId', headerName: 'ईमेल आयडी', hide: true },
@@ -38,22 +38,25 @@ export class UserGridComponent implements OnInit {
       filter: false,
       floatingFilter: false,
       sortable: false,
+      pinned: 'right',
       cellRenderer: (params: any) => {
         const eDiv = document.createElement('div');
-        eDiv.classList.add('action-cell');
+        eDiv.className = 'grid-action-container'; // Using a class for better control
 
+        // Edit Button
         const editBtn = document.createElement('button');
-        editBtn.innerText = 'Edit';
-        editBtn.classList.add('btn-edit');
-        editBtn.addEventListener('click', () => this.onEdit(params.data));
+        editBtn.innerHTML = '<i class="fas fa-edit"></i> <span>Edit</span>';
+        editBtn.className = 'grid-btn grid-btn-edit';
+        editBtn.onclick = () => this.onEdit(params.data);
+
+        // Delete Button
         const deleteBtn = document.createElement('button');
-        deleteBtn.innerText = 'Delete';
-        deleteBtn.classList.add('btn-delete');
-        deleteBtn.addEventListener('click', () => this.onDelete(params.data));
+        deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i> <span>Delete</span>';
+        deleteBtn.className = 'grid-btn grid-btn-delete';
+        deleteBtn.onclick = () => this.onDelete(params.data);
 
         eDiv.appendChild(editBtn);
         eDiv.appendChild(deleteBtn);
-
         return eDiv;
       },
       width: 200

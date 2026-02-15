@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { UserDetailsService } from '../../core/services/user-details';
 import { CommonModule } from '@angular/common';
 import { IBusinessDetails, BusinessType, Ownership, BusinessCategory, BusinessPlace } from '../../models/business-details.model';
@@ -16,6 +16,7 @@ import { BusinessCategoryNames, BusinessPlaceNames, BusinessTypeNames, Ownership
 export class BusinessInfoComponent implements OnInit {
   @Input() userId: any | null = null;
   @Input() mode: 'add' | 'edit' = 'add';
+  @Output() nextButton = new EventEmitter<string>();
 
   InformationTitle = '';
   InformationDescription = '';
@@ -29,7 +30,7 @@ export class BusinessInfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isEditMode = this.mode === 'edit' && !!this.userId;
+    this.isEditMode = this.mode === 'edit';
 
     this.businessForm = this.fb.group({
       businessName: ['', Validators.required],
@@ -50,7 +51,7 @@ export class BusinessInfoComponent implements OnInit {
         PvtLtd: [false],
         LLP: [false],
         Partnership: [false]
-      }),
+      },{ validators: this.minOneCheckboxValidator() }),
 
       bType: this.fb.group({
         Service: [false],
@@ -60,7 +61,7 @@ export class BusinessInfoComponent implements OnInit {
         //retail: [false],
         RetailGhar: [false],
         RetailShop: [false]
-      }),
+      },{ validators: this.minOneCheckboxValidator() }),
 
       location: this.fb.group({
         Gaon: [false],
@@ -69,7 +70,7 @@ export class BusinessInfoComponent implements OnInit {
         Home: [false],
         Phirta: [false],
         Itar: [false]
-      }),
+      },{ validators: this.minOneCheckboxValidator() }),
 
       capitalInvestment: [0, [Validators.required, Validators.min(0)]],
       workingCapital: [0, [Validators.required, Validators.min(0)]],
@@ -156,6 +157,43 @@ export class BusinessInfoComponent implements OnInit {
     });
   }
 
+  onCheckboxChange(groupName: string, selectedControl: string) {
+  // 1. Identify the group (either the main form or a nested group)
+  const group = groupName === 'root'
+    ? this.businessForm
+    : this.businessForm.get(groupName) as FormGroup;
+
+  if (!group) return;
+
+  // 2. Check if the clicked checkbox was just turned ON
+  const isChecked = group.get(selectedControl)?.value;
+
+  if (isChecked) {
+    if (groupName === 'root') {
+      // Logic for Time Commitment (partTime vs fullTime)
+      const timeFields = ['partTime', 'fullTime'];
+      timeFields.forEach(field => {
+        if (field !== selectedControl) {
+          group.get(field)?.setValue(false, { emitEvent: false });
+        }
+      });
+    } else {
+      // Logic for nested groups (ownership, bType, location)
+      Object.keys(group.controls).forEach(controlName => {
+        if (controlName !== selectedControl) {
+          group.get(controlName)?.setValue(false, { emitEvent: false });
+        }
+      });
+    }
+  }
+
+  // 3. Mark the group as touched to trigger validation messages immediately
+  group.get(selectedControl)?.markAsTouched();
+  if (groupName !== 'root') {
+    group.markAsTouched();
+  }
+}
+
   atLeastOneCheckboxSelected(fields: string[]): ValidatorFn {
     return (group: AbstractControl): ValidationErrors | null => {
       const hasOneSelected = fields.some(field => group.get(field)?.value === true);
@@ -163,7 +201,36 @@ export class BusinessInfoComponent implements OnInit {
     };
   }
 
+  private minOneCheckboxValidator(): ValidatorFn {
+    return (group: AbstractControl): ValidationErrors | null => {
+      const g = group as FormGroup;
+      const anySelected = Object.keys(g.controls).some(key => g.get(key)?.value === true);
+      return anySelected ? null : { requireOne: true };
+    };
+  }
+
+checkFormErrors() {
+  const findInvalidControls = (formGroup: FormGroup | FormArray, parentName = '') => {
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      const name = parentName ? `${parentName} -> ${field}` : field;
+
+      if (control?.invalid) {
+        console.log('Invalid Field:', name, 'Errors:', control.errors);
+      }
+
+      // Recursive call for nested groups
+      if (control instanceof FormGroup || control instanceof FormArray) {
+        findInvalidControls(control, name);
+      }
+    });
+  };
+
+  findInvalidControls(this.businessForm);
+}
+
   onSaveBusinessInformation() {
+    // this.checkFormErrors();
     // if (this.businessForm.invalid) {
     //   this.businessForm.markAllAsTouched();
     //   return;
@@ -243,29 +310,18 @@ export class BusinessInfoComponent implements OnInit {
       }
     };
 
-    if (this.isEditMode) {
-      this.userDetailsService.UpdateBusinessDetails(this.userId, payload).subscribe({
-        next: res => {
-          alert('Business Information updated successfully!');
-          console.log('Updated payload:', payload);
+   this.userDetailsService.UpdateBusinessDetails(this.userId, payload).subscribe({
+        next:  (res: IUserResponse) => {
+            alert(`${res.message}`)
+            this.nextButton.emit('next');
+          //alert('Business Information updated successfully!');
+          //console.log('Updated payload:', payload);
         },
         error: err => {
           console.error('Error updating business info:', err);
           alert('Error updating business information.');
         }
       });
-    } else {
-      this.userDetailsService.addBusinessDetails(payload).subscribe({
-        next: res => {
-          alert('Business Information added successfully!');
-          console.log('Added payload:', payload);
-        },
-        error: err => {
-          console.error('Error adding business info:', err);
-          alert('Error adding business information.');
-        }
-      });
-    }
   }
 
 }

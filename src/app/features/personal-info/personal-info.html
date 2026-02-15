@@ -1,177 +1,156 @@
-<form [formGroup]="personalForm" (ngSubmit)="onSaveUser()">
+<div class="profile-container">
+  <form [formGroup]="personalForm" (ngSubmit)="onSaveUser()" class="form-card">
 
-  <!-- User Name -->
-  <div class="form-group">
-    <label>श्री सदस्याचे नाव :</label>
-    <input formControlName="userName" />
-    <div *ngIf="personalForm.get('userName')?.touched && personalForm.get('userName')?.invalid">
-      <small *ngIf="personalForm.get('userName')?.errors?.['required']">श्री सदस्याचे नाव आवश्यक आहे.</small>
+    <div class="card-banner">
+      <h2>श्री सदस्य नोंदणी (Member Registration)</h2>
+      <p>कृपया आपली वैयक्तिक आणि बैठक माहिती अचूक भरा.</p>
     </div>
-  </div>
 
-  <!-- Gender -->
-  <div class="form-group">
-    <label>लिंग :</label>
-    <select formControlName="gender">
-      <option value="">Select</option>
-      <option *ngFor="let g of genders" [value]="g.value">{{ g.label }}</option>
-    </select>
-    <div *ngIf="personalForm.get('gender')?.touched && personalForm.get('gender')?.invalid">
-      <small>लिंग आवश्यक आहे.</small>
-    </div>
-  </div>
+    <div class="form-grid">
+      <div class="column">
+        <span class="section-label">वैयक्तिक माहिती (Personal Details)</span>
 
-  <!-- Shree Baithak -->
-  <!-- <div class="form-group">
-    <label>श्री समर्थ बैठक :</label>
-    <select formControlName="userBaithakName">
-      <option value="">Select</option>
-      <option *ngFor="let b of baithakList" [value]="b.baithakLocationId">{{ b.baithakName }}</option>
-    </select>
-    <div *ngIf="personalForm.get('userBaithakName')?.touched && personalForm.get('userBaithakName')?.invalid">
-      <small>श्री समर्थ बैठक आवश्यक आहे.</small>
-    </div>
-  </div> -->
-  <!-- Shree Baithak -->
-  <div class="form-group">
-    <label>श्री समर्थ बैठक :</label>
-    <select formControlName="userBaithakLocationId">
-      <option value="">Select</option>
-      <option *ngFor="let b of baithakList" [value]="b.baithakLocationId">{{ b.baithakName }}</option>
-    </select>
-    <div
-      *ngIf="personalForm.get('userBaithakLocationId')?.touched && personalForm.get('userBaithakLocationId')?.invalid">
-      <small>श्री समर्थ बैठक आवश्यक आहे.</small>
-    </div>
-  </div>
+        <div class="form-group">
+          <label>श्री सदस्याचे नाव :</label>
+          <input formControlName="userName" placeholder="पूर्ण नाव टाका" />
+          <div class="error-hint"
+            *ngIf="personalForm.get('userName')?.touched && personalForm.get('userName')?.invalid">
+            * नाव आवश्यक आहे.
+          </div>
+        </div>
 
-  <!-- Shree Baithak Day -->
-  <!-- <div class="form-group">
-    <label>श्री बैठक वार :</label>
-    <select formControlName="userBaithakDay">
-      <option value="">Select</option>
-      <option *ngFor="let d of baithakDays" [value]="d.userBaithakDayId">
-        {{ d.dayName }} ({{ d.timeSlotDescription }})
-      </option>
-    </select>
-    <div *ngIf="personalForm.get('userBaithakDay')?.touched && personalForm.get('userBaithakDay')?.invalid">
-      <small>श्री बैठक वार आवश्यक आहे.</small>
-    </div>
-  </div> -->
+        <!-- <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label>लिंग :</label>
+            <select formControlName="gender">
+              <option value="">Select</option>
+              <option *ngFor="let g of genders" [value]="g.value">{{ g.label }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>जन्मतारीख :</label>
+            <input type="date" formControlName="birthDate" (change)="calculateAge()" />
+          </div>
+        </div> -->
 
-  <!-- Shree Baithak Day -->
-  <div class="form-group">
-    <label>श्री बैठक वार :</label>
-    <select formControlName="userBaithakDayId">
-      <option value="">Select</option>
-      <option *ngFor="let d of baithakDays" [value]="d.dayId">
-        {{ d.dayName }} ({{ d.timeSlotDescription }})
-      </option>
-    </select>
-    <div *ngIf="personalForm.get('userBaithakDayId')?.touched && personalForm.get('userBaithakDayId')?.invalid">
-      <small>श्री बैठक वार आवश्यक आहे.</small>
-    </div>
-  </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label>लिंग :</label>
+            <select formControlName="gender">
+              <option value="">Select</option>
+              <option *ngFor="let g of genders" [value]="g.value">{{ g.label }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>जन्मतारीख :</label>
+            <input type="date" formControlName="birthDate" (change)="calculateAge()" />
+          </div>
+
+          <div class="form-group">
+            <label>वय (Age) :</label>
+            <input type="number" formControlName="age" readonly placeholder="वय" class="readonly-input" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>मोबाईल नंबर :</label>
+          <input formControlName="mobile" placeholder="10 अंकी क्रमांक" />
+        </div>
+
+        <div class="form-group">
+          <label>ई-मेल :</label>
+          <input formControlName="emailId" placeholder="example@mail.com" />
+        </div>
+
+        <div class="form-group">
+          <label>पत्ता :</label>
+          <input formControlName="userAddress" placeholder="घर क्रमांक, गल्ली, एरिया" />
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label>पिनकोड (Pincode) :</label>
+            <input type="text" formControlName="pinCode" placeholder="6 अंकी पिनकोड" maxlength="6" />
+            <div class="error-hint"
+              *ngIf="personalForm.get('pinCode')?.touched && personalForm.get('pinCode')?.invalid">
+              * वैध पिनकोड आवश्यक आहे.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>शिक्षण (Education) :</label>
+            <select formControlName="education">
+              <option value="">निवडा</option>
+              <option *ngFor="let edu of educationList" [value]="edu.name">{{ edu.name }}</option>
+            </select>
+          </div>
+        </div>
 
 
-  <!-- Baithak Number -->
-  <div class="form-group">
-    <label>श्री बैठक क्रमांक :</label>
-    <input type="number" formControlName="userBaithakNo" />
-    <div *ngIf="personalForm.get('userBaithakNo')?.touched && personalForm.get('userBaithakNo')?.invalid">
-      <small>बैठक क्रमांक आवश्यक आहे.</small>
-    </div>
-  </div>
+        <!-- <div class="form-group">
+          <label>शिक्षण (Education) :</label>
+          <select formControlName="education" class="custom-select">
+            <option value="" disabled selected>शिक्षण निवडा</option>
+            <option *ngFor="let edu of educationList" [value]="edu.name">
+              {{ edu.name }}
+            </option>
+          </select>
+        </div> -->
+      </div>
 
-  <!-- Mobile -->
-  <div class="form-group">
-    <label>मोबाईल नंबर :</label>
-    <input formControlName="mobile" />
-    <div *ngIf="personalForm.get('mobile')?.touched && personalForm.get('mobile')?.invalid">
-      <small *ngIf="personalForm.get('mobile')?.errors?.['required']">मोबाईल नंबर आवश्यक आहे.</small>
-      <small *ngIf="personalForm.get('mobile')?.errors?.['pattern']">मोबाईल क्रमांक १० अंकांचा हवा.</small>
-    </div>
-  </div>
+      <div class="column">
+        <span class="section-label">बैठक आणि ओळख (Membership & ID)</span>
 
-  <!-- Address -->
-  <div class="form-group">
-    <label>पत्ता :</label>
-    <input formControlName="userAddress" />
-    <div *ngIf="personalForm.get('userAddress')?.touched && personalForm.get('userAddress')?.invalid">
-      <small>पत्ता आवश्यक आहे.</small>
-    </div>
-  </div>
+        <div class="id-badge-section">
+          <div class="form-group">
+            <label>श्री समर्थ बैठक :</label>
+            <select formControlName="userBaithakLocationId">
+              <option value="">Select Location</option>
+              <option *ngFor="let b of baithakList" [value]="b.baithakLocationId">{{ b.baithakName }}</option>
+            </select>
+          </div>
 
-  <!-- Pincode -->
-  <div class="form-group">
-    <label>पिनकोड :</label>
-    <input formControlName="pinCode" />
-    <div *ngIf="personalForm.get('pincode')?.touched && personalForm.get('pincode')?.invalid">
-      <small>पिनकोड आवश्यक आहे.</small>
-    </div>
-  </div>
+          <div class="form-group">
+            <label>श्री बैठक वार :</label>
+            <select formControlName="userBaithakDayId">
+              <option value="">Select Day</option>
+              <option *ngFor="let d of baithakDays" [value]="d.dayId">
+                {{ d.dayName }} ({{ d.timeSlotDescription }})
+              </option>
+            </select>
+          </div>
 
-  <!-- Email -->
-  <div class="form-group">
-    <label>ई-मेल :</label>
-    <input formControlName="emailId" />
-    <div *ngIf="personalForm.get('emailId')?.touched && personalForm.get('emailId')?.invalid">
-      <small>ई-मेल आवश्यक आहे.</small>
-    </div>
-  </div>
+          <div class="form-group">
+            <label>श्री बैठक क्रमांक :</label>
+            <input type="number" formControlName="userBaithakNo" placeholder="बैठक क्रमांक" />
+          </div>
+        </div>
 
-  <!-- Education -->
-  <!-- <div class="form-group">
-    <label>शिक्षण :</label>
-    <input formControlName="education" />
-    <div *ngIf="personalForm.get('education')?.touched && personalForm.get('education')?.invalid">
-      <small>शिक्षण आवश्यक आहे.</small>
-    </div>
-  </div> -->
 
-  <!-- Birth Date -->
-  <div class="form-group">
-    <label>जन्मतारीख :</label>
-    <input type="date" formControlName="birthDate" (change)="calculateAge()" />
-    <div *ngIf="personalForm.get('birthDate')?.touched && personalForm.get('birthDate')?.invalid">
-      <small>जन्मतारीख आवश्यक आहे.</small>
-    </div>
-  </div>
+        <div style="margin-top: 2rem;">
+          <span class="section-label">ओळख पुरावा (Identification)</span>
 
-  <!-- Age -->
-  <div class="form-group">
-    <label>वय :</label>
-    <input type="number" formControlName="age" />
-    <div *ngIf="personalForm.get('age')?.touched && personalForm.get('age')?.invalid">
-      <small *ngIf="personalForm.get('age')?.errors?.['required']">वय आवश्यक आहे.</small>
-      <small *ngIf="personalForm.get('age')?.errors?.['min']">वय Positive नंबर असावे.</small>
-    </div>
-  </div>
+          <div class="form-group">
+            <label>आधार क्रमांक :</label>
+            <input formControlName="aadhaar" placeholder="0000 0000 0000" />
+            <div class="error-hint"
+              *ngIf="personalForm.get('aadhaar')?.touched && personalForm.get('aadhaar')?.invalid">
+              * आधार क्रमांक १२ अंकी हवा.
+            </div>
+          </div>
 
-  <!-- Aadhaar -->
-  <div class="form-group">
-    <label>आधार क्रमांक :</label>
-    <input formControlName="aadhaar" />
-    <div *ngIf="personalForm.get('aadhaar')?.touched && personalForm.get('aadhaar')?.invalid">
-      <small *ngIf="personalForm.get('aadhaar')?.errors?.['required']">आधार क्रमांक आवश्यक आहे.</small>
-      <small *ngIf="personalForm.get('aadhaar')?.errors?.['pattern']">आधार क्रमांक १२ अंकी असावा.</small>
+          <div class="form-group">
+            <label>पॅन क्रमांक :</label>
+            <input formControlName="pan" placeholder="ABCDE1234F" style="text-transform: uppercase;" />
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- PAN -->
-  <div class="form-group">
-    <label>पॅन क्रमांक :</label>
-    <input formControlName="pan" />
-    <div *ngIf="personalForm.get('pan')?.touched && personalForm.get('pan')?.invalid">
-      <small *ngIf="personalForm.get('pan')?.errors?.['required']">पॅन क्रमांक आवश्यक आहे.</small>
-      <small *ngIf="personalForm.get('pan')?.errors?.['pattern']">PAN फॉरमॅट ABCDE1234F असावा.</small>
+    <div class="action-bar">
+      <button type="submit" class="btn-save" [disabled]="personalForm.invalid">
+        {{ isEditMode ? 'माहिती अपडेट करा' : 'माहिती जतन करा' }}
+      </button>
     </div>
-  </div>
+  </form>
+</div>
 
-  <!-- Save Button -->
-  <div class="form-group-full">
-    <div class="button-group save-button">
-      <button type="submit">{{ isEditMode ? 'Update' : 'Save' }}</button>
-    </div>
-  </div>
-</form>

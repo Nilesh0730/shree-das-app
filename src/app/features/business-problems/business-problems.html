@@ -1,44 +1,52 @@
-<form [formGroup]="businessForm" (ngSubmit)="onSubmit()">
-
-  <div class="problem-group" *ngFor="let field of problemFields">
-
-    <label class="main-label">{{ field.label }}</label>
-
-    <div class="radio-group">
-      <label>
-        <input
-          type="radio"
-          [formControlName]="field.id + 'YesNo'"
-          [value]="true">
-        होय
-      </label>
-
-      <label>
-        <input
-          type="radio"
-          [formControlName]="field.id + 'YesNo'"
-          [value]="false">
-        नाही
-      </label>
-    </div>
-
-    <div *ngIf="businessForm.get(field.id + 'YesNo')?.value === true">
-      <textarea
-        [formControlName]="field.id"
-        placeholder="तपशील लिहा">
-      </textarea>
-
-      <small class="error"
-        *ngIf="businessForm.get(field.id)?.touched &&
-               businessForm.get(field.id)?.invalid">
-        हे क्षेत्र आवश्यक आहे
-      </small>
-    </div>
-
+<div class="problems-container">
+  <div class="header-box">
+    <h2>व्यवसाय समस्या आणि आव्हाने</h2>
+    <p>तुमच्या व्यवसायाशी संबंधित समस्यांची माहिती येथे द्या.</p>
   </div>
 
-  <button class="save-button" type="submit">
-    {{ isEditMode ? 'Update' : 'Save' }}
-  </button>
+  <form [formGroup]="businessForm" (ngSubmit)="onSubmit()">
 
-</form>
+    <div class="problem-group" *ngFor="let field of problemFields">
+      <div class="problem-card" [ngClass]="{'active-card': businessForm.get(field.id + 'YesNo')?.value === true}">
+
+        <label class="main-label">{{ field.label }}</label>
+
+        <div class="radio-group">
+          <label>
+            <input
+              type="radio"
+              [formControlName]="field.id + 'YesNo'"
+              [value]="true">
+            <span>होय</span>
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              [formControlName]="field.id + 'YesNo'"
+              [value]="false">
+            <span>नाही</span>
+          </label>
+        </div>
+
+        <div class="detail-box" *ngIf="businessForm.get(field.id + 'YesNo')?.value === true">
+          <textarea
+            [formControlName]="field.id"
+            placeholder="येथे सविस्तर माहिती लिहा...">
+          </textarea>
+
+          <small class="error" *ngIf="businessForm.get(field.id)?.touched && businessForm.get(field.id)?.invalid">
+            <i class="fas fa-exclamation-circle"></i> कृपया माहिती भरणे आवश्यक आहे.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-actions">
+      <button class="save-button" type="submit">
+        <i class="fas fa-cloud-upload-alt"></i> {{ isEditMode ? 'माहिती अपडेट करा' : 'माहिती जतन करा' }}
+      </button>
+    </div>
+
+  </form>
+</div>

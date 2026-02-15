@@ -1,29 +1,82 @@
+// form {
+//   max-width: 600px;
+//   margin: 20px auto;
+//   padding: 20px;
+//   border: 1px solid #ddd;
+//   border-radius: 6px;
+//   background: #fafafa;
+// }
 form {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
+  margin: 0 0 0 10vw;
+  padding: 1% 0 2% 0;
   border: 1px solid #ddd;
   border-radius: 6px;
   background: #fafafa;
+  width: 80vw;
+  height: max-content;
+  .form-row{
+    width: 95%;
+    height: 12vh;
+  }
+  .form-group{
+    display: inline-block;
+    width: 30%;
+    margin: 0 0 0 2.5%;
+    height: 12vh;
+    div{
+      small{
+        margin: 0 0 0 0;
+      }
+    }
+  }
+  .form-group-checkbox{
+    display: inline-flex;
+  }
+  .form-group.form-group-double{
+   width: 62.5%;
+  }
+  .form-group-full{
+      display: inline-block;
+    width: 100%;
+        .save-button{
+      justify-self: center;
+      width: 50%;
+    }
+  }
 }
+
 
 label {
   display: block;
-  font-weight: 600;
   margin-bottom: 4px;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.8vw;
+  line-height: 0.9vw;
 }
 
-input {
+input, select {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 6px;
+  padding: 0 0 0 0.5vw;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 1vw;
+  height: 2vw;
+}
+.checkbox-group{
+  width: max-content;
+    display: grid;
+    height: 2vw;
+        margin: -5% 0 0 0;
+        white-space: nowrap;
+        input{
+          width: 1.5vw !important;
+        }
 }
 
 .checkbox-group label {
   display: inline-block;
-  margin-right: 16px;
+  margin: 0 0 0 0;
   font-weight: normal;
 }
 
@@ -34,19 +87,22 @@ input.ng-invalid.ng-touched {
 
 small {
   color: #e74c3c;
-  font-size: 12px;
-  margin-bottom: 8px;
+  font-size: 1vw;
+  margin: 0 0 0 0;
   display: block;
+  line-height: 1.2vw;
 }
 
 button {
-  margin-top: 15px;
-  padding: 10px 16px;
   background: #007bff;
   color: #fff;
   border: none;
+  padding: 1% 2%;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 1.5vw;
+  width: 100%;
+  height: 3vw;
 }
 
 button:hover {

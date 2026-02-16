@@ -121,6 +121,16 @@
   .form-grid { grid-template-columns: 1fr; }
 }
 
+.grid-container {
+  /* Use calc to ensure it doesn't push the pagination off-screen */
+  height: calc(100vh - 300px);
+  width: 100%;
+  margin-top: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden; /* Keeps the grid inside the rounded borders */
+}
+
 ///////////////////////////////
 
 // :host {

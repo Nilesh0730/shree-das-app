@@ -37,6 +37,8 @@ export class AgGridComponent implements OnInit {
     resizable: true,
   };
 
+
+
   constructor(private router: Router) { }
 
   ngOnInit() {

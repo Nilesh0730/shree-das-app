@@ -238,6 +238,10 @@
           <label>सध्याचा व्यवसाय (Current Industry)</label>
           <input formControlName="currentBusiness" placeholder="Industry Type">
         </div>
+        <div class="form-group">
+          <label>पोट व्यवसाय (Sub Business)</label>
+          <input formControlName="subBusiness" placeholder="Enter Sub Business Type">
+        </div>
       </div>
 
       <div class="form-group" style="margin-bottom: 1.5rem;">
@@ -274,7 +278,8 @@
       <div class="section-title">व्यवसायाचे स्वरूप (Ownership)</div>
       <div class="tile-grid" formGroupName="ownership">
         <label class="selectable-tile">
-          <input type="checkbox" formControlName="Proprietorship" (change)="onCheckboxChange('ownership', 'Proprietorship')">
+          <input type="checkbox" formControlName="Proprietorship"
+            (change)="onCheckboxChange('ownership', 'Proprietorship')">
           <span>वैयक्तिक मालकी</span>
         </label>
         <label class="selectable-tile">
@@ -290,7 +295,8 @@
           <span>भागीदारी</span>
         </label>
       </div>
-      <div class="error-message" *ngIf="businessForm.get('ownership')?.errors?.['requireOne'] && businessForm.get('ownership')?.touched">
+      <div class="error-message"
+        *ngIf="businessForm.get('ownership')?.errors?.['requireOne'] && businessForm.get('ownership')?.touched">
         * कृपया एक पर्याय निवडा
       </div>
 
@@ -321,7 +327,8 @@
           <span>किरकोळ (दुकान)</span>
         </label>
       </div>
-      <div class="error-message" *ngIf="businessForm.get('bType')?.errors?.['requireOne'] && businessForm.get('bType')?.touched">
+      <div class="error-message"
+        *ngIf="businessForm.get('bType')?.errors?.['requireOne'] && businessForm.get('bType')?.touched">
         * कृपया एक पर्याय निवडा
       </div>
 
@@ -352,7 +359,8 @@
           <span>इतर</span>
         </label>
       </div>
-      <div class="error-message" *ngIf="businessForm.get('location')?.errors?.['requireOne'] && businessForm.get('location')?.touched">
+      <div class="error-message"
+        *ngIf="businessForm.get('location')?.errors?.['requireOne'] && businessForm.get('location')?.touched">
         * कृपया एक पर्याय निवडा
       </div>
 
@@ -383,7 +391,7 @@
 
     <div class="form-footer">
       <button type="button" class="btn-secondary" (click)="businessForm.reset()">Reset</button>
-      <button type="submit" class="btn-primary" >
+      <button type="submit" class="btn-primary">
         <i class="fas fa-check-circle"></i> {{ isEditMode ? 'Update Profile' : 'Save Details' }}
       </button>
     </div>

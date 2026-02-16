@@ -196,7 +196,7 @@ export class PersonalInfoComponent implements OnInit {
             mobile: user.mobile,
             emailId: user.emailId,
             // education: user.education,
-            birthDate: user.birthDate,
+            birthDate: user.birthDate ? user.birthDate.split('T')[0] : '',
             age: user.age,
             gender: user.gender === "Ladies" ? "l" : "g",
             aadhaar: user.aadhaar,

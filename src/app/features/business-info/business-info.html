@@ -38,29 +38,18 @@
         <input formControlName="address" placeholder="Complete Location Details">
       </div>
 
-      <!-- <div class="input-grid">
-        <div class="form-group">
-          <label>जीएसटी क्रमांक (GST No.)</label>
-          <input formControlName="gst" placeholder="GSTIN Optional">
-        </div>
-        <div class="form-group">
-          <label>अनुभव वर्षे (Experience Years)</label>
-          <input type="number" formControlName="businessDuration" placeholder="0">
-        </div>
-      </div> -->
-
-       <div class="input-grid">
+      <div class="input-grid">
         <div class="form-group">
           <label class="required-label">जीएसटी क्रमांक (GST No.) <span class="required-star">*</span></label>
           <input formControlName="gst" placeholder="22AAAAA0000A1Z5"
             [class.is-invalid]="businessForm.get('gst')?.invalid && businessForm.get('gst')?.touched">
           <small class="error-message"
             *ngIf="businessForm.get('gst')?.touched && businessForm.get('gst')?.errors?.['pattern']">
-             चुकीचा GST फॉरमॅट (e.g. 22AAAAA0000A1Z5)
+            चुकीचा GST फॉरमॅट (e.g. 22AAAAA0000A1Z5)
           </small>
           <small class="error-message"
             *ngIf="businessForm.get('gst')?.touched && businessForm.get('gst')?.errors?.['required']">
-             जीएसटी क्रमांक आवश्यक आहे
+            जीएसटी क्रमांक आवश्यक आहे
           </small>
         </div>
         <div class="form-group">
@@ -69,20 +58,22 @@
         </div>
       </div>
 
-      <div class="section-title">वेळ उपलब्धता (Time Commitment) <span class="required-star">*</span></div>
-      <div class="tile-grid">
-        <label class="selectable-tile">
-          <input type="checkbox" formControlName="partTime" (change)="onCheckboxChange('root', 'partTime')">
-          <span>अर्धवेळ (Part Time)</span>
-        </label>
-        <label class="selectable-tile">
-          <input type="checkbox" formControlName="fullTime" (change)="onCheckboxChange('root', 'fullTime')">
-          <span>पूर्णवेळ (Full Time)</span>
-        </label>
-      </div>
-      <div class="error-message"
-        *ngIf="businessForm.errors?.['timeRequired']?.errors?.['requireOne'] && businessForm.touched">
-        * कृपया एक पर्याय निवडा
+      <div formGroupName="timeCommitment">
+        <div class="section-title">वेळ उपलब्धता (Time Commitment) <span class="required-star">*</span></div>
+        <div class="tile-grid">
+          <label class="selectable-tile">
+            <input type="checkbox" formControlName="partTime" (change)="onCheckboxChange('timeCommitment', 'partTime')">
+            <span>अर्धवेळ (Part Time)</span>
+          </label>
+          <label class="selectable-tile">
+            <input type="checkbox" formControlName="fullTime" (change)="onCheckboxChange('timeCommitment', 'fullTime')">
+            <span>पूर्णवेळ (Full Time)</span>
+          </label>
+        </div>
+        <div class="error-message"
+          *ngIf="businessForm.get('timeCommitment')?.errors?.['requireOne'] && businessForm.get('timeCommitment')?.touched">
+          * कृपया एक पर्याय निवडा
+        </div>
       </div>
 
       <div class="section-title">व्यवसायाचे स्वरूप (Ownership) <span class="required-star">*</span> </div>
@@ -207,4 +198,3 @@
     </div>
   </form>
 </div>
-<!-- [disabled]="businessForm.invalid" -->

@@ -347,3 +347,25 @@
     cursor: not-allowed;
   }
 }
+
+/* The main error message text */
+.error-message, .error-hint, .error-msg {
+  color: #d32f2f !important; /* Standard Red */
+  font-size: 13px;
+  margin-top: 5px;
+  font-weight: 500;
+  display: block;
+}
+
+/* The red asterisk (*) next to labels */
+.required-star, .required {
+  color: #d32f2f !important;
+  font-weight: bold;
+  margin-left: 3px;
+}
+
+/* Optional: Make the input border red when there is an error */
+input.is-invalid, select.is-invalid {
+  border: 1.5px solid #d32f2f !important;
+  background-color: #fff8f8; /* Very light red tint */
+}

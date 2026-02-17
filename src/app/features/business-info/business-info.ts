@@ -37,31 +37,31 @@ export class BusinessInfoComponent implements OnInit {
       currentBusiness: ['', Validators.required],
       address: ['', Validators.required],
       gst: ['', [
-        Validators.required
-        //Validators.pattern(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/)
+        Validators.required,
+        Validators.pattern(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/)
       ]],
       businessDuration: [0, Validators.min(0)],
-      //years: [0, Validators.min(0)],
       partTime: [false],
       fullTime: [false],
       subBusiness: [''],
+      coreStrength: [''],
+      businessView: [''],
 
       ownership: this.fb.group({
         Proprietorship: [false],
         PvtLtd: [false],
         LLP: [false],
         Partnership: [false]
-      },{ validators: this.minOneCheckboxValidator() }),
+      }, { validators: this.minOneCheckboxValidator() }),
 
       bType: this.fb.group({
         Service: [false],
         Trading: [false],
         Manufacture: [false],
         Wholesale: [false],
-        //retail: [false],
         RetailGhar: [false],
         RetailShop: [false]
-      },{ validators: this.minOneCheckboxValidator() }),
+      }, { validators: this.minOneCheckboxValidator() }),
 
       location: this.fb.group({
         Gaon: [false],
@@ -70,7 +70,7 @@ export class BusinessInfoComponent implements OnInit {
         Home: [false],
         Phirta: [false],
         Itar: [false]
-      },{ validators: this.minOneCheckboxValidator() }),
+      }, { validators: this.minOneCheckboxValidator() }),
 
       capitalInvestment: [0, [Validators.required, Validators.min(0)]],
       workingCapital: [0, [Validators.required, Validators.min(0)]],
@@ -107,6 +107,8 @@ export class BusinessInfoComponent implements OnInit {
             gst: business.businessGstNo,
             businessDuration: business.businessDuration,
             subBusiness: business.subBusiness,
+            coreStrength:business.coreStrength,
+            businessView:business.businessView,
             capitalInvestment: business.businessCapital.capitalInvestment,
             workingCapital: business.businessCapital.rollingInvestment,
             monthlyExpenses: business.businessCapital.monthlyExpenses,
@@ -120,19 +122,14 @@ export class BusinessInfoComponent implements OnInit {
               Partnership: this.normalize(business.businessOwnershipId) === this.normalize(Ownership.Partnership)
             },
 
-            // category: {
             partTime: this.normalize(business.businessCategoryId) === this.normalize(BusinessCategory.partTime),
             fullTime: this.normalize(business.businessCategoryId) === this.normalize(BusinessCategory.fullTime),
-            // },
-
 
             bType: {
               Service: this.normalize(business.businessTypeId) === this.normalize(BusinessType.Service),
               Trading: this.normalize(business.businessTypeId) === this.normalize(BusinessType.Trading),
               Manufacture: this.normalize(business.businessTypeId) === this.normalize(BusinessType.Manufacture),
               Wholesale: this.normalize(business.businessTypeId) === this.normalize(BusinessType.Wholesale),
-              //retail: this.normalize(business.businessTypeId) === this.normalize(BusinessType.RetailGhar) ||
-              //   this.normalize(business.businessTypeId) === this.normalize(BusinessType.RetailShop),
               RetailGhar: this.normalize(business.businessTypeId) === this.normalize(BusinessType.RetailGhar),
               RetailShop: this.normalize(business.businessTypeId) === this.normalize(BusinessType.RetailShop)
             },
@@ -145,10 +142,7 @@ export class BusinessInfoComponent implements OnInit {
               Phirta: this.normalize(business.businessPlaceId) === this.normalize(BusinessPlace.Phirta),
               Itar: this.normalize(business.businessPlaceId) === this.normalize(BusinessPlace.Itar)
             }
-
           });
-
-
         } else {
           console.warn(`No business found with id ${userId}`);
         }
@@ -158,41 +152,41 @@ export class BusinessInfoComponent implements OnInit {
   }
 
   onCheckboxChange(groupName: string, selectedControl: string) {
-  // 1. Identify the group (either the main form or a nested group)
-  const group = groupName === 'root'
-    ? this.businessForm
-    : this.businessForm.get(groupName) as FormGroup;
+    // 1. Identify the group (either the main form or a nested group)
+    const group = groupName === 'root'
+      ? this.businessForm
+      : this.businessForm.get(groupName) as FormGroup;
 
-  if (!group) return;
+    if (!group) return;
 
-  // 2. Check if the clicked checkbox was just turned ON
-  const isChecked = group.get(selectedControl)?.value;
+    // 2. Check if the clicked checkbox was just turned ON
+    const isChecked = group.get(selectedControl)?.value;
 
-  if (isChecked) {
-    if (groupName === 'root') {
-      // Logic for Time Commitment (partTime vs fullTime)
-      const timeFields = ['partTime', 'fullTime'];
-      timeFields.forEach(field => {
-        if (field !== selectedControl) {
-          group.get(field)?.setValue(false, { emitEvent: false });
-        }
-      });
-    } else {
-      // Logic for nested groups (ownership, bType, location)
-      Object.keys(group.controls).forEach(controlName => {
-        if (controlName !== selectedControl) {
-          group.get(controlName)?.setValue(false, { emitEvent: false });
-        }
-      });
+    if (isChecked) {
+      if (groupName === 'root') {
+        // Logic for Time Commitment (partTime vs fullTime)
+        const timeFields = ['partTime', 'fullTime'];
+        timeFields.forEach(field => {
+          if (field !== selectedControl) {
+            group.get(field)?.setValue(false, { emitEvent: false });
+          }
+        });
+      } else {
+        // Logic for nested groups (ownership, bType, location)
+        Object.keys(group.controls).forEach(controlName => {
+          if (controlName !== selectedControl) {
+            group.get(controlName)?.setValue(false, { emitEvent: false });
+          }
+        });
+      }
+    }
+
+    // 3. Mark the group as touched to trigger validation messages immediately
+    group.get(selectedControl)?.markAsTouched();
+    if (groupName !== 'root') {
+      group.markAsTouched();
     }
   }
-
-  // 3. Mark the group as touched to trigger validation messages immediately
-  group.get(selectedControl)?.markAsTouched();
-  if (groupName !== 'root') {
-    group.markAsTouched();
-  }
-}
 
   atLeastOneCheckboxSelected(fields: string[]): ValidatorFn {
     return (group: AbstractControl): ValidationErrors | null => {
@@ -209,32 +203,32 @@ export class BusinessInfoComponent implements OnInit {
     };
   }
 
-checkFormErrors() {
-  const findInvalidControls = (formGroup: FormGroup | FormArray, parentName = '') => {
-    Object.keys(formGroup.controls).forEach(field => {
-      const control = formGroup.get(field);
-      const name = parentName ? `${parentName} -> ${field}` : field;
+  checkFormErrors() {
+    const findInvalidControls = (formGroup: FormGroup | FormArray, parentName = '') => {
+      Object.keys(formGroup.controls).forEach(field => {
+        const control = formGroup.get(field);
+        const name = parentName ? `${parentName} -> ${field}` : field;
 
-      if (control?.invalid) {
-        console.log('Invalid Field:', name, 'Errors:', control.errors);
-      }
+        if (control?.invalid) {
+          console.log('Invalid Field:', name, 'Errors:', control.errors);
+        }
 
-      // Recursive call for nested groups
-      if (control instanceof FormGroup || control instanceof FormArray) {
-        findInvalidControls(control, name);
-      }
-    });
-  };
+        // Recursive call for nested groups
+        if (control instanceof FormGroup || control instanceof FormArray) {
+          findInvalidControls(control, name);
+        }
+      });
+    };
 
-  findInvalidControls(this.businessForm);
-}
+    findInvalidControls(this.businessForm);
+  }
 
   onSaveBusinessInformation() {
     // this.checkFormErrors();
-    // if (this.businessForm.invalid) {
-    //   this.businessForm.markAllAsTouched();
-    //   return;
-    // }
+    if (this.businessForm.invalid) {
+      this.businessForm.markAllAsTouched();
+      return;
+    }
 
     const formData = this.businessForm.value;
     let businessCategoryId: number | null = null;
@@ -302,6 +296,8 @@ checkFormErrors() {
       businessPlaceId: businessPlaceId,
       businessPlace: businessPlace,
       subBusiness: formData.subBusiness,
+      coreStrength:formData.coreStrength,
+      businessView:formData.businessView,
       businessCapital: {
         capitalInvestment: formData.capitalInvestment,
         monthlyExpenses: formData.monthlyExpenses,
@@ -310,18 +306,16 @@ checkFormErrors() {
       }
     };
 
-   this.userDetailsService.UpdateBusinessDetails(this.userId, payload).subscribe({
-        next:  (res: IUserResponse) => {
-            alert(`${res.message}`)
-            this.nextButton.emit('next');
-          //alert('Business Information updated successfully!');
-          //console.log('Updated payload:', payload);
-        },
-        error: err => {
-          console.error('Error updating business info:', err);
-          alert('Error updating business information.');
-        }
-      });
+    this.userDetailsService.UpdateBusinessDetails(this.userId, payload).subscribe({
+      next: (res: IUserResponse) => {
+        alert(`${res.message}`)
+        this.nextButton.emit('next');
+      },
+      error: err => {
+        console.error('Error updating business info:', err);
+        alert('Error updating business information.');
+      }
+    });
   }
 
 }

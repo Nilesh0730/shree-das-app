@@ -15,6 +15,8 @@ export interface IBusinessDetails {
   businessPlaceId: number;
   businessPlace: string;
   subBusiness: string;
+  coreStrength:string;
+  businessView:string;
   businessCapital: IBusinessCapital;
 }
 

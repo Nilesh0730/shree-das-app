@@ -109,7 +109,31 @@ export class UserGridComponent implements OnInit {
     }
   }
 
-  onDelete(data: IUserDetails): any {
-    console.log("onDelete", data);
+  onDelete(data: IUserDetails): void {
+    const userId = data.userId;
+
+    if (confirm('Are you sure you want to delete this record?')) {
+      this.userService.deleteUser(userId).subscribe({
+        next: (res: IUserResponse) => {
+          alert(`${res.message}`)
+          this.loadGridData(); // Refresh list after successful PUT/DELETE
+        },
+        error: (err) => {
+          console.error('Delete failed', err);
+          alert('Error deleting record.');
+        }
+      });
+    }
   }
+
+  loadGridData(): void {
+    // We call the service directly here to bypass the resolver for updates
+    this.userService.getUsers().subscribe({
+      next: (res: IUserDetails[]) => {
+        this.rowData = res;
+      },
+      error: (err) => console.error('Refresh failed', err)
+    });
+  }
+
 }

@@ -35,26 +35,11 @@ export class UserDetailsService {
     );
   }
 
-  // updateBusinessProblems(userId: number, payload: any) {
-  //   return this.http.post(
-  //     `${this.baseUrl}/addbusinessproblems/${userId}`,
-  //     payload
-  //   );
-  // }
-
-    updateBusinessProblems(userId: number, payload: any): Observable<any> {
+  updateBusinessProblems(userId: number, payload: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/addbusinessproblems/${userId}`, payload);
   }
 
-  // UpdateBusinessDetails(userId: number, payload: any) {
-  //   return this.http.post(
-  //     `${this.baseUrl}/addbusinessdetails/${userId}`,
-  //     payload
-  //   );
-  // }
-
-
-    UpdateBusinessDetails(userId: number, payload: any): Observable<any> {
+  UpdateBusinessDetails(userId: number, payload: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/addbusinessdetails/${userId}`, payload);
   }
 
@@ -75,19 +60,17 @@ export class UserDetailsService {
     return this.http.get<IBaithakDay[]>(
       `${this.baseUrl}/baithakdays/${baithakLocationId}/${genderFlag}`
     );
-
   }
 
   getLookup() {
     return this.http.get(`${this.baseUrl}/lookup`);
   }
 
-  // insertUpdateUser(payload: any) {
-  //   return this.http.post(`${this.baseUrl}/insertupdate`, payload);
-  // }
-
   insertUpdateUser(payload: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/insertupdate`, payload);
   }
 
+  deleteUser(userId: string | number): Observable<any> {
+    return this.http.put(`${this.baseUrl}/delete/${userId}`, null);
+  }
 }

@@ -1,110 +1,3 @@
-<!-- <div class="dashboard-container">
-  <form [formGroup]="businessForm" (ngSubmit)="onSaveBusinessInformation()" class="info-card">
-
-    <div class="card-header">
-      <h2><i class="fas fa-briefcase"></i> व्यवसायाची माहिती</h2>
-      <span class="badge" [ngClass]="isEditMode ? 'edit' : 'add'">
-        {{ isEditMode ? 'Update Mode' : 'New Entry' }}
-      </span>
-    </div>
-
-    <div class="form-body">
-      <div class="input-grid">
-        <div class="form-group">
-          <label>व्यवसायाचे नाव (Business Name)</label>
-          <input formControlName="businessName" placeholder="Enter Business Name">
-        </div>
-        <div class="form-group">
-          <label>सध्याचा व्यवसाय (Current Industry)</label>
-          <input formControlName="currentBusiness" placeholder="Industry Type">
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-bottom: 1.5rem;">
-        <label>व्यवसायाचा पूर्ण पत्ता (Full Address)</label>
-        <input formControlName="address" placeholder="Complete Location Details">
-      </div>
-
-      <div class="input-grid">
-        <div class="form-group">
-          <label>जीएसटी क्रमांक (GST No.)</label>
-          <input formControlName="gst" placeholder="GSTIN Optional">
-        </div>
-        <div class="form-group">
-          <label>अनुभव वर्षे (Experience Years)</label>
-          <input type="number" formControlName="businessDuration" placeholder="0">
-        </div>
-      </div>
-
-      <div class="section-title">वेळ उपलब्धता (Time Commitment)</div>
-      <div class="tile-grid">
-        <label class="selectable-tile">
-          <input type="checkbox" formControlName="partTime">
-          <span>अर्धवेळ (Part Time)</span>
-        </label>
-        <label class="selectable-tile">
-          <input type="checkbox" formControlName="fullTime">
-          <span>पूर्णवेळ (Full Time)</span>
-        </label>
-      </div>
-      <div class="error-message" *ngIf="businessForm.hasError('timeRequired') && businessForm.touched">
-        * कृपया एक पर्याय निवडा
-      </div>
-
-      <div class="section-title">व्यवसायाचे स्वरूप (Ownership)</div>
-      <div class="tile-grid" formGroupName="ownership">
-        <label class="selectable-tile">
-          <input type="checkbox" formControlName="Proprietorship">
-          <span>वैयक्तिक मालकी</span>
-        </label>
-        <label class="selectable-tile">
-          <input type="checkbox" formControlName="PvtLtd">
-          <span>Pvt. Ltd.</span>
-        </label>
-        <label class="selectable-tile">
-          <input type="checkbox" formControlName="LLP">
-          <span>LLP</span>
-        </label>
-        <label class="selectable-tile">
-          <input type="checkbox" formControlName="Partnership">
-          <span>भागीदारी</span>
-        </label>
-      </div>
-
-      <div class="section-title">आर्थिक माहिती (Financial Overview)</div>
-      <div class="input-grid">
-        <div class="form-group">
-          <label>भांडवली गुंतवणूक (Investment)</label>
-          <input type="number" formControlName="capitalInvestment">
-        </div>
-        <div class="form-group">
-          <label>मासिक खर्च (Monthly Exp)</label>
-          <input type="number" formControlName="monthlyExpenses">
-        </div>
-        <div class="form-group">
-          <label>सरासरी नफा (Avg Profit %)</label>
-          <input type="number" formControlName="averageProfit">
-        </div>
-        <div class="form-group">
-          <label>रोलिंग इन्व्हेस्टमेंट</label>
-          <input type="number" formControlName="rollingInvestment">
-        </div>
-      </div>
-    </div>
-
-    <div class="form-footer">
-      <button type="button" class="btn-secondary" (click)="businessForm.reset()">Reset</button>
-      <button type="submit" class="btn-primary" [disabled]="businessForm.invalid">
-        <i class="fas fa-check-circle"></i> {{ isEditMode ? 'Update Profile' : 'Save Details' }}
-      </button>
-    </div>
-  </form>
-</div> -->
-
-
-
-
-<!--
 <div class="dashboard-container">
   <form [formGroup]="businessForm" (ngSubmit)="onSaveBusinessInformation()" class="info-card">
 
@@ -118,138 +11,34 @@
     <div class="form-body">
       <div class="input-grid">
         <div class="form-group">
-          <label>व्यवसायाचे नाव (Business Name)</label>
+          <label>व्यवसायाचे नाव (Business Name) <span class="required-star">*</span></label>
           <input formControlName="businessName" placeholder="Enter Business Name">
         </div>
         <div class="form-group">
-          <label>सध्याचा व्यवसाय (Current Industry)</label>
-          <input formControlName="currentBusiness" placeholder="Industry Type">
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-bottom: 1.5rem;">
-        <label>व्यवसायाचा पूर्ण पत्ता (Full Address)</label>
-        <input formControlName="address" placeholder="Complete Location Details">
-      </div>
-
-      <div class="input-grid">
-        <div class="form-group">
-          <label>जीएसटी क्रमांक (GST No.)</label>
-          <input formControlName="gst" placeholder="GSTIN Optional">
-        </div>
-        <div class="form-group">
-          <label>अनुभव वर्षे (Experience Years)</label>
-          <input type="number" formControlName="businessDuration" placeholder="0">
-        </div>
-      </div>
-
-      <div class="section-title">वेळ उपलब्धता (Time Commitment)</div>
-      <div class="tile-grid">
-        <label class="selectable-tile">
-          <input type="checkbox" formControlName="partTime">
-          <span>अर्धवेळ (Part Time)</span>
-        </label>
-        <label class="selectable-tile">
-          <input type="checkbox" formControlName="fullTime">
-          <span>पूर्णवेळ (Full Time)</span>
-        </label>
-      </div>
-
-      <div class="section-title">व्यवसायाचे स्वरूप (Ownership)</div>
-      <div class="tile-grid" formGroupName="ownership">
-        <label class="selectable-tile"><input type="checkbox" formControlName="Proprietorship"><span>वैयक्तिक मालकी</span></label>
-        <label class="selectable-tile"><input type="checkbox" formControlName="PvtLtd"><span>Pvt. Ltd.</span></label>
-        <label class="selectable-tile"><input type="checkbox" formControlName="LLP"><span>LLP</span></label>
-        <label class="selectable-tile"><input type="checkbox" formControlName="Partnership"><span>भागीदारी</span></label>
-      </div>
-
-      <div class="section-title">व्यवसाय प्रकार (Business Type)</div>
-      <div class="tile-grid" formGroupName="bType">
-        <label class="selectable-tile"><input type="checkbox" formControlName="Service"><span>सेवा (Service)</span></label>
-        <label class="selectable-tile"><input type="checkbox" formControlName="Trading"><span>व्यापार (Trading)</span></label>
-        <label class="selectable-tile"><input type="checkbox" formControlName="Manufacture"><span>उत्पादन (Mfg)</span></label>
-        <label class="selectable-tile"><input type="checkbox" formControlName="Wholesale"><span>घाऊक (Wholesale)</span></label>
-        <label class="selectable-tile"><input type="checkbox" formControlName="RetailGhar"><span>किरकोळ (घरून)</span></label>
-        <label class="selectable-tile"><input type="checkbox" formControlName="RetailShop"><span>किरकोळ (दुकान)</span></label>
-      </div>
-
-      <div class="section-title">व्यवसायाचे ठिकाण (Location)</div>
-      <div class="tile-grid" formGroupName="location">
-        <label class="selectable-tile"><input type="checkbox" formControlName="Gaon"><span>गाव</span></label>
-        <label class="selectable-tile"><input type="checkbox" formControlName="City"><span>शहर</span></label>
-        <label class="selectable-tile"><input type="checkbox" formControlName="Bazaar"><span>बाजार</span></label>
-        <label class="selectable-tile"><input type="checkbox" formControlName="Home"><span>घर</span></label>
-        <label class="selectable-tile"><input type="checkbox" formControlName="Phirta"><span>फिरता</span></label>
-        <label class="selectable-tile"><input type="checkbox" formControlName="Itar"><span>इतर</span></label>
-      </div>
-
-      <div class="section-title">आर्थिक माहिती (Financial Overview)</div>
-      <div class="input-grid">
-        <div class="form-group">
-          <label>भांडवली गुंतवणूक (Investment)</label>
-          <input type="number" formControlName="capitalInvestment">
-        </div>
-        <div class="form-group">
-          <label>वर्किंग कॅपिटल (Working Capital)</label>
-          <input type="number" formControlName="workingCapital">
-        </div>
-        <div class="form-group">
-          <label>मासिक खर्च (Monthly Exp)</label>
-          <input type="number" formControlName="monthlyExpenses">
-        </div>
-        <div class="form-group">
-          <label>सरासरी नफा (Avg Profit %)</label>
-          <input type="number" formControlName="averageProfit">
-        </div>
-        <div class="form-group">
-          <label>रोलिंग इन्व्हेस्टमेंट</label>
-          <input type="number" formControlName="rollingInvestment">
-        </div>
-      </div>
-    </div>
-
-    <div class="form-footer">
-      <button type="button" class="btn-secondary" (click)="businessForm.reset()">Reset</button>
-      <button type="submit" class="btn-primary" [disabled]="businessForm.invalid">
-        <i class="fas fa-check-circle"></i> {{ isEditMode ? 'Update Profile' : 'Save Details' }}
-      </button>
-    </div>
-  </form>
-</div> -->
-
-
-<div class="dashboard-container">
-  <form [formGroup]="businessForm" (ngSubmit)="onSaveBusinessInformation()" class="info-card">
-
-    <div class="card-header">
-      <h2><i class="fas fa-briefcase"></i> व्यवसायाची माहिती</h2>
-      <span class="badge" [ngClass]="isEditMode ? 'edit' : 'add'">
-        {{ isEditMode ? 'Update Mode' : 'New Entry' }}
-      </span>
-    </div>
-
-    <div class="form-body">
-      <div class="input-grid">
-        <div class="form-group">
-          <label>व्यवसायाचे नाव (Business Name)</label>
-          <input formControlName="businessName" placeholder="Enter Business Name">
-        </div>
-        <div class="form-group">
-          <label>सध्याचा व्यवसाय (Current Industry)</label>
+          <label>सध्याचा व्यवसाय (Current Industry) <span class="required-star">*</span></label>
           <input formControlName="currentBusiness" placeholder="Industry Type">
         </div>
         <div class="form-group">
           <label>पोट व्यवसाय (Sub Business)</label>
           <input formControlName="subBusiness" placeholder="Enter Sub Business Type">
         </div>
+
+      </div>
+      <div class="form-group" style="margin-bottom: 1.5rem;">
+        <label>सकारात्मक विचार (Core Strength)</label>
+        <input formControlName="coreStrength" placeholder="Enter Core Strength">
+      </div>
+      <div class="form-group" style="margin-bottom: 1.5rem;">
+        <label>भविष्य - दूर दृष्टी (Business View)</label>
+        <input formControlName="businessView" placeholder="Enter Business View">
       </div>
 
       <div class="form-group" style="margin-bottom: 1.5rem;">
-        <label>व्यवसायाचा पूर्ण पत्ता (Full Address)</label>
+        <label>व्यवसायाचा पूर्ण पत्ता (Full Address) <span class="required-star">*</span></label>
         <input formControlName="address" placeholder="Complete Location Details">
       </div>
 
-      <div class="input-grid">
+      <!-- <div class="input-grid">
         <div class="form-group">
           <label>जीएसटी क्रमांक (GST No.)</label>
           <input formControlName="gst" placeholder="GSTIN Optional">
@@ -258,9 +47,29 @@
           <label>अनुभव वर्षे (Experience Years)</label>
           <input type="number" formControlName="businessDuration" placeholder="0">
         </div>
+      </div> -->
+
+       <div class="input-grid">
+        <div class="form-group">
+          <label class="required-label">जीएसटी क्रमांक (GST No.) <span class="required-star">*</span></label>
+          <input formControlName="gst" placeholder="22AAAAA0000A1Z5"
+            [class.is-invalid]="businessForm.get('gst')?.invalid && businessForm.get('gst')?.touched">
+          <small class="error-message"
+            *ngIf="businessForm.get('gst')?.touched && businessForm.get('gst')?.errors?.['pattern']">
+             चुकीचा GST फॉरमॅट (e.g. 22AAAAA0000A1Z5)
+          </small>
+          <small class="error-message"
+            *ngIf="businessForm.get('gst')?.touched && businessForm.get('gst')?.errors?.['required']">
+             जीएसटी क्रमांक आवश्यक आहे
+          </small>
+        </div>
+        <div class="form-group">
+          <label>अनुभव वर्षे (Experience Years) <span class="required-star">*</span></label>
+          <input type="number" formControlName="businessDuration" placeholder="0">
+        </div>
       </div>
 
-      <div class="section-title">वेळ उपलब्धता (Time Commitment)</div>
+      <div class="section-title">वेळ उपलब्धता (Time Commitment) <span class="required-star">*</span></div>
       <div class="tile-grid">
         <label class="selectable-tile">
           <input type="checkbox" formControlName="partTime" (change)="onCheckboxChange('root', 'partTime')">
@@ -271,11 +80,12 @@
           <span>पूर्णवेळ (Full Time)</span>
         </label>
       </div>
-      <div class="error-message" *ngIf="businessForm.errors?.['timeRequired']?.['requireOne'] && businessForm.touched">
+      <div class="error-message"
+        *ngIf="businessForm.errors?.['timeRequired']?.errors?.['requireOne'] && businessForm.touched">
         * कृपया एक पर्याय निवडा
       </div>
 
-      <div class="section-title">व्यवसायाचे स्वरूप (Ownership)</div>
+      <div class="section-title">व्यवसायाचे स्वरूप (Ownership) <span class="required-star">*</span> </div>
       <div class="tile-grid" formGroupName="ownership">
         <label class="selectable-tile">
           <input type="checkbox" formControlName="Proprietorship"
@@ -300,7 +110,7 @@
         * कृपया एक पर्याय निवडा
       </div>
 
-      <div class="section-title">व्यवसाय प्रकार (Business Type)</div>
+      <div class="section-title">व्यवसाय प्रकार (Business Type) <span class="required-star">*</span></div>
       <div class="tile-grid" formGroupName="bType">
         <label class="selectable-tile">
           <input type="checkbox" formControlName="Service" (change)="onCheckboxChange('bType', 'Service')">
@@ -332,7 +142,7 @@
         * कृपया एक पर्याय निवडा
       </div>
 
-      <div class="section-title">व्यवसायाचे ठिकाण (Location)</div>
+      <div class="section-title">व्यवसायाचे ठिकाण (Location) <span class="required-star">*</span></div>
       <div class="tile-grid" formGroupName="location">
         <label class="selectable-tile">
           <input type="checkbox" formControlName="Gaon" (change)="onCheckboxChange('location', 'Gaon')">
@@ -364,7 +174,7 @@
         * कृपया एक पर्याय निवडा
       </div>
 
-      <div class="section-title">आर्थिक माहिती (Financial Overview)</div>
+      <div class="section-title">आर्थिक माहिती (Financial Overview) <span class="required-star">*</span></div>
       <div class="input-grid">
         <div class="form-group">
           <label>भांडवली गुंतवणूक (Investment)</label>
@@ -390,12 +200,11 @@
     </div>
 
     <div class="form-footer">
-      <button type="button" class="btn-secondary" (click)="businessForm.reset()">Reset</button>
-      <button type="submit" class="btn-primary">
+
+      <button type="submit" class="btn-primary" [disabled]="businessForm.invalid">
         <i class="fas fa-check-circle"></i> {{ isEditMode ? 'Update Profile' : 'Save Details' }}
       </button>
     </div>
   </form>
 </div>
-
 <!-- [disabled]="businessForm.invalid" -->

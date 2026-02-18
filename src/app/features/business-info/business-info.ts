@@ -251,7 +251,7 @@ export class BusinessInfoComponent implements OnInit {
         capitalInvestment: formData.capitalInvestment,
         monthlyExpenses: formData.monthlyExpenses,
         rollingInvestment: formData.rollingInvestment,
-        avgProfitPercentage: formData.averageProofit
+        avgProfitPercentage: formData.averageProfit
       }
     };
 

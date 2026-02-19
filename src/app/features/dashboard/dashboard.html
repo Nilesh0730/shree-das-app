@@ -1,21 +1,21 @@
 <div class="dashboard-panel">
 
   <aside class="dashboard-menu-section">
-    <div class="brand-logo"
-      style="color: white; font-weight: 800; font-size: 1.2rem; margin-bottom: 2rem; padding-left: 1rem;">
-      Admin Portal
-    </div>
+    <div class="brand-logo">Admin User</div>
 
-    <button type="button" (click)="userMarster()">
+    <button type="button" (click)="userMarster()" [class.active]="activeTab === 'userMaster'">
       <i class="fas fa-users"></i> User Master
     </button>
-    <button type="button" (click)="businessMaster()">
+
+    <button type="button" (click)="businessMaster()" [class.active]="activeTab === 'businessMaster'">
       <i class="fas fa-chart-line"></i> Business Master
     </button>
-    <button type="button" (click)="sadasyaMahiti()" class="active">
+
+    <button type="button" (click)="sadasyaMahiti()" [class.active]="activeTab === 'sadasya'">
       <i class="fas fa-user-plus"></i> सदस्य माहिती एंट्री
     </button>
-    <button type="button" (click)="userRegristration()" class="active">
+
+    <button type="button" (click)="userRegristration()" [class.active]="activeTab === 'registration'">
       <i class="fas fa-user-plus"></i> नवीन वापरकर्ता नोंदणी (User Regristration)
     </button>
 
@@ -24,6 +24,8 @@
     </div>
   </aside>
 
+  @if(!isUserRegistration)
+  {
   <main class="dashboard-data-section">
     <h2>उदयोजक सांख्यिकी (Entrepreneur Statistics)</h2>
 
@@ -58,14 +60,14 @@
     </div>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
       <!-- <div class="grid-row"> -->
-      <div class="table-container" style="height: 400px;">
+      <div class="table-container" style="height: 480px;">
         <div class="table-header">व्यवसायातील अडचणी (Business Difficulties)</div>
         <div class="grid-wrapper">
           <app-ag-grid [rowData]="difficultyData" [columnDefs]="difficultyCols" class="ag-theme-alpine"></app-ag-grid>
         </div>
       </div>
 
-      <div class="table-container" style="height: 400px;">
+      <div class="table-container" style="height: 480px;">
         <div class="table-header">व्यवसायाचे स्वरूप (Ownership)</div>
         <div class="grid-wrapper">
           <app-ag-grid [rowData]="ownershipData" [columnDefs]="ownershipCols" class="ag-theme-alpine"></app-ag-grid>
@@ -75,4 +77,13 @@
     </div>
 
   </main>
+  }
+
+  @if(isUserRegistration)
+  {
+  <main class="dashboard-data-section">
+    <app-user-registration></app-user-registration>
+  </main>
+  }
+
 </div>

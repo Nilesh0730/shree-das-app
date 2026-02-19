@@ -1,3 +1,4 @@
+import { UserRegistration } from './../../models/user.model';
 import { Component, OnInit } from '@angular/core';
 import { LogoutComponent } from '../../core/auth/logout/logout';
 import { Router } from '@angular/router';
@@ -6,10 +7,11 @@ import { AgGridComponent } from '../../shared/ag-grid/ag-grid';
 import { ColDef } from 'ag-grid-community';
 import { DashboardService } from '../../core/services/dashboard';
 import { forkJoin } from 'rxjs';
+import { UserRegistrationComponent } from "../admin/user-registration/user-registration";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [LogoutComponent, CommonModule, AgGridComponent],
+  imports: [LogoutComponent, CommonModule, AgGridComponent, UserRegistrationComponent],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
@@ -21,6 +23,8 @@ export class DashboardComponent implements OnInit {
   public businessTypeData: any[] = [];
   public ageData: any[] = [];
   public difficultyData: any[] = [];
+  activeTab: string = 'userMaster';
+  isUserRegistration : boolean = false;
 
   public ownershipCols: ColDef[] = [
     { field: 'ownershipName', headerName: 'वय', flex: 1, minWidth: 200 },
@@ -203,20 +207,30 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/UserdetailsList']);
   }
 
-  userRegristration() {
-    this.router.navigate(['/register-user']);
-  }
-
-
   userMarster() {
+    this.isUserRegistration = false;
+    this.activeTab = 'userMaster';
     alert("userMarster was clicked!");
   }
+
   businessMaster() {
+    this.isUserRegistration = false;
+    this.activeTab = 'businessMaster';
     alert("businessMaster was clicked!");
   }
+
   sadasyaMahiti() {
+    this.isUserRegistration = false;
+    this.activeTab = 'sadasya';
     this.router.navigate(['/UserdetailsList']);
   }
+
+  userRegristration() {
+    this.isUserRegistration = true;
+    this.activeTab = 'registration';
+   // this.router.navigate(['/register-user']);
+  }
+
   logout() {
     alert("logout was clicked!");
   }

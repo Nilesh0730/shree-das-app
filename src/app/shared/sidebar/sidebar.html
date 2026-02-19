@@ -1,0 +1,27 @@
+<aside class="dashboard-menu-section">
+  <div class="brand-logo">
+    Admin Portal
+  </div>
+
+  <ng-container *ngIf="userRole === 'Admin'">
+    <button type="button" routerLink="/user-master" routerLinkActive="active">
+      <i class="fas fa-users"></i> User Master
+    </button>
+
+    <button type="button" routerLink="/register-user" routerLinkActive="active">
+      <i class="fas fa-user-plus"></i> नवीन वापरकर्ता नोंदणी
+    </button>
+  </ng-container>
+
+  <button type="button" routerLink="/business" routerLinkActive="active">
+    <i class="fas fa-chart-line"></i> Business Master
+  </button>
+
+  <button type="button" routerLink="/personal" routerLinkActive="active">
+    <i class="fas fa-user-edit"></i> सदस्य माहिती एंट्री
+  </button>
+
+  <div class="logout-container">
+    <app-logout></app-logout>
+  </div>
+</aside>

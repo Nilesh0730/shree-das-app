@@ -1,5 +1,7 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
+import { SidebarComponent } from "./shared/sidebar/sidebar";
 
 @Component({
   selector: 'app-root',
@@ -7,6 +9,19 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
+export class App implements OnInit {
   protected readonly title = signal('shree-das-app');
+  showSidebar: boolean | undefined;
+
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    // this.router.events.pipe(
+    //   filter((event: any) => event instanceof NavigationEnd)
+    // ).subscribe((event: any) => {
+    //   const sidebarRoutes = ['/dashboard', '/UserdetailsList'];
+
+    //   this.showSidebar = sidebarRoutes.some(route => event.urlAfterRedirects.includes(route));
+    // });
+  }
 }

@@ -9,6 +9,7 @@ import { UserDetailsService } from '../../core/services/user-details';
 import { LogoutComponent } from '../../core/auth/logout/logout';
 import { DashboardService } from '../../core/services/dashboard';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../core/auth/auth-service';
 
 @Component({
   selector: 'app-user-grid',
@@ -17,7 +18,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './user-grid.html',
   styleUrl: './user-grid.scss',
 })
-export class UserGridComponent implements OnInit,OnDestroy {
+export class UserGridComponent implements OnInit, OnDestroy {
 
   rowData: IUserDetails[] = [];
   columnDefs: ColDef[] = [
@@ -67,16 +68,19 @@ export class UserGridComponent implements OnInit,OnDestroy {
 
   private filterSubscription!: Subscription;
   public activeFilter: any = null;
+  activeTab: string = 'sadasya';
+  userRole: string | null = null;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private userService: UserDetailsService,
-   private dashboardService: DashboardService) { }
+    private dashboardService: DashboardService,
+    private authService: AuthService) { }
 
   ngOnInit() {
-
+     this.userRole = this.authService.getUserRole();
     // Subscribe to the observable to fetch the data
     // this.filterSubscription = this.dashboardService.currentFilter.subscribe(filter => {
     //   if (filter) {
@@ -105,10 +109,18 @@ export class UserGridComponent implements OnInit,OnDestroy {
   }
 
   userMarster() {
-    //alert("userMarster was clicked!");
+    this.activeTab = 'userMaster';
+     this.router.navigate(['/dashboard']);
   }
+
   businessMaster() {
-    //alert("businessMaster was clicked!");
+    this.activeTab = 'businessMaster';
+    alert("businessMaster was clicked!");
+  }
+
+  sadasyaMahiti() {
+    this.activeTab = 'sadasya';
+    this.router.navigate(['/UserdetailsList']);
   }
 
   addEditUser(event: any) {
@@ -126,9 +138,6 @@ export class UserGridComponent implements OnInit,OnDestroy {
     this.router.navigate(['/tab']);
   }
 
-  sadasyaMahiti() {
-    //alert("sadasyaMahiti was clicked!");
-  }
   onEdit(data: IUserDetails): any {
     console.log("onEdit", data);
     if (data.userId) {

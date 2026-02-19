@@ -26,7 +26,8 @@ export class LoginComponent {
     });
   }
 
-  onSubmit(): void {
+  onSubmit() {
+
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
@@ -34,10 +35,18 @@ export class LoginComponent {
 
     const { username, password } = this.loginForm.value;
 
-    if (this.authService.login(username, password)) {
-      this.router.navigate(['/dashboard']);
+    const success = this.authService.login(username, password);
+
+    if (success) {
+      // Redirect based on role
+      const role = this.authService.getUserRole();
+      if (role === 'Admin') {
+        this.router.navigate(['/dashboard']);
+      } else {
+        this.router.navigate(['/UserdetailsList']);
+      }
     } else {
-      this.errorMessage = 'Invalid username or password';
+      this.errorMessage = 'अवैध वापरकर्तानाव किंवा पासवर्ड (Invalid Credentials)';
     }
   }
 }

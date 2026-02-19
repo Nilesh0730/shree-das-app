@@ -1,3 +1,130 @@
+// :host {
+//   --sidebar-width: 260px;
+//   --primary: #4f46e5;
+//   --bg-light: #f8fafc;
+//   --white: #ffffff;
+//   --border: #e2e8f0;
+//   --text-dark: #1e293b;
+// }
+
+// .dashboard-panel {
+//   display: flex;
+//   min-height: 100vh;
+//   background-color: var(--bg-light);
+//   font-family: 'Inter', sans-serif;
+// }
+
+// /* Sidebar Styling */
+// .dashboard-menu-section {
+//   width: var(--sidebar-width);
+//   background: #1e293b; // Deep dark sidebar
+//   padding: 2rem 1.5rem;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 0.75rem;
+//   position: fixed;
+//   height: 100vh;
+
+//   button {
+//     background: transparent;
+//     color: #cbd5e1;
+//     border: none;
+//     padding: 0.8rem 1rem;
+//     text-align: left;
+//     border-radius: 8px;
+//     font-weight: 500;
+//     cursor: pointer;
+//     transition: all 0.2s;
+//     display: flex;
+//     align-items: center;
+//     gap: 12px;
+
+//     &:hover {
+//       background: rgba(255, 255, 255, 0.1);
+//       color: white;
+//     }
+
+//     &.active {
+//       background: var(--primary);
+//       color: white;
+//     }
+//   }
+// }
+
+// /* Main Content Section */
+// .dashboard-data-section {
+//   flex: 1;
+//   margin-left: var(--sidebar-width);
+//   padding: 2rem 3rem;
+
+//   h2 { color: var(--text-dark); margin-bottom: 2rem; font-weight: 800; }
+// }
+
+// /* Statistics Grid (Cards) */
+// .stats-grid {
+//   display: grid;
+//   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+//   gap: 1.5rem;
+//   margin-bottom: 3rem;
+// }
+
+// .stat-card {
+//   background: var(--white);
+//   padding: 1.5rem;
+//   border-radius: 12px;
+//   border: 1px solid var(--border);
+//   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+//   .label { color: #64748b; font-size: 0.9rem; font-weight: 600; }
+//   .value { font-size: 2rem; font-weight: 800; color: var(--primary); margin-top: 5px; }
+// }
+
+// /* Table Design */
+// .table-container {
+//   background: var(--white);
+//   border-radius: 12px;
+//   border: 1px solid var(--border);
+//   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+//   margin-bottom: 2rem;
+//   overflow: hidden;
+
+//   .table-header {
+//     padding: 1.25rem 1.5rem;
+//     background: #fcfdff;
+//     border-bottom: 1px solid var(--border);
+//     font-weight: 700;
+//     color: var(--text-dark);
+//   }
+
+//   table {
+//     width: 100%;
+//     border-collapse: collapse;
+
+//     th {
+//       text-align: left;
+//       padding: 1rem 1.5rem;
+//       background: #f8fafc;
+//       font-size: 0.75rem;
+//       text-transform: uppercase;
+//       letter-spacing: 0.05em;
+//       color: #64748b;
+//     }
+
+//     td {
+//       padding: 1rem 1.5rem;
+//       border-bottom: 1px solid var(--border);
+//       color: #334155;
+//       font-size: 0.95rem;
+//     }
+
+//     tr:last-child td { border-bottom: none; }
+
+//     /* Highlight female/male columns */
+//     .val-female { color: #db2777; font-weight: 600; }
+//     .val-male { color: #2563eb; font-weight: 600; }
+//   }
+// }
+
 :host {
   --sidebar-width: 260px;
   --primary: #4f46e5;
@@ -14,10 +141,10 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* Sidebar Styling */
+/* Sidebar Styling - No changes needed here */
 .dashboard-menu-section {
   width: var(--sidebar-width);
-  background: #1e293b; // Deep dark sidebar
+  background: #1e293b;
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -60,7 +187,7 @@
   h2 { color: var(--text-dark); margin-bottom: 2rem; font-weight: 800; }
 }
 
-/* Statistics Grid (Cards) */
+/* Statistics Grid */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -79,7 +206,7 @@
   .value { font-size: 2rem; font-weight: 800; color: var(--primary); margin-top: 5px; }
 }
 
-/* Table Design */
+/* Table/Grid Container Fixes */
 .table-container {
   background: var(--white);
   border-radius: 12px;
@@ -87,15 +214,32 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   margin-bottom: 2rem;
   overflow: hidden;
+  display: flex;          /* Added to manage internal spacing */
+  flex-direction: column; /* Stack header and grid vertically */
 
   .table-header {
     padding: 1.25rem 1.5rem;
-    background: #fcfdff;
+    background: #ffffff;    /* Match your second screenshot */
     border-bottom: 1px solid var(--border);
     font-weight: 700;
     color: var(--text-dark);
+    margin-bottom: 0;      /* Ensure no margin pushes the grid away */
   }
 
+  /* Target the wrapper around your app-ag-grid */
+  .grid-wrapper {
+    height: 400px;        /* Or whatever height you prefer */
+    width: 100%;
+    padding: 0;           /* Remove padding to eliminate that "yellow space" */
+
+    ::ng-deep .ag-theme-alpine {
+      --ag-border-color: var(--border);
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  /* Support for both legacy tables and new ag-grid */
   table {
     width: 100%;
     border-collapse: collapse;
@@ -118,9 +262,85 @@
     }
 
     tr:last-child td { border-bottom: none; }
-
-    /* Highlight female/male columns */
-    .val-female { color: #db2777; font-weight: 600; }
-    .val-male { color: #2563eb; font-weight: 600; }
   }
+}
+
+/* Specific Cell Colors for AG-Grid */
+::ng-deep {
+  .val-female { color: #db2777 !important; font-weight: 600; }
+  .val-male { color: #2563eb !important; font-weight: 600; }
+}
+
+// /* Use ng-deep to go inside the AG Grid component levels */
+// ::ng-deep {
+//   .grid-custom-link {
+//     /* Basic Hyperlink Look */
+//     cursor: pointer !important;
+//     text-decoration: underline !important;
+//     font-weight: 700 !important;
+//     display: inline-block;
+
+//     /* Animation for better UX */
+//     transition: all 0.2s ease-in-out;
+
+//     &:hover {
+//       filter: brightness(0.6);
+//       transform: scale(1.05); /* Slight zoom on hover */
+//       text-decoration: none !important; /* Optional: remove underline on hover */
+//     }
+//   }
+
+//   /* Specific colors for Gender columns */
+//   .val-female .grid-custom-link {
+//     color: #db2777 !important; /* Vibrant Pink */
+//   }
+
+//   .val-male .grid-custom-link {
+//     color: #2563eb !important; /* Vibrant Blue */
+//   }
+
+//   /* Ensure the cell alignment doesn't hide the underline */
+//   .ag-cell {
+//     display: flex !important;
+//     align-items: center;
+//     justify-content: center;
+//   }
+// }
+
+::ng-deep {
+  /* 1. Default alignment for ALL cells (Left Aligned) */
+  .ag-cell {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start !important; /* Default to left */
+    padding-left: 15px !important;
+  }
+
+  /* 2. DYNAMICALLY center any cell with a value class */
+  /* This targets any cell where we've added 'val-female' or 'val-male' */
+  .ag-cell.val-female,
+  .ag-cell.val-male {
+    justify-content: center !important;
+    padding-left: 0 !important; /* Remove padding when centered */
+  }
+
+  /* 3. The Hyperlink Styling (remains the same) */
+  .grid-custom-link {
+    cursor: pointer !important;
+    text-decoration: underline !important;
+    font-weight: 700 !important;
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      filter: brightness(0.6);
+      transform: scale(1.08);
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  .val-female .grid-custom-link { color: #db2777 !important; }
+  .val-male .grid-custom-link { color: #2563eb !important; }
 }

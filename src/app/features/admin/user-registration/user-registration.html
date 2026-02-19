@@ -1,0 +1,57 @@
+
+<div class="registration-container">
+  <div class="registration-card">
+    <div class="card-header">
+      <h3>User Registration</h3>
+      <p>Create a new account by selecting a role</p>
+    </div>
+
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" formControlName="fullName" placeholder="Enter full name">
+        <small class="error" *ngIf="registrationForm.get('fullName')?.touched && registrationForm.get('fullName')?.invalid">
+          Name is required (min 3 chars).
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label>Assign Role</label>
+        <select formControlName="role" class="role-select">
+          <option *ngFor="let role of roles" [value]="role.value">
+            {{ role.label }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" formControlName="email" placeholder="example@mail.com">
+        </div>
+
+        <div class="form-group">
+          <label>Mobile Number</label>
+          <input type="text" formControlName="mobile" placeholder="10-digit mobile">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" formControlName="username">
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" formControlName="password">
+        </div>
+      </div>
+
+      <button type="submit" class="btn-register" [disabled]="registrationForm.invalid">
+        Register User
+      </button>
+    </form>
+  </div>
+</div>

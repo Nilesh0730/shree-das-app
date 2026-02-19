@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgGridComponent } from '../../shared/ag-grid/ag-grid';
 import { ColDef } from 'ag-grid-community';
@@ -7,6 +7,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { IUserDetails } from '../../models/user-details.model';
 import { UserDetailsService } from '../../core/services/user-details';
 import { LogoutComponent } from '../../core/auth/logout/logout';
+import { DashboardService } from '../../core/services/dashboard';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-grid',
@@ -15,7 +17,7 @@ import { LogoutComponent } from '../../core/auth/logout/logout';
   templateUrl: './user-grid.html',
   styleUrl: './user-grid.scss',
 })
-export class UserGridComponent implements OnInit {
+export class UserGridComponent implements OnInit,OnDestroy {
 
   rowData: IUserDetails[] = [];
   columnDefs: ColDef[] = [
@@ -63,15 +65,43 @@ export class UserGridComponent implements OnInit {
     },
   ];
 
+  private filterSubscription!: Subscription;
+  public activeFilter: any = null;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
-    private userService: UserDetailsService) { }
+    private userService: UserDetailsService,
+   private dashboardService: DashboardService) { }
 
   ngOnInit() {
+
+    // Subscribe to the observable to fetch the data
+    // this.filterSubscription = this.dashboardService.currentFilter.subscribe(filter => {
+    //   if (filter) {
+    //     console.log('Received Filter Params:', filter);
+    //     this.activeFilter = filter;
+
+    //     // Logic to refresh your grid with these filters
+    //     this.applyFilterToGrid(filter);
+    //   }
+    // });
+
     this.rowData = this.route.snapshot.data['users'] || [];
     console.log("resolved users", this.rowData);
+  }
+
+  applyFilterToGrid(filter: any) {
+    // If using AG Grid, you can use gridApi.setServerSideDatasource or local filter
+    console.log(`Filtering for ${filter.gender} in ${filter.categoryName}`);
+  }
+
+  ngOnDestroy(): void {
+    // Always unsubscribe to prevent memory leaks
+    if (this.filterSubscription) {
+      this.filterSubscription.unsubscribe();
+    }
   }
 
   userMarster() {

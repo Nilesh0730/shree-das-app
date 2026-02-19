@@ -14,9 +14,9 @@
     </button>
     }
 
-     @if (userRole != 'Admin') {
-      <div class="brand-logo">Data Entry User</div>
-     }
+    @if (userRole != 'Admin') {
+    <div class="brand-logo">Data Entry User</div>
+    }
 
     <button type="button" (click)="sadasyaMahiti()" [class.active]="activeTab === 'sadasya'">
       <i class="fas fa-user-plus"></i> सदस्य माहिती एंट्री
@@ -43,8 +43,14 @@
     </div>
 
     <div class="grid-container">
-      <app-ag-grid [rowData]="rowData" [columnDefs]="columnDefs" class="ag-theme-alpine"
-        style="width: 100%; height: 100%;">
+      <app-ag-grid
+        #agGridComp
+        [rowData]="rowData"
+        [columnDefs]="columnDefs"
+        [enablePagination]="true"
+        [pageSize]="20"
+        [enableFilter]="true"
+        rowIdField="userId">
       </app-ag-grid>
     </div>
 

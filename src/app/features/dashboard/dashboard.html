@@ -40,40 +40,42 @@
       </div>
     </div>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
-
-      <!-- <div class="grid-row"> -->
-      <div class="table-container" style="height: 430px;">
-        <div class="table-header">व्यवसाय प्रकार (Business Type)</div>
-        <div class="grid-wrapper">
-          <app-ag-grid [rowData]="businessTypeData" [columnDefs]="businessTypeCols"
-            class="ag-theme-alpine"></app-ag-grid>
-        </div>
-      </div>
-
-      <div class="table-container" style="height: 430px;">
-        <div class="table-header">वयोगटानुसार (Age Wise)</div>
-        <div class="grid-wrapper">
-          <app-ag-grid [rowData]="ageData" [columnDefs]="ageCols" class="ag-theme-alpine"></app-ag-grid>
-        </div>
-      </div>
-      <!-- </div> -->
-    </div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
-      <!-- <div class="grid-row"> -->
       <div class="table-container" style="height: 480px;">
         <div class="table-header">व्यवसायातील अडचणी (Business Difficulties)</div>
         <div class="grid-wrapper">
-          <app-ag-grid [rowData]="difficultyData" [columnDefs]="difficultyCols" class="ag-theme-alpine"></app-ag-grid>
+          <app-ag-grid [rowData]="difficultyData" [columnDefs]="difficultyCols" [enablePagination]="false"
+            [enableFilter]="true">
+          </app-ag-grid>
         </div>
       </div>
+
+      <div class="table-container" style="height: 480px;">
+        <div class="table-header">व्यवसाय प्रकार (Business Type)</div>
+        <div class="grid-wrapper">
+          <app-ag-grid [rowData]="businessTypeData" [columnDefs]="businessTypeCols" [enablePagination]="false"
+            [enableFilter]="true">
+          </app-ag-grid>
+
+        </div>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
 
       <div class="table-container" style="height: 480px;">
         <div class="table-header">व्यवसायाचे स्वरूप (Ownership)</div>
         <div class="grid-wrapper">
-          <app-ag-grid [rowData]="ownershipData" [columnDefs]="ownershipCols" class="ag-theme-alpine"></app-ag-grid>
+          <app-ag-grid [rowData]="ownershipData" [columnDefs]="ownershipCols" [enablePagination]="false"
+            [enableFilter]="true">
+          </app-ag-grid>
         </div>
       </div>
-      <!-- </div> -->
+      <div class="table-container" style="height: 430px;">
+        <div class="table-header">वयोगटानुसार (Age Wise)</div>
+        <div class="grid-wrapper">
+          <app-ag-grid [rowData]="ageData" [columnDefs]="ageCols" [enablePagination]="false" [enableFilter]="true">
+          </app-ag-grid>
+        </div>
+      </div>
     </div>
 
   </main>

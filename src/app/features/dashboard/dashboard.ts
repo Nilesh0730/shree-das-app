@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   public ageData: any[] = [];
   public difficultyData: any[] = [];
   activeTab: string = 'userMaster';
-  isUserRegistration : boolean = false;
+  isUserRegistration: boolean = false;
 
   public ownershipCols: ColDef[] = [
     { field: 'ownershipName', headerName: 'वय', flex: 1, minWidth: 200 },
@@ -34,9 +34,17 @@ export class DashboardComponent implements OnInit {
       flex: 1,
       cellClass: 'val-female',
       cellRenderer: (params: any) => {
+        const val = Number(params.value) || 0;
+        if (val === 0) {
+          return params.value;
+        }
+
         const eSpan = document.createElement('span');
         eSpan.innerText = params.value;
-        eSpan.className = 'grid-custom-link';
+        eSpan.className = 'grid-custom-link female-link';
+        eSpan.style.cursor = 'pointer';
+        eSpan.style.textDecoration = 'underline';
+        eSpan.style.fontWeight = '700';
         eSpan.onclick = () => this.onCellClicked(params);
         return eSpan;
       }
@@ -47,9 +55,17 @@ export class DashboardComponent implements OnInit {
       flex: 1,
       cellClass: 'val-male',
       cellRenderer: (params: any) => {
+        const val = Number(params.value) || 0;
+        if (val === 0) {
+          return params.value;
+        }
+
         const eSpan = document.createElement('span');
         eSpan.innerText = params.value;
-        eSpan.className = 'grid-custom-link';
+        eSpan.className = 'grid-custom-link male-link';
+        eSpan.style.cursor = 'pointer';
+        eSpan.style.textDecoration = 'underline';
+        eSpan.style.fontWeight = '700';
         eSpan.onclick = () => this.onCellClicked(params);
         return eSpan;
       }
@@ -65,9 +81,17 @@ export class DashboardComponent implements OnInit {
       flex: 1,
       cellClass: 'val-female',
       cellRenderer: (params: any) => {
+        const val = Number(params.value) || 0;
+        if (val === 0) {
+          return params.value;
+        }
+
         const eSpan = document.createElement('span');
         eSpan.innerText = params.value;
-        eSpan.className = 'grid-custom-link';
+        eSpan.className = 'grid-custom-link female-link';
+        eSpan.style.cursor = 'pointer';
+        eSpan.style.textDecoration = 'underline';
+        eSpan.style.fontWeight = '700';
         eSpan.onclick = () => this.onCellClicked(params);
         return eSpan;
       }
@@ -78,9 +102,17 @@ export class DashboardComponent implements OnInit {
       flex: 1,
       cellClass: 'val-male',
       cellRenderer: (params: any) => {
+        const val = Number(params.value) || 0;
+        if (val === 0) {
+          return params.value;
+        }
+
         const eSpan = document.createElement('span');
         eSpan.innerText = params.value;
-        eSpan.className = 'grid-custom-link';
+        eSpan.className = 'grid-custom-link male-link';
+        eSpan.style.cursor = 'pointer';
+        eSpan.style.textDecoration = 'underline';
+        eSpan.style.fontWeight = '700';
         eSpan.onclick = () => this.onCellClicked(params);
         return eSpan;
       }
@@ -96,9 +128,17 @@ export class DashboardComponent implements OnInit {
       flex: 1,
       cellClass: 'val-female',
       cellRenderer: (params: any) => {
+        const val = Number(params.value) || 0;
+        if (val === 0) {
+          return params.value;
+        }
+
         const eSpan = document.createElement('span');
         eSpan.innerText = params.value;
-        eSpan.className = 'grid-custom-link';
+        eSpan.className = 'grid-custom-link female-link';
+        eSpan.style.cursor = 'pointer';
+        eSpan.style.textDecoration = 'underline';
+        eSpan.style.fontWeight = '700';
         eSpan.onclick = () => this.onCellClicked(params);
         return eSpan;
       }
@@ -109,9 +149,17 @@ export class DashboardComponent implements OnInit {
       flex: 1,
       cellClass: 'val-male',
       cellRenderer: (params: any) => {
+        const val = Number(params.value) || 0;
+        if (val === 0) {
+          return params.value;
+        }
+
         const eSpan = document.createElement('span');
         eSpan.innerText = params.value;
-        eSpan.className = 'grid-custom-link';
+        eSpan.className = 'grid-custom-link male-link';
+        eSpan.style.cursor = 'pointer';
+        eSpan.style.textDecoration = 'underline';
+        eSpan.style.fontWeight = '700';
         eSpan.onclick = () => this.onCellClicked(params);
         return eSpan;
       }
@@ -127,9 +175,17 @@ export class DashboardComponent implements OnInit {
       flex: 1,
       cellClass: 'val-female',
       cellRenderer: (params: any) => {
+        const val = Number(params.value) || 0;
+        if (val === 0) {
+          return params.value;
+        }
+
         const eSpan = document.createElement('span');
         eSpan.innerText = params.value;
-        eSpan.className = 'grid-custom-link';
+        eSpan.className = 'grid-custom-link female-link';
+        eSpan.style.cursor = 'pointer';
+        eSpan.style.textDecoration = 'underline';
+        eSpan.style.fontWeight = '700';
         eSpan.onclick = () => this.onCellClicked(params);
         return eSpan;
       }
@@ -140,9 +196,17 @@ export class DashboardComponent implements OnInit {
       flex: 1,
       cellClass: 'val-male',
       cellRenderer: (params: any) => {
+        const val = Number(params.value) || 0;
+        if (val === 0) {
+          return params.value;
+        }
+
         const eSpan = document.createElement('span');
         eSpan.innerText = params.value;
-        eSpan.className = 'grid-custom-link';
+        eSpan.className = 'grid-custom-link male-link';
+        eSpan.style.cursor = 'pointer';
+        eSpan.style.textDecoration = 'underline';
+        eSpan.style.fontWeight = '700';
         eSpan.onclick = () => this.onCellClicked(params);
         return eSpan;
       }
@@ -156,33 +220,55 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fetchAllData();
+    this.loadGridData();
   }
 
-  private fetchAllData(): void {
-    // Calling all individual APIs in parallel
-    forkJoin({
-      // totals: this.apiService.getTotalCounts(),
-      ownership: this.dashboardService.getOwnershipStats(),
-      business: this.dashboardService.getBusinessTypeStats(),
-      age: this.dashboardService.getAgeStats(),
-      difficulty: this.dashboardService.getDifficultyStats()
-    }).subscribe({
+  loadGridData(): void {
+    this.getOwnership();
+    this.getBusinessType();
+    this.getAge();
+    this.getDifficulty();
+  }
+
+  getOwnership() {
+    this.dashboardService.getOwnership().subscribe({
       next: (res) => {
-        // this.totalFemaleCount = this.businessTypeData.reduce((acc, curr) => acc + curr.female, 0);;
-        // this.totalMaleCount = this.businessTypeData.reduce((acc, curr) => acc + curr.male, 0);;
-        this.ownershipData = res.ownership;
-        this.businessTypeData = res.business;
-        this.ageData = res.age;
-        this.difficultyData = res.difficulty;
+        this.ownershipData = res;
+      },
+      error: (err) => console.error('Refresh failed', err)
+    });
+  }
+
+  getBusinessType() {
+    this.dashboardService.getBusinessType().subscribe({
+      next: (res) => {
+        this.businessTypeData = res;
+      },
+      error: (err) => console.error('Refresh failed', err)
+    });
+  }
+
+
+  getAge() {
+    this.dashboardService.getAge().subscribe({
+      next: (res) => {
+        this.ageData = res;
         this.calculateTotals();
       },
-      error: (err) => console.error('Dashboard Load Error:', err)
+      error: (err) => console.error('Refresh failed', err)
+    });
+  }
+
+  getDifficulty() {
+    this.dashboardService.getDifficulty().subscribe({
+      next: (res) => {
+        this.difficultyData = res;
+      },
+      error: (err) => console.error('Refresh failed', err)
     });
   }
 
   calculateTotals() {
-    // Example: summing classification data
     this.totalFemaleCount = this.ageData.reduce((acc, curr) => acc + curr.female, 0);
     this.totalMaleCount = this.ageData.reduce((acc, curr) => acc + curr.male, 0);
   }
@@ -228,10 +314,6 @@ export class DashboardComponent implements OnInit {
   userRegristration() {
     this.isUserRegistration = true;
     this.activeTab = 'registration';
-   // this.router.navigate(['/register-user']);
-  }
-
-  logout() {
-    alert("logout was clicked!");
+    this.router.navigate(['/register-user']);
   }
 }

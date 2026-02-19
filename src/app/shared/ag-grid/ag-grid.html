@@ -4,9 +4,12 @@
     [gridOptions]="{ theme: 'legacy' }"
     [rowData]="rowData"
     [columnDefs]="columnDefs"
-    [defaultColDef]="defaultColDef"
-    [pagination]="true"
-    [paginationPageSize]="paginationPageSize"
+    [getRowId]="getRowId"
+    [defaultColDef]="dynamicDefaultColDef"
+    [pagination]="enablePagination"
+    [paginationPageSize]="pageSize"
+    [paginationPageSizeSelector]="pageSizeOptions"
+    (gridReady)="onGridReady($event)"
     (selectionChanged)="onSelectionChanged($event)"
     (gridReady)="onGridReady($event)">
   </ag-grid-angular>

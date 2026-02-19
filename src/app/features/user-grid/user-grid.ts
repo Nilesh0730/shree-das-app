@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgGridComponent } from '../../shared/ag-grid/ag-grid';
 import { ColDef } from 'ag-grid-community';
@@ -71,6 +71,8 @@ export class UserGridComponent implements OnInit, OnDestroy {
   activeTab: string = 'sadasya';
   userRole: string | null = null;
 
+  @ViewChild('agGridComp') agGridComp!: AgGridComponent;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -80,7 +82,7 @@ export class UserGridComponent implements OnInit, OnDestroy {
     private authService: AuthService) { }
 
   ngOnInit() {
-     this.userRole = this.authService.getUserRole();
+    this.userRole = this.authService.getUserRole();
     // Subscribe to the observable to fetch the data
     // this.filterSubscription = this.dashboardService.currentFilter.subscribe(filter => {
     //   if (filter) {
@@ -93,6 +95,9 @@ export class UserGridComponent implements OnInit, OnDestroy {
     // });
 
     this.rowData = this.route.snapshot.data['users'] || [];
+    if (!this.rowData) {
+      this.loadGridData();
+    }
     console.log("resolved users", this.rowData);
   }
 
@@ -110,7 +115,7 @@ export class UserGridComponent implements OnInit, OnDestroy {
 
   userMarster() {
     this.activeTab = 'userMaster';
-     this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard']);
   }
 
   businessMaster() {
@@ -155,7 +160,8 @@ export class UserGridComponent implements OnInit, OnDestroy {
       this.userService.deleteUser(userId).subscribe({
         next: (res: IUserResponse) => {
           alert(`${res.message}`)
-          this.loadGridData(); // Refresh list after successful PUT/DELETE
+          this.agGridComp.deleteRow(userId);
+          //this.loadGridData(); // Refresh list after successful PUT/DELETE
         },
         error: (err) => {
           console.error('Delete failed', err);
@@ -166,10 +172,9 @@ export class UserGridComponent implements OnInit, OnDestroy {
   }
 
   loadGridData(): void {
-    // We call the service directly here to bypass the resolver for updates
     this.userService.getUsers().subscribe({
       next: (res: IUserDetails[]) => {
-        this.rowData = res;
+        this.rowData = [...res];
       },
       error: (err) => console.error('Refresh failed', err)
     });

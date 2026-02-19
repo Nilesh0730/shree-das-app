@@ -131,161 +131,21 @@
   overflow: hidden; /* Keeps the grid inside the rounded borders */
 }
 
-///////////////////////////////
+.req-star {
+  color: #e11d48; /* Bright Red */
+  font-weight: bold;
+  margin-left: 2px;
+}
 
-// :host {
-//   /* Softened Color Palette for Eye Comfort */
-//   --primary: #5a5fcf;       /* Slightly deeper indigo, less "neon" */
-//   --secondary: #64748b;
-//   --bg-main: #f8fafc;       /* Light blue-tinted gray */
-//   --white: #ffffff;
-//   --error: #e11d48;
-//   --input-border: #cbd5e1;
-// }
+/* व्हॅलिडेशननुसार इनपुटचा रंग बदलण्यासाठी */
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+  border-color: #e11d48 !important;
+  background-color: #fff1f2;
+}
 
-// .profile-container {
-//   max-width: 1000px;
-//   margin: 2rem auto;
-//   padding: 0 1.5rem;
-//   font-family: 'Inter', system-ui, sans-serif;
-//   background-color: var(--bg-main);
-// }
-
-// .form-card {
-//   background: var(--white);
-//   border-radius: 16px; /* Slightly less round for a cleaner look */
-//   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03); /* Softer shadow */
-//   border: 1px solid #e2e8f0;
-//   overflow: hidden;
-// }
-
-// .card-banner {
-//   /* Muted gradient to reduce eye strain */
-//   background: linear-gradient(135deg, #5a5fcf 0%, #8b5cf6 100%);
-//   padding: 2rem;
-//   color: white;
-
-//   h2 { margin: 0; font-size: 1.5rem; font-weight: 700; }
-//   p { margin: 0.4rem 0 0; opacity: 0.85; font-size: 0.85rem; }
-// }
-
-// .form-grid {
-//   display: grid;
-//   grid-template-columns: 1.2fr 1fr;
-//   gap: 2rem; /* Consistent gap to prevent overlap */
-//   padding: 2rem;
-//   align-items: start; /* Prevents columns from stretching unevenly */
-// }
-
-// .section-label {
-//   display: block;
-//   font-size: 0.75rem;
-//   font-weight: 700;
-//   text-transform: uppercase;
-//   color: var(--primary); /* Changed to primary to guide the eye */
-//   letter-spacing: 0.05em;
-//   margin-bottom: 1.25rem;
-//   border-bottom: 2px solid #f1f5f9;
-//   padding-bottom: 0.5rem;
-// }
-
-// .form-group {
-//   margin-bottom: 1.25rem;
-//   display: flex;
-//   flex-direction: column; /* Force stack to prevent horizontal overlap */
-
-//   label {
-//     display: block;
-//     font-size: 0.8rem; /* Smaller, cleaner label */
-//     font-weight: 600;
-//     margin-bottom: 0.4rem;
-//     color: #334155;
-//   }
-
-//   input, select {
-//     width: 100%;
-//     padding: 0.7rem 0.9rem;
-//     border: 1px solid var(--input-border);
-//     border-radius: 8px;
-//     font-size: 0.9rem;
-//     color: #1e293b;
-//     background: #fff;
-//     transition: all 0.2s ease-in-out;
-//     box-sizing: border-box; /* Crucial: ensures padding doesn't break width */
-
-//     &:focus {
-//       border-color: var(--primary);
-//       outline: none;
-//       box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
-//       background-color: #fff;
-//     }
-
-//     /* Style for read-only age field */
-//     &.readonly-input {
-//       background-color: #f8fafc;
-//       color: #64748b;
-//       cursor: not-allowed;
-//       border-style: dashed;
-//     }
-//   }
-// }
-
-// /* Specific fix for the 3-column row (Gender, DOB, Age) */
-// .dob-grid {
-//   display: grid;
-//   grid-template-columns: 1fr 1fr 1fr;
-//   gap: 1rem;
-//   margin-bottom: 1.25rem;
-//   /* Reset the default margin of children since they are inside this grid */
-//   .form-group { margin-bottom: 0; }
-// }
-
-// .id-badge-section {
-//   background: #f8fafc;
-//   padding: 1.5rem;
-//   border-radius: 12px;
-//   border: 1px solid #e2e8f0; /* Solid border is cleaner than dashed */
-// }
-
-// .action-bar {
-//   padding: 1.25rem 2rem;
-//   background: #f1f5f9; /* Subtle contrast from the white card */
-//   display: flex;
-//   justify-content: flex-end;
-//   border-top: 1px solid #e2e8f0;
-
-//   .btn-save {
-//     background: var(--primary);
-//     color: white;
-//     padding: 0.7rem 2rem;
-//     border-radius: 8px;
-//     border: none;
-//     font-weight: 600;
-//     cursor: pointer;
-//     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-
-//     &:hover:not(:disabled) {
-//       background: #4f46e5;
-//       transform: translateY(-1px);
-//       box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
-//     }
-
-//     &:disabled {
-//       background: #cbd5e1;
-//       color: #94a3b8;
-//       cursor: not-allowed;
-//     }
-//   }
-// }
-
-// /* Handle mobile overlapping */
-// @media (max-width: 768px) {
-//   .form-grid {
-//     grid-template-columns: 1fr;
-//     padding: 1.5rem;
-//   }
-
-//   .dob-grid {
-//     grid-template-columns: 1fr; /* Stack DOB/Age on mobile */
-//   }
-// }
+.error-hint {
+  color: #e11d48;
+  font-size: 0.75rem;
+  margin-top: 4px;
+  font-weight: 500;
+}

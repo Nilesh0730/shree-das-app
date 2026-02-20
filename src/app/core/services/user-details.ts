@@ -7,6 +7,7 @@ import { IBusinessDetails } from '../../models/business-details.model';
 import { environment } from '../../../environments/environment';
 import { IBaithakLocation } from '../../models/baithak-location.model';
 import { IBaithakDay } from '../../models/baithak-day.model';
+import { UserRegistration } from '../../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserDetailsService {
@@ -72,5 +73,13 @@ export class UserDetailsService {
 
   deleteUser(userId: string | number): Observable<any> {
     return this.http.put(`${this.baseUrl}/delete/${userId}`, null);
+  }
+
+  registerUser(userData: UserRegistration): Observable<any> {
+    return this.http.post<any>('http://localhost:5082/api/User/registeruser', userData);
+  }
+
+  getAllRegisterUsers(): Observable<UserRegistration[]> {
+    return this.http.get<UserRegistration[]>('http://localhost:5082/api/User/getregisteruser');
   }
 }

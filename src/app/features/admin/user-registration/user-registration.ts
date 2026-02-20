@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { UserRegistration } from '../../../models/user.model';
 import { CommonModule } from '@angular/common';
+import { UserDetailsService } from '../../../core/services/user-details';
 
 @Component({
   selector: 'app-user-registration',
@@ -17,7 +18,7 @@ export class UserRegistrationComponent implements OnInit {
     { value: 'DataEntry', label: 'Data Entry User' }
   ];
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router, private userDetailsService :UserDetailsService) {}
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
@@ -26,7 +27,8 @@ export class UserRegistrationComponent implements OnInit {
       mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      role: ['DataEntry', Validators.required] // Default role
+      role: ['DataEntry', Validators.required], // Default role
+      isActive: [true]
     });
   }
 
@@ -40,6 +42,22 @@ export class UserRegistrationComponent implements OnInit {
 
       alert('Registration Successful for ' + userData.role);
       this.router.navigate(['/login']);
+    }
+  }
+
+  onSaveUser() {
+    if (this.registrationForm.valid) {
+      const userData: UserRegistration = this.registrationForm.value;
+
+      this.userDetailsService.registerUser(userData).subscribe({
+        next: (res) => {
+         alert(res.message);
+          this.registrationForm.reset();
+        },
+        error: (err) => {
+          alert(err.error.message);
+        }
+      });
     }
   }
 }

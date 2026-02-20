@@ -1,17 +1,17 @@
-
-<div class="registration-container">
+<!-- <div class="registration-container">
   <div class="registration-card">
     <div class="card-header">
       <h3>User Registration</h3>
       <p>Create a new account by selecting a role</p>
     </div>
 
-    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="registrationForm" (ngSubmit)="onSaveUser()">
 
       <div class="form-group">
         <label>Full Name</label>
         <input type="text" formControlName="fullName" placeholder="Enter full name">
-        <small class="error" *ngIf="registrationForm.get('fullName')?.touched && registrationForm.get('fullName')?.invalid">
+        <small class="error"
+          *ngIf="registrationForm.get('fullName')?.touched && registrationForm.get('fullName')?.invalid">
           Name is required (min 3 chars).
         </small>
       </div>
@@ -37,6 +37,16 @@
         </div>
       </div>
 
+      <div class="form-group status-container">
+        <label class="switch-label">Account Status</label>
+        <div class="switch-wrapper">
+          <input type="checkbox" formControlName="isActive" id="isActive">
+          <label for="isActive">
+            {{ registrationForm.get('isActive')?.value ? 'Active' : 'Inactive' }}
+          </label>
+        </div>
+      </div>
+
       <div class="form-row">
         <div class="form-group">
           <label>Username</label>
@@ -46,6 +56,88 @@
         <div class="form-group">
           <label>Password</label>
           <input type="password" formControlName="password">
+        </div>
+      </div>
+
+      <button type="submit" class="btn-register" [disabled]="registrationForm.invalid">
+        Register User
+      </button>
+    </form>
+  </div>
+</div> -->
+
+
+<div class="registration-container">
+  <div class="registration-card">
+    <div class="card-header">
+      <h3>User Registration</h3>
+      <p>Create a new account by selecting a role</p>
+    </div>
+
+    <form [formGroup]="registrationForm" (ngSubmit)="onSaveUser()">
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" formControlName="fullName" placeholder="Enter full name">
+        <small class="error-msg" *ngIf="registrationForm.get('fullName')?.touched && registrationForm.get('fullName')?.invalid">
+          Name is required (min 3 chars).
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label>Assign Role</label>
+        <select formControlName="role" class="role-select">
+          <option value="">Select a Role</option>
+          <option *ngFor="let role of roles" [value]="role.value">{{ role.label }}</option>
+        </select>
+        <small class="error-msg" *ngIf="registrationForm.get('role')?.touched && registrationForm.get('role')?.invalid">
+          Please select a role.
+        </small>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" formControlName="email" placeholder="example@mail.com">
+          <small class="error-msg" *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.invalid">
+            Please enter a valid email address.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label>Mobile Number</label>
+          <input type="text" formControlName="mobile" placeholder="10-digit mobile">
+          <small class="error-msg" *ngIf="registrationForm.get('mobile')?.touched && registrationForm.get('mobile')?.invalid">
+            10-digit mobile number is required.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group status-container">
+        <label class="switch-label">Account Status</label>
+        <div class="switch-wrapper">
+          <input type="checkbox" formControlName="isActive" id="isActive">
+          <label for="isActive">
+            {{ registrationForm.get('isActive')?.value ? 'Active' : 'Inactive' }}
+          </label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" formControlName="username">
+          <small class="error-msg" *ngIf="registrationForm.get('username')?.touched && registrationForm.get('username')?.invalid">
+            Username is required.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" formControlName="password">
+          <small class="error-msg" *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.invalid">
+            Password must be at least 6 characters.
+          </small>
         </div>
       </div>
 

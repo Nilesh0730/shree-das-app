@@ -33,20 +33,15 @@ export class LoginComponent {
       return;
     }
 
-    const { username, password } = this.loginForm.value;
-
-    const success = this.authService.login(username, password);
-
-    if (success) {
-      // Redirect based on role
-      const role = this.authService.getUserRole();
-      if (role === 'Admin') {
-        this.router.navigate(['/dashboard']);
-      } else {
-        this.router.navigate(['/UserdetailsList']);
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        const role = this.authService.getUserRole();
+        if (role === 'Admin') this.router.navigate(['/dashboard']);
+        else this.router.navigate(['/UserdetailsList']);
+      },
+      error: (err) => {
+        alert(err.error.message || "Invalid Login");
       }
-    } else {
-      this.errorMessage = 'अवैध वापरकर्तानाव किंवा पासवर्ड (Invalid Credentials)';
-    }
+    });
   }
 }

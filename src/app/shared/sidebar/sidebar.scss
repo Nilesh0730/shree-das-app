@@ -1,0 +1,46 @@
+/* Sidebar Styling */
+.dashboard-menu-section {
+  width: var(--sidebar-width);
+  background: #1e293b;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: fixed;
+  height: 100vh;
+  z-index: 100;
+
+  .brand-logo {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    opacity: 0.9;
+  }
+
+  button {
+    background: transparent;
+    color: #cbd5e1;
+    border: none;
+    padding: 0.8rem 1rem;
+    text-align: left;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    &.active {
+      background: var(--primary);
+      color: white;
+    }
+  }
+}

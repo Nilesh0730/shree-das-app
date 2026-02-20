@@ -1,8 +1,10 @@
 export interface UserRegistration {
+  userId: number;
   fullName: string;
   email: string;
   mobile: string;
   username: string;
   password?: string;
-  role: 'Admin' | 'DataEntry'; // Restricts to specific roles
+  isActive: boolean;
+  role: 'Admin' | 'DataEntry';
 }

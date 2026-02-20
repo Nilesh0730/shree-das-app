@@ -314,6 +314,6 @@ export class DashboardComponent implements OnInit {
   userRegristration() {
     this.isUserRegistration = true;
     this.activeTab = 'registration';
-    this.router.navigate(['/register-user']);
+   // this.router.navigate(['/register-user']);
   }
 }

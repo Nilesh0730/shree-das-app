@@ -19,7 +19,7 @@ export class App implements OnInit {
     // this.router.events.pipe(
     //   filter((event: any) => event instanceof NavigationEnd)
     // ).subscribe((event: any) => {
-    //   const sidebarRoutes = ['/dashboard', '/UserdetailsList'];
+    //   const sidebarRoutes = ['/dashboard', '/UserdetailsList', 'register-user'];
 
     //   this.showSidebar = sidebarRoutes.some(route => event.urlAfterRedirects.includes(route));
     // });

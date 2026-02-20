@@ -1,6 +1,82 @@
+// .registration-container {
+//   display: flex;
+//   justify-content: center;
+//   padding: 2rem;
+//   background: #f4f7fe;
+//   min-height: 100vh;
+
+//   .registration-card {
+//     background: white;
+//     padding: 2.5rem;
+//     border-radius: 12px;
+//     box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+//     width: 100%;
+//     max-width: 600px;
+
+//     .card-header {
+//       margin-bottom: 2rem;
+//       text-align: center;
+//       h3 { color: #2d3748; margin-bottom: 0.5rem; }
+//       p { color: #718096; font-size: 0.9rem; }
+//     }
+//   }
+// }
+
+// .form-group {
+//   margin-bottom: 1.25rem;
+//   display: flex;
+//   flex-direction: column;
+
+//   label { font-weight: 600; margin-bottom: 0.5rem; color: #4a5568; }
+
+//   input, select {
+//     padding: 0.75rem;
+//     border: 1px solid #e2e8f0;
+//     border-radius: 6px;
+//     font-size: 1rem;
+//     &:focus { border-color: #4299e1; outline: none; box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1); }
+//   }
+// }
+
+// .form-row {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
+//   gap: 1rem;
+// }
+
+// .btn-register {
+//   width: 100%;
+//   padding: 1rem;
+//   background: #2b6cb0;
+//   color: white;
+//   border: none;
+//   border-radius: 6px;
+//   font-weight: 700;
+//   cursor: pointer;
+//   margin-top: 1rem;
+//   &:disabled { background: #cbd5e0; cursor: not-allowed; }
+// }
+
+// .error { color: #e53e3e; font-size: 0.75rem; margin-top: 0.25rem; }
+
+// .error-msg {
+//   color: #dc3545; /* Red color */
+//   font-size: 0.8rem;
+//   margin-top: 4px;
+//   display: block;
+// }
+
+// /* Optional: Highlight the input border red when invalid */
+// input.ng-invalid.ng-touched,
+// select.ng-invalid.ng-touched {
+//   border: 1px solid #dc3545;
+// }
+
+
 .registration-container {
   display: flex;
   justify-content: center;
+  align-items: center; /* Centers vertically */
   padding: 2rem;
   background: #f4f7fe;
   min-height: 100vh;
@@ -9,52 +85,98 @@
     background: white;
     padding: 2.5rem;
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     width: 100%;
     max-width: 600px;
 
     .card-header {
       margin-bottom: 2rem;
       text-align: center;
-      h3 { color: #2d3748; margin-bottom: 0.5rem; }
+      h3 { color: #2d3748; margin-bottom: 0.5rem; margin-top: 0; }
       p { color: #718096; font-size: 0.9rem; }
     }
   }
-}
 
-.form-group {
-  margin-bottom: 1.25rem;
-  display: flex;
-  flex-direction: column;
+  // Nesting form elements inside the container for better scoping
+  .form-group {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
 
-  label { font-weight: 600; margin-bottom: 0.5rem; color: #4a5568; }
+    label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #4a5568;
+      font-size: 0.9rem;
+    }
 
-  input, select {
-    padding: 0.75rem;
-    border: 1px solid #e2e8f0;
+    input, select {
+      padding: 0.75rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+
+      &:focus {
+        border-color: #4299e1;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+      }
+
+      // Angular specific validation styling
+      &.ng-invalid.ng-touched {
+        border-color: #e53e3e;
+        background-color: #fff5f5;
+      }
+    }
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    // Stack columns on mobile
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .btn-register {
+    width: 100%;
+    padding: 1rem;
+    background: #2b6cb0;
+    color: white;
+    border: none;
     border-radius: 6px;
-    font-size: 1rem;
-    &:focus { border-color: #4299e1; outline: none; box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1); }
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.3s ease;
+
+    &:hover:not(:disabled) {
+      background: #2c5282;
+    }
+
+    &:disabled {
+      background: #cbd5e0;
+      cursor: not-allowed;
+    }
+  }
+
+  // Error Message Styling
+  .error-msg {
+    color: #e53e3e;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-top: 0.4rem;
+    display: block;
+    animation: fadeIn 0.3s ease-in;
   }
 }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+// Simple fade-in animation for error messages
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-.btn-register {
-  width: 100%;
-  padding: 1rem;
-  background: #2b6cb0;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 1rem;
-  &:disabled { background: #cbd5e0; cursor: not-allowed; }
-}
-
-.error { color: #e53e3e; font-size: 0.75rem; margin-top: 0.25rem; }

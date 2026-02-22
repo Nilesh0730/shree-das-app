@@ -120,7 +120,6 @@ export class UserGridComponent implements OnInit, OnDestroy {
 
   businessMaster() {
     this.activeTab = 'businessMaster';
-    alert("businessMaster was clicked!");
   }
 
   sadasyaMahiti() {

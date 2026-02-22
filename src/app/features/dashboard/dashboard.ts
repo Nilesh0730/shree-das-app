@@ -296,13 +296,11 @@ export class DashboardComponent implements OnInit {
   userMarster() {
     this.isUserRegistration = false;
     this.activeTab = 'userMaster';
-    alert("userMarster was clicked!");
   }
 
   businessMaster() {
     this.isUserRegistration = false;
     this.activeTab = 'businessMaster';
-    alert("businessMaster was clicked!");
   }
 
   sadasyaMahiti() {

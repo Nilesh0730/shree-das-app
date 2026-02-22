@@ -5,7 +5,7 @@ import { SidebarComponent } from "./shared/sidebar/sidebar";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet,SidebarComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -16,12 +16,12 @@ export class App implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    // this.router.events.pipe(
-    //   filter((event: any) => event instanceof NavigationEnd)
-    // ).subscribe((event: any) => {
-    //   const sidebarRoutes = ['/dashboard', '/UserdetailsList', 'register-user'];
+    this.router.events.pipe(
+      filter((event: any) => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      const sidebarRoutes = ['/dashboard', '/UserdetailsList', 'register-user'];
 
-    //   this.showSidebar = sidebarRoutes.some(route => event.urlAfterRedirects.includes(route));
-    // });
+      this.showSidebar = sidebarRoutes.some(route => event.urlAfterRedirects.includes(route));
+    });
   }
 }

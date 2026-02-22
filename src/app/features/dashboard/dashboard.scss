@@ -1,5 +1,5 @@
 :host {
-  --sidebar-width: 260px;
+  --sidebar-width: 20vw;
   --primary: #4f46e5;
   --bg-light: #f8fafc;
   --white: #ffffff;
@@ -65,7 +65,7 @@
 /* Main Content Section */
 .dashboard-data-section {
   flex: 1;
-  margin-left: var(--sidebar-width);
+  // margin-left: var(--sidebar-width);
   padding: 2rem 3rem;
   overflow-x: hidden;
 

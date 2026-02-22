@@ -7,6 +7,7 @@ import { UserDetailsService } from '../../../core/services/user-details';
 
 @Component({
   selector: 'app-user-registration',
+  standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './user-registration.html',
   styleUrl: './user-registration.scss',

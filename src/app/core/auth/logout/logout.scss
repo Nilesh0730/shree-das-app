@@ -17,17 +17,19 @@ form {
   //   border-radius: 4px;
   // }
   button{
-      width: 80%;
-      margin: 12vh 0 0 0;
+      width: 100%;
+      margin: 6vh 0 0 0;
       height: 10vh;
-      font-size: 1vw;
+      font-size: 1.3vw;
       border-radius: 10px;
-      border: 1px solid orange;
-      background-color: #ffffff;
+      border: 1px solid gray;
+      background-color: rgba(255, 255, 255, 0.2);;
       color: black;
+      font-weight: bold;
   }
   button:hover{
-      background-color: red;
+      // background-color: #4f46e5;
+      background-color: rgba(255, 255, 255, 0.5);
       color: white;
     }
 }

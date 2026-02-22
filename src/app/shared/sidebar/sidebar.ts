@@ -60,8 +60,7 @@ export class SidebarComponent implements OnInit {
 
   businessMaster() {
     this.activeTab = 'businessMaster';
-    alert("businessMaster was clicked!");
-  }
+   }
 
   sadasyaMahiti() {
     this.activeTab = 'sadasya';

@@ -1,0 +1,10 @@
+.app-container{
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--bg-light);
+    font-family: 'Inter', sans-serif;
+    .main-content{
+        width: 80vw;
+        margin: 0 0 0 20vw;
+    }
+}

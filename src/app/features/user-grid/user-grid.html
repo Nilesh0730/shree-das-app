@@ -1,9 +1,7 @@
 <div class="userdetailslist-panel">
+  <!-- <aside class="userdetailslist-menu-section">
 
-  <aside class="userdetailslist-menu-section">
 
-
-    @if (userRole === 'Admin') {
     <div class="brand-logo">Admin User</div>
     <button type="button" (click)="userMarster()" [class.active]="activeTab === 'userMaster'">
       <i class="fas fa-users"></i> User Master
@@ -12,11 +10,8 @@
     <button type="button" (click)="businessMaster()" [class.active]="activeTab === 'businessMaster'">
       <i class="fas fa-chart-line"></i> Business Master
     </button>
-    }
 
-    @if (userRole != 'Admin') {
     <div class="brand-logo">Data Entry User</div>
-    }
 
     <button type="button" (click)="sadasyaMahiti()" [class.active]="activeTab === 'sadasya'">
       <i class="fas fa-user-plus"></i> सदस्य माहिती एंट्री
@@ -25,7 +20,7 @@
     <div style="margin-top: auto;">
       <app-logout></app-logout>
     </div>
-  </aside>
+  </aside> -->
 
   <main class="userdetailslist-data-section">
 

@@ -1,9 +1,9 @@
 <div class="userdetailslist-panel">
 
-  <aside class="userdetailslist-menu-section">
+  <aside class="dashboard-menu-section">
 
 
-    @if (userRole === 'Admin') {
+    @if (userRole === 'Admin') {  
     <div class="brand-logo">Admin User</div>
     <button type="button" (click)="userMarster()" [class.active]="activeTab === 'userMaster'">
       <i class="fas fa-users"></i> User Master

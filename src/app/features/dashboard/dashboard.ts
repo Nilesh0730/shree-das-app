@@ -1,6 +1,5 @@
 import { UserRegistration } from './../../models/user.model';
 import { Component, OnInit } from '@angular/core';
-import { LogoutComponent } from '../../core/auth/logout/logout';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AgGridComponent } from '../../shared/ag-grid/ag-grid';
@@ -11,7 +10,7 @@ import { UserRegistrationComponent } from "../admin/user-registration/user-regis
 
 @Component({
   selector: 'app-dashboard',
-  imports: [LogoutComponent, CommonModule, AgGridComponent, UserRegistrationComponent],
+  imports: [CommonModule, AgGridComponent, UserRegistrationComponent],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

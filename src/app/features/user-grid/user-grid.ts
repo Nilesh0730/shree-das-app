@@ -10,11 +10,12 @@ import { LogoutComponent } from '../../core/auth/logout/logout';
 import { DashboardService } from '../../core/services/dashboard';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../core/auth/auth-service';
+import { SidebarComponent } from "../../shared/sidebar/sidebar";
 
 @Component({
   selector: 'app-user-grid',
   standalone: true,
-  imports: [CommonModule, AgGridComponent, LogoutComponent],
+  imports: [CommonModule, AgGridComponent, LogoutComponent, SidebarComponent],
   templateUrl: './user-grid.html',
   styleUrl: './user-grid.scss',
 })
@@ -120,7 +121,6 @@ export class UserGridComponent implements OnInit, OnDestroy {
 
   businessMaster() {
     this.activeTab = 'businessMaster';
-    alert("businessMaster was clicked!");
   }
 
   sadasyaMahiti() {

@@ -1,3 +1,11 @@
+:host {
+  --sidebar-width: 20vw;
+  --primary: #4f46e5;
+  --bg-light: #f8fafc;
+  --white: #ffffff;
+  --border: #e2e8f0;
+  --text-dark: #1e293b;
+}
 /* Sidebar Styling */
 .dashboard-menu-section {
   width: var(--sidebar-width);
@@ -20,7 +28,7 @@
   }
 
   button {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.1);
     color: #cbd5e1;
     border: none;
     padding: 0.8rem 1rem;
@@ -32,9 +40,11 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    width: 100%;
+    font-size: 1.2vw;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.2);
       color: white;
     }
 

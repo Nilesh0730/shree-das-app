@@ -8,10 +8,11 @@ import { ColDef } from 'ag-grid-community';
 import { DashboardService } from '../../core/services/dashboard';
 import { forkJoin } from 'rxjs';
 import { UserRegistrationComponent } from "../admin/user-registration/user-registration";
+import { SidebarComponent } from "../../shared/sidebar/sidebar";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [LogoutComponent, CommonModule, AgGridComponent, UserRegistrationComponent],
+  imports: [LogoutComponent, CommonModule, AgGridComponent, UserRegistrationComponent, SidebarComponent],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
@@ -296,13 +297,11 @@ export class DashboardComponent implements OnInit {
   userMarster() {
     this.isUserRegistration = false;
     this.activeTab = 'userMaster';
-    alert("userMarster was clicked!");
   }
 
   businessMaster() {
     this.isUserRegistration = false;
     this.activeTab = 'businessMaster';
-    alert("businessMaster was clicked!");
   }
 
   sadasyaMahiti() {

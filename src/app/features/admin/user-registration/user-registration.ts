@@ -4,12 +4,11 @@ import { Router } from '@angular/router';
 import { UserRegistration } from '../../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { UserDetailsService } from '../../../core/services/user-details';
-import { SidebarComponent } from "../../../shared/sidebar/sidebar";
 
 @Component({
   selector: 'app-user-registration',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,SidebarComponent],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './user-registration.html',
   styleUrl: './user-registration.scss',
 })

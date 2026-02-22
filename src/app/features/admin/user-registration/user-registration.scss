@@ -72,7 +72,13 @@
 //   border: 1px solid #dc3545;
 // }
 
-
+.form-group.status-container{
+  .switch-wrapper{
+    input{
+      margin: 0 1% 0 0;
+    }
+  }
+}
 .registration-container {
   display: flex;
   justify-content: center;

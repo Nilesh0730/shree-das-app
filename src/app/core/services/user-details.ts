@@ -76,10 +76,10 @@ export class UserDetailsService {
   }
 
   registerUser(userData: UserRegistration): Observable<any> {
-    return this.http.post<any>('http://localhost:5082/api/User/registeruser', userData);
+    return this.http.post<any>('https://internal-forms-submission-api-fzedabapg3d7hqdq.centralindia-01.azurewebsites.net/api/users/registeruser', userData);
   }
 
   getAllRegisterUsers(): Observable<UserRegistration[]> {
-    return this.http.get<UserRegistration[]>('http://localhost:5082/api/User/getregisteruser');
+    return this.http.get<UserRegistration[]>('https://internal-forms-submission-api-fzedabapg3d7hqdq.centralindia-01.azurewebsites.net/api/users/getregisteruser');
   }
 }

@@ -118,7 +118,7 @@ import { Observable, tap, BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:5082/api/User/login';
+  private apiUrl = 'https://internal-forms-submission-api-fzedabapg3d7hqdq.centralindia-01.azurewebsites.net/api/users/login';
   private tokenKey = 'authToken';
   private userKey = 'app_user';
 

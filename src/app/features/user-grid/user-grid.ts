@@ -6,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IUserDetails } from '../../models/user-details.model';
 import { UserDetailsService } from '../../core/services/user-details';
-import { LogoutComponent } from '../../core/auth/logout/logout';
 import { DashboardService } from '../../core/services/dashboard';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../core/auth/auth-service';
@@ -14,7 +13,7 @@ import { AuthService } from '../../core/auth/auth-service';
 @Component({
   selector: 'app-user-grid',
   standalone: true,
-  imports: [CommonModule, AgGridComponent, LogoutComponent],
+  imports: [CommonModule, AgGridComponent],
   templateUrl: './user-grid.html',
   styleUrl: './user-grid.scss',
 })

@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { IUserDetails } from '../../models/user-details.model';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { map, Observable, of } from 'rxjs';
+import { IUserDetails, IUserDetailsResponse } from '../../models/user-details.model';
 import { IBusinessProblems } from '../../models/business-problems.model';
 import { IBusinessDetails } from '../../models/business-details.model';
 import { environment } from '../../../environments/environment';
 import { IBaithakLocation } from '../../models/baithak-location.model';
 import { IBaithakDay } from '../../models/baithak-day.model';
 import { UserRegistration } from '../../models/user.model';
+
+export type CategoryType =
+  | 'OWNERSHIP'
+  | 'BUSINESS TYPE'
+  | 'BUSINESS PROBLEM'
+  | 'AGE RANGE';
 
 @Injectable({ providedIn: 'root' })
 export class UserDetailsService {
@@ -19,6 +25,46 @@ export class UserDetailsService {
   getUsers(): Observable<IUserDetails[]> {
     return this.http.get<IUserDetails[]>(`${this.baseUrl}/all`);
   }
+
+  // getUsersByParameters(
+  //   categoryType: CategoryType,
+  //   categoryId?: number,
+  //   gender?: string
+  // ): Observable<IUserDetails[]> {
+
+  //   let params = new HttpParams()
+  //     .set('categoryType', categoryType);
+
+  //   if (categoryId !== null && categoryId !== undefined) {
+  //     params = params.set('categoryId', categoryId.toString());
+  //   }
+
+  //   if (gender !== null && gender !== undefined) {
+  //     params = params.set('gender', gender);
+  //   }
+
+  //   return this.http.get<IUserDetails[]>(`${this.baseUrl}/dashboard/drilldown`, { params });
+  // }
+
+getUsersByParameters(filterParams?: any): Observable<IUserDetails[]> {
+
+  let params = new HttpParams()
+    .set('categoryType', filterParams.categoryType);
+
+  if (filterParams.categoryId != null) {
+    params = params.set('categoryId', filterParams.categoryId.toString());
+  }
+
+  if (filterParams.gender != null) {
+    params = params.set('gender', filterParams.gender);
+  }
+
+  return this.http
+    .get<IUserDetailsResponse>(`${this.baseUrl}/dashboard/drilldown`, { params })
+    .pipe(
+      map(response => response.users)
+    );
+}
 
   getUserDetails(userId: string): Observable<IUserDetails> {
     return this.http.get<IUserDetails>(`${this.baseUrl}/details/${userId}`);

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgGridComponent } from '../../shared/ag-grid/ag-grid';
 import { ColDef } from 'ag-grid-community';
@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { IUserDetails } from '../../models/user-details.model';
 import { UserDetailsService } from '../../core/services/user-details';
 import { DashboardService } from '../../core/services/dashboard';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, switchMap, takeUntil } from 'rxjs';
 import { AuthService } from '../../core/auth/auth-service';
 
 @Component({
@@ -69,6 +69,7 @@ export class UserGridComponent implements OnInit, OnDestroy {
   public activeFilter: any = null;
   activeTab: string = 'sadasya';
   userRole: string | null = null;
+  private destroy$ = new Subject<void>();
 
   @ViewChild('agGridComp') agGridComp!: AgGridComponent;
 
@@ -78,25 +79,33 @@ export class UserGridComponent implements OnInit, OnDestroy {
     private httpClient: HttpClient,
     private userService: UserDetailsService,
     private dashboardService: DashboardService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.userRole = this.authService.getUserRole();
-    // Subscribe to the observable to fetch the data
-    // this.filterSubscription = this.dashboardService.currentFilter.subscribe(filter => {
-    //   if (filter) {
-    //     console.log('Received Filter Params:', filter);
-    //     this.activeFilter = filter;
+    this.dashboardService.currentFilter
+      .pipe(
+        switchMap(filter =>
+          filter && Object.keys(filter).length > 0
+            ? this.userService.getUsersByParameters(filter)
+            : this.userService.getUsers()
+        ),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(data => {
+        this.rowData = [...data];
+        this.refreshGrid();
+        this.cd.detectChanges();
+      });
+    // this.route.data.subscribe((data: any) => {
+    //     this.rowData = [...data['users']];
+    //   });
 
-    //     // Logic to refresh your grid with these filters
-    //     this.applyFilterToGrid(filter);
-    //   }
-    // });
-
-    this.rowData = this.route.snapshot.data['users'] || [];
-    if (!this.rowData) {
-      this.loadGridData();
-    }
+    //this.rowData = this.route.snapshot.data['users'] || [];
+    // if (!this.rowData) {
+    //   this.loadGridData();
+    // }
     console.log("resolved users", this.rowData);
   }
 
@@ -105,12 +114,15 @@ export class UserGridComponent implements OnInit, OnDestroy {
     console.log(`Filtering for ${filter.gender} in ${filter.categoryName}`);
   }
 
-  ngOnDestroy(): void {
-    // Always unsubscribe to prevent memory leaks
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
     if (this.filterSubscription) {
       this.filterSubscription.unsubscribe();
     }
+    this.dashboardService.setFilter(null);
   }
+
 
   userMarster() {
     this.activeTab = 'userMaster';
@@ -176,6 +188,12 @@ export class UserGridComponent implements OnInit, OnDestroy {
       },
       error: (err) => console.error('Refresh failed', err)
     });
+  }
+
+  refreshGrid() {
+    if (this.agGridComp.gridApi) {
+      this.agGridComp.refreshGrid(this.rowData);
+    }
   }
 
 }

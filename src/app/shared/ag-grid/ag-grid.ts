@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { AgGridAngular } from "ag-grid-angular";
 import {
@@ -36,6 +36,7 @@ export class AgGridComponent implements OnInit {
 
   dynamicDefaultColDef: ColDef = {};
   // getRowId = (params: any) => params.data.userId;
+  //@Output() gridReadyEvent = new EventEmitter<void>();
 
   ngOnInit() {
 
@@ -58,9 +59,11 @@ export class AgGridComponent implements OnInit {
 
   onGridReady(params: any) {
     this.gridApi = params.api;
+   // this.gridColumnApi = params.columnApi;
     // if (this.isLoading) {
     //   this.gridApi.setGridOption('loading', true);
     // }
+
   }
 
   onSelectionChanged(event: any) {
@@ -89,4 +92,9 @@ export class AgGridComponent implements OnInit {
     return params.data[this.rowIdField];
   };
 
+  refreshGrid(rowData : any) {
+    if (this.gridApi) {
+      this.gridApi.setGridOption('rowData', rowData);
+    }
+  }
 }

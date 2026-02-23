@@ -1,18 +1,16 @@
-import { UserRegistration } from './../../models/user.model';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AgGridComponent } from '../../shared/ag-grid/ag-grid';
 import { ColDef } from 'ag-grid-community';
 import { DashboardService } from '../../core/services/dashboard';
-import { forkJoin } from 'rxjs';
-import { UserRegistrationComponent } from "../admin/user-registration/user-registration";
-
+import { TotalStats } from '../../models/dashboard.model';
+import { AgeGroupMap } from '../../models/dashboard-type.enum';
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, AgGridComponent, UserRegistrationComponent],
+  imports: [CommonModule, AgGridComponent],
   templateUrl: './dashboard.html',
-  styleUrl: './dashboard.scss',
+  styleUrls: ['./dashboard.scss'],
 })
 export class DashboardComponent implements OnInit {
 
@@ -21,6 +19,7 @@ export class DashboardComponent implements OnInit {
   public ownershipData: any[] = [];
   public businessTypeData: any[] = [];
   public ageData: any[] = [];
+  public ageTotalCountData: any[] = [];
   public difficultyData: any[] = [];
   activeTab: string = 'userMaster';
   isUserRegistration: boolean = false;
@@ -211,10 +210,16 @@ export class DashboardComponent implements OnInit {
       }
     }
   ];
+  totalStats: TotalStats = { totalFemale: 0, totalMale: 0 };
+  @ViewChild('agGridDifficulty') agGridDifficulty!: AgGridComponent;
+  @ViewChild('agGridBusinessType') agGridBusinessType!: AgGridComponent;
+  @ViewChild('agGridOwnership') agGridOwnership!: AgGridComponent;
+  @ViewChild('agGridAge') agGridAge!: AgGridComponent;
 
   constructor(
     private router: Router,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private cd: ChangeDetectorRef
   ) {
   }
 
@@ -223,16 +228,18 @@ export class DashboardComponent implements OnInit {
   }
 
   loadGridData(): void {
-    this.getOwnership();
-    this.getBusinessType();
     this.getAge();
     this.getDifficulty();
+    this.getBusinessType();
+    this.getOwnership();
+    this.calculateTotals();
   }
 
-  getOwnership() {
-    this.dashboardService.getOwnership().subscribe({
+  getDifficulty() {
+    this.dashboardService.getDifficulty().subscribe({
       next: (res) => {
-        this.ownershipData = res;
+        this.difficultyData = res;
+        this.agGridDifficulty.refreshGrid(res);
       },
       error: (err) => console.error('Refresh failed', err)
     });
@@ -242,49 +249,64 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getBusinessType().subscribe({
       next: (res) => {
         this.businessTypeData = res;
+        this.agGridBusinessType.refreshGrid(res);
       },
       error: (err) => console.error('Refresh failed', err)
     });
   }
 
+  getOwnership() {
+    this.dashboardService.getOwnership().subscribe({
+      next: (res) => {
+        this.ownershipData = res;
+        this.agGridOwnership.refreshGrid(res);
+      },
+      error: (err) => console.error('Refresh failed', err)
+    });
+  }
 
   getAge() {
     this.dashboardService.getAge().subscribe({
       next: (res) => {
-        this.ageData = res;
+        this.ageTotalCountData = res;
         this.calculateTotals();
+        this.ageData = res;
+        this.agGridAge.refreshGrid(res);
       },
       error: (err) => console.error('Refresh failed', err)
     });
   }
 
-  getDifficulty() {
-    this.dashboardService.getDifficulty().subscribe({
-      next: (res) => {
-        this.difficultyData = res;
-      },
-      error: (err) => console.error('Refresh failed', err)
-    });
-  }
 
   calculateTotals() {
-    this.totalFemaleCount = this.ageData.reduce((acc, curr) => acc + curr.female, 0);
-    this.totalMaleCount = this.ageData.reduce((acc, curr) => acc + curr.male, 0);
+
+    if(this.ageTotalCountData)
+    {
+    this.totalStats.totalFemale = this.ageTotalCountData.reduce((acc, curr) => acc + curr.female, 0);
+    this.totalStats.totalMale = this.ageTotalCountData.reduce((acc, curr) => acc + curr.male, 0);
+    }
+
+    this.cd.detectChanges();
   }
 
   onCellClicked(params: any) {
     const data = params.data;
     const colField = params.colDef.field;
+    let categoryId = data.id;
+
+    if (data.ageRange) {
+      categoryId = AgeGroupMap[data.ageRange]; // 👈 Convert string to enum ID
+    }
 
     const filterParams = {
-      id: data.id,
-      categoryValue: data.ownershipName || data.businessType || data.ageRange || data.difficulty,
-      categoryName: data.ownershipName ? 'ownership' :
-        data.businessType ? 'businessType' :
-          data.ageRange ? 'ageRange' :
-            data.difficulty ? 'difficulty' : 'unknown',
-      gender: colField,
-      countValue: params.value
+      categoryId: categoryId,
+      // categoryValue: data.ownershipName || data.businessType || data.ageRange || data.difficulty,
+      categoryType: data.ownershipName ? 'OWNERSHIP' :
+        data.businessType ? 'BUSINESS TYPE' :
+          data.ageRange ? 'AGE RANGE' :
+            data.difficulty ? 'BUSINESS PROBLEM' : 'unknown',
+      gender: colField == 'male' ? 'G' : 'L',
+      // countValue: params.value
     };
 
     console.log('Filtering for:', filterParams);
@@ -292,25 +314,4 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/UserdetailsList']);
   }
 
-  userMarster() {
-    this.isUserRegistration = false;
-    this.activeTab = 'userMaster';
-  }
-
-  businessMaster() {
-    this.isUserRegistration = false;
-    this.activeTab = 'businessMaster';
-  }
-
-  sadasyaMahiti() {
-    this.isUserRegistration = false;
-    this.activeTab = 'sadasya';
-    this.router.navigate(['/UserdetailsList']);
-  }
-
-  userRegristration() {
-    this.isUserRegistration = true;
-    this.activeTab = 'registration';
-   // this.router.navigate(['/register-user']);
-  }
 }

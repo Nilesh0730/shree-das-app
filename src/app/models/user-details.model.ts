@@ -41,3 +41,11 @@ export interface IUserDetails {
   userBaithakTimeId: number;
   userBaithakTime: string;
 }
+
+export interface IUserDetailsResponse {
+  users: IUserDetails[];
+  totalRecords?: number;
+  categoryType?: string;
+  categoryId?: number;
+  gender?: string;
+}

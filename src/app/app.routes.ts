@@ -30,8 +30,8 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['Admin', 'DataEntry'] },
     loadComponent: () => import('./features/user-grid/user-grid')
-      .then(m => m.UserGridComponent),
-    resolve: { users: UserResolver }
+      .then(m => m.UserGridComponent)
+  //  resolve: { users: UserResolver }
   },
   {
     path: 'dashboard',

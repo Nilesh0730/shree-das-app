@@ -3,17 +3,17 @@
   <aside class="dashboard-menu-section">
 
 
-    @if (userRole === 'Admin') {  
+    @if (userRole === 'Admin') {
     <div class="brand-logo">Admin User</div>
-    <button type="button" (click)="userMarster()" [class.active]="activeTab === 'userMaster'">
-      <i class="fas fa-users"></i> User Master
+    <button type="button" (click)="userMaster()" [class.active]="activeTab === 'userMaster'">
+      <i class="fas fa-users"></i> डॅशबोर्ड (Dashboard)
     </button>
 
-    <button type="button" (click)="businessMaster()" [class.active]="activeTab === 'businessMaster'">
+    <!-- <button type="button" (click)="businessMaster()" [class.active]="activeTab === 'businessMaster'">
       <i class="fas fa-chart-line"></i> Business Master
-    </button>
+    </button> -->
 
-     <button type="button" (click)="userRegristration()" [class.active]="activeTab === 'registration'">
+     <button type="button" (click)="userRegistration()" [class.active]="activeTab === 'registration'">
       <i class="fas fa-user-plus"></i> नवीन वापरकर्ता नोंदणी (User Regristration)
     </button>
     }

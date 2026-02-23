@@ -24,3 +24,5 @@ export interface TotalStats {
   totalFemale: number;
   totalMale: number;
 }
+
+

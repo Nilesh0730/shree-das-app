@@ -244,8 +244,6 @@ export class BusinessProblemsComponent implements OnInit {
       return;
     }
 
-    //this.isSubmitting = true;
-
     // Prepare payload by mapping form values back to model keys
     const payload: any = {};
     this.problemFields.forEach(f => {
@@ -259,15 +257,12 @@ export class BusinessProblemsComponent implements OnInit {
     this.userDetailsService.updateBusinessProblems(this.userId, payload).subscribe({
       next:  (res: IUserResponse)  => {
           alert(`${res.message}`)
-      this.router.navigate(['/UserdetailsList']);
-       // console.log('Success:', response);
-      //  alert(this.isEditMode ? 'Details Updated Successfully!' : 'Details Added Successfully!');
-        //this.isSubmitting = false;
+          this.router.navigate(['/UserdetailsList']);
       },
       error: (err) => {
-        console.error('API Error:', err);
-        alert('Something went wrong. Please try again.');
-        //this.isSubmitting = false;
+         console.error('API Error:', err);
+         const errorMessage = err.error?.error || err.message || 'Something went wrong. Please try again';
+         alert(errorMessage);
       }
     });
   }

@@ -260,7 +260,11 @@ export class BusinessInfoComponent implements OnInit {
         alert(`${res.message}`);
         this.nextButton.emit('next');
       },
-      error: () => alert('Error updating business information.')
+      error: (err) => {
+        console.error('API Error:', err);
+        const errorMessage = err.error?.error || err.message || 'Something went wrong. Please try again';
+        alert(errorMessage);
+      }
     });
   }
 }

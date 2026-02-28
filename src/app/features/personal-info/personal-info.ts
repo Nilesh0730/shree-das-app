@@ -28,13 +28,13 @@ export class PersonalInfoComponent implements OnInit {
   ];
 
   educationList = [
-  { id: 1, name: 'Primary (प्राथमिक)' },
-  { id: 2, name: 'Secondary (माध्यमिक)' },
-  { id: 3, name: 'Higher Secondary (उच्च माध्यमिक)' },
-  { id: 4, name: 'Graduate (पदवीधर)' },
-  { id: 5, name: 'Post Graduate (पदव्युत्तर)' },
-  { id: 6, name: 'Other (इतर)' }
-];
+    { id: 1, name: 'Primary (प्राथमिक)' },
+    { id: 2, name: 'Secondary (माध्यमिक)' },
+    { id: 3, name: 'Higher Secondary (उच्च माध्यमिक)' },
+    { id: 4, name: 'Graduate (पदवीधर)' },
+    { id: 5, name: 'Post Graduate (पदव्युत्तर)' },
+    { id: 6, name: 'Other (इतर)' }
+  ];
 
   baithakList: IBaithakLocation[] = [];
   baithakDays: IBaithakDay[] = [];
@@ -126,13 +126,13 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   checkFormErrors() {
-  const controls = this.personalForm.controls;
-  for (const name in controls) {
-    if (controls[name].invalid) {
-      console.log('Invalid Field found:', name, controls[name].errors);
+    const controls = this.personalForm.controls;
+    for (const name in controls) {
+      if (controls[name].invalid) {
+        console.log('Invalid Field found:', name, controls[name].errors);
+      }
     }
   }
-}
 
   onSaveUser() {
     this.checkFormErrors();
@@ -163,16 +163,18 @@ export class PersonalInfoComponent implements OnInit {
 
     this.userDetailsService.insertUpdateUser(payload).subscribe({
       next: (res: IUserResponse) => {
-        alert(`${res.message}`)
-       const emitData = {
-        userId: res.userId,
-        mode: this.mode
-      };
-      this.userCreated.emit(emitData);
+        alert(res.message);
+
+        const emitData = {
+          userId: res.userId,
+          mode: this.mode
+        };
+        this.userCreated.emit(emitData);
       },
-      error: err => {
+      error: (err) => {
         console.error('Error saving user:', err);
-        alert('Error saving user!');
+        const errorMessage = err.error?.error || err.message || 'An unexpected error occurred';
+        alert(errorMessage);
       }
     });
   }
@@ -195,7 +197,7 @@ export class PersonalInfoComponent implements OnInit {
             pinCode: user.pinCode,
             mobile: user.mobile,
             emailId: user.emailId,
-            // education: user.education,
+            education: user.education,
             birthDate: user.birthDate ? user.birthDate.split('T')[0] : '',
             age: user.age,
             gender: user.gender === "Ladies" ? "l" : "g",

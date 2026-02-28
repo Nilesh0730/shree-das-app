@@ -33,6 +33,7 @@ export interface IUserDetails {
   gender: string;
   aadhaar: string;
   pan: string;
+  education: string;
   userBaithakNo: number;
   userBaithakLocationId: number;
   userBaithakName: string;
